@@ -8,4 +8,12 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Admin.js'
+export type * from './models/Titia.js'
+export type * from './models/Turma.js'
+export type * from './models/TurmaTitia.js'
+export type * from './models/Aluno.js'
+export type * from './models/Presenca.js'
+export type * from './models/PresencaTitia.js'
+export type * from './models/Comportamento.js'
 export type * from './commonInputTypes.js'

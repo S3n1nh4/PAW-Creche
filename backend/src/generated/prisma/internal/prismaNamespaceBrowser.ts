@@ -51,7 +51,14 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-
+  Admin: 'Admin',
+  Titia: 'Titia',
+  Turma: 'Turma',
+  TurmaTitia: 'TurmaTitia',
+  Aluno: 'Aluno',
+  Presenca: 'Presenca',
+  PresencaTitia: 'PresencaTitia',
+  Comportamento: 'Comportamento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -68,4 +75,132 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const AdminScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  email: 'email',
+  senhaHash: 'senhaHash',
+  ativo: 'ativo',
+  criadoEm: 'criadoEm'
+} as const
+
+export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
+
+
+export const TitiaScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  email: 'email',
+  senhaHash: 'senhaHash',
+  telefone: 'telefone',
+  dataAdmissao: 'dataAdmissao',
+  salarioBase: 'salarioBase',
+  ativo: 'ativo',
+  criadoEm: 'criadoEm'
+} as const
+
+export type TitiaScalarFieldEnum = (typeof TitiaScalarFieldEnum)[keyof typeof TitiaScalarFieldEnum]
+
+
+export const TurmaScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  anoLetivo: 'anoLetivo',
+  turno: 'turno',
+  ativo: 'ativo',
+  criadoEm: 'criadoEm'
+} as const
+
+export type TurmaScalarFieldEnum = (typeof TurmaScalarFieldEnum)[keyof typeof TurmaScalarFieldEnum]
+
+
+export const TurmaTitiaScalarFieldEnum = {
+  turmaId: 'turmaId',
+  titiaId: 'titiaId'
+} as const
+
+export type TurmaTitiaScalarFieldEnum = (typeof TurmaTitiaScalarFieldEnum)[keyof typeof TurmaTitiaScalarFieldEnum]
+
+
+export const AlunoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  dataNascimento: 'dataNascimento',
+  turmaId: 'turmaId',
+  responsavelNome: 'responsavelNome',
+  responsavelTelefone: 'responsavelTelefone',
+  responsavelEmail: 'responsavelEmail',
+  observacoes: 'observacoes',
+  ativo: 'ativo',
+  criadoEm: 'criadoEm'
+} as const
+
+export type AlunoScalarFieldEnum = (typeof AlunoScalarFieldEnum)[keyof typeof AlunoScalarFieldEnum]
+
+
+export const PresencaScalarFieldEnum = {
+  id: 'id',
+  alunoId: 'alunoId',
+  turmaId: 'turmaId',
+  data: 'data',
+  status: 'status',
+  observacao: 'observacao',
+  registradoPorTitiaId: 'registradoPorTitiaId',
+  criadoEm: 'criadoEm'
+} as const
+
+export type PresencaScalarFieldEnum = (typeof PresencaScalarFieldEnum)[keyof typeof PresencaScalarFieldEnum]
+
+
+export const PresencaTitiaScalarFieldEnum = {
+  id: 'id',
+  titiaId: 'titiaId',
+  data: 'data',
+  status: 'status',
+  entrada: 'entrada',
+  saida: 'saida',
+  observacao: 'observacao',
+  registradoPorAdminId: 'registradoPorAdminId',
+  criadoEm: 'criadoEm'
+} as const
+
+export type PresencaTitiaScalarFieldEnum = (typeof PresencaTitiaScalarFieldEnum)[keyof typeof PresencaTitiaScalarFieldEnum]
+
+
+export const ComportamentoScalarFieldEnum = {
+  id: 'id',
+  alunoId: 'alunoId',
+  titiaId: 'titiaId',
+  data: 'data',
+  descricao: 'descricao',
+  criadoEm: 'criadoEm'
+} as const
+
+export type ComportamentoScalarFieldEnum = (typeof ComportamentoScalarFieldEnum)[keyof typeof ComportamentoScalarFieldEnum]
+
+
+export const SortOrder = {
+  asc: 'asc',
+  desc: 'desc'
+} as const
+
+export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+} as const
+
+export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
