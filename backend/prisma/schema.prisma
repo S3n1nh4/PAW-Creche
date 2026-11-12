@@ -6,3 +6,138 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String
+  senhaHash String   @map("senha_hash")
+  ativo     Boolean  @default(true)
+  criadoEm  DateTime @default(now()) @map("criado_em") @db.Timestamptz
+
+  presencasTitia PresencaTitia[]
+
+  @@map("admin")
+}
+
+model Titia {
+  id           Int      @id @default(autoincrement())
+  nome         String
+  email        String
+  senhaHash    String   @map("senha_hash")
+  telefone     String?
+  dataAdmissao DateTime @default(now()) @map("data_admissao") @db.Date
+  salarioBase  Decimal  @default(0) @map("salario_base") @db.Decimal(12, 2)
+  ativo        Boolean  @default(true)
+  criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz
+
+  turmas         TurmaTitia[]
+  presencas      Presenca[]
+  presencasTitia PresencaTitia[]
+  comportamentos Comportamento[]
+
+  @@map("titia")
+}
+
+model Turma {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  anoLetivo Int      @map("ano_letivo")
+  turno     String
+  ativo     Boolean  @default(true)
+  criadoEm  DateTime @default(now()) @map("criado_em") @db.Timestamptz
+
+  titias    TurmaTitia[]
+  alunos    Aluno[]
+  presencas Presenca[]
+
+  @@unique([nome, anoLetivo, turno])
+  @@map("turma")
+}
+
+model TurmaTitia {
+  turmaId Int @map("turma_id")
+  titiaId Int @map("titia_id")
+
+  turma Turma @relation(fields: [turmaId], references: [id])
+  titia Titia @relation(fields: [titiaId], references: [id])
+
+  @@id([turmaId, titiaId])
+  @@index([titiaId], map: "turma_titia_titia_idx")
+  @@map("turma_titia")
+}
+
+model Aluno {
+  id                  Int      @id @default(autoincrement())
+  nome                String
+  dataNascimento      DateTime @map("data_nascimento") @db.Date
+  turmaId             Int?     @map("turma_id")
+  responsavelNome     String   @map("responsavel_nome")
+  responsavelTelefone String   @map("responsavel_telefone")
+  responsavelEmail    String?  @map("responsavel_email")
+  observacoes         String?
+  ativo               Boolean  @default(true)
+  criadoEm            DateTime @default(now()) @map("criado_em") @db.Timestamptz
+
+  turma          Turma?          @relation(fields: [turmaId], references: [id])
+  presencas      Presenca[]
+  comportamentos Comportamento[]
+
+  @@index([turmaId], map: "aluno_turma_idx")
+  @@map("aluno")
+}
+
+model Presenca {
+  id                   Int      @id @default(autoincrement())
+  alunoId              Int      @map("aluno_id")
+  turmaId              Int      @map("turma_id")
+  data                 DateTime @default(now()) @db.Date
+  status               String
+  observacao           String?
+  registradoPorTitiaId Int      @map("registrado_por_titia_id")
+  criadoEm             DateTime @default(now()) @map("criado_em") @db.Timestamptz
+
+  aluno Aluno @relation(fields: [alunoId], references: [id])
+  turma Turma @relation(fields: [turmaId], references: [id])
+  titia Titia @relation(fields: [registradoPorTitiaId], references: [id])
+
+  @@unique([alunoId, data])
+  @@index([turmaId, data], map: "presenca_turma_data_idx")
+  @@index([registradoPorTitiaId], map: "presenca_autor_idx")
+  @@map("presenca")
+}
+
+model PresencaTitia {
+  id                   Int       @id @default(autoincrement())
+  titiaId              Int       @map("titia_id")
+  data                 DateTime  @default(now()) @db.Date
+  status               String
+  entrada              DateTime? @db.Timestamptz
+  saida                DateTime? @db.Timestamptz
+  observacao           String?
+  registradoPorAdminId Int       @map("registrado_por_admin_id")
+  criadoEm             DateTime  @default(now()) @map("criado_em") @db.Timestamptz
+
+  titia Titia @relation(fields: [titiaId], references: [id])
+  admin Admin @relation(fields: [registradoPorAdminId], references: [id])
+
+  @@unique([titiaId, data])
+  @@index([registradoPorAdminId], map: "presenca_titia_admin_idx")
+  @@map("presenca_titia")
+}
+
+model Comportamento {
+  id        Int      @id @default(autoincrement())
+  alunoId   Int      @map("aluno_id")
+  titiaId   Int      @map("titia_id")
+  data      DateTime @default(now()) @db.Date
+  descricao String
+  criadoEm  DateTime @default(now()) @map("criado_em") @db.Timestamptz
+
+  aluno Aluno @relation(fields: [alunoId], references: [id])
+  titia Titia @relation(fields: [titiaId], references: [id])
+
+  @@index([alunoId, data], map: "comportamento_aluno_data_idx")
+  @@index([titiaId], map: "comportamento_titia_idx")
+  @@map("comportamento")
+}
