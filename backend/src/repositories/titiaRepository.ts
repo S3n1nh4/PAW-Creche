@@ -9,7 +9,6 @@ export async function buscarTodos() {
 
 export async function buscarPorId(id: number) {
   return await prisma.titia.findUnique({ where: { id } });
-
 }
 
 export async function buscarPorEmail(email: string) {
