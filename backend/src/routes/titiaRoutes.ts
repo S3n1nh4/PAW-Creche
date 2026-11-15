@@ -1,5 +1,5 @@
 import {Router} from "express";
-import * as controller from "../controllers/titiaContoller.js";
+import * as controller from "../controllers/titiaController.js";
 
 const router = Router();
 

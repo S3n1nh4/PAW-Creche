@@ -14,7 +14,7 @@ export async function buscarPorId(req: Request, res: Response) {
         const titia = await Service.buscarTitiaPorId(Number(id));
         return res.json(titia);
     } catch (erro: any) {
-        return res.status(404).json({ mensagem: erro.message })
+        return res.status(404).json({ mensagem: erro.message });
     }
 }
 
@@ -66,7 +66,7 @@ export async function atualizar(req: Request, res: Response) {
 export async function deletar(req: Request, res: Response){
     try {
         const id: number = Number(req.params.id);
-        await Service.deletarTitia(id)
+        await Service.deletarTitia(id);
         return res.status(204).send();
     } catch (erro:any) {
         return res.status(500).json({mensagem: erro.message});
