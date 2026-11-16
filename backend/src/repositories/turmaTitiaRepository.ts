@@ -18,7 +18,7 @@ export async function buscarTurmasDasTitias(titiaId:number): Promise<TurmaTitia[
     });
 }
 
-export async function Vincular(dados:TurmaTitiaUncheckedCreateInput ): Promise<TurmaTitia> {
+export async function vincular(dados:TurmaTitiaUncheckedCreateInput ): Promise<TurmaTitia> {
     return await prisma.turmaTitia.create({data:dados});
 }
 
