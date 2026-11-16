@@ -18,6 +18,10 @@ export async function buscarTurmasDasTitias(titiaId:number): Promise<TurmaTitia[
     });
 }
 
-export async function Vincular(params:type) {
-    
+export async function Vincular(dados:TurmaTitiaUncheckedCreateInput ): Promise<TurmaTitia> {
+    return await prisma.turmaTitia.create({data:dados});
+}
+
+export async function desvincular(titiaId:number,turmaId: number): Promise<TurmaTitia> {
+    return await prisma.turmaTitia.delete({where:{turmaId_titiaId:{turmaId,titiaId}}});
 }
