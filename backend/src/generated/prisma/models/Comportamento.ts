@@ -29,19 +29,19 @@ export type AggregateComportamento = {
 export type ComportamentoAvgAggregateOutputType = {
   id: number | null
   alunoId: number | null
-  titiaId: number | null
+  cuidadorId: number | null
 }
 
 export type ComportamentoSumAggregateOutputType = {
   id: number | null
   alunoId: number | null
-  titiaId: number | null
+  cuidadorId: number | null
 }
 
 export type ComportamentoMinAggregateOutputType = {
   id: number | null
   alunoId: number | null
-  titiaId: number | null
+  cuidadorId: number | null
   data: Date | null
   descricao: string | null
   criadoEm: Date | null
@@ -50,7 +50,7 @@ export type ComportamentoMinAggregateOutputType = {
 export type ComportamentoMaxAggregateOutputType = {
   id: number | null
   alunoId: number | null
-  titiaId: number | null
+  cuidadorId: number | null
   data: Date | null
   descricao: string | null
   criadoEm: Date | null
@@ -59,7 +59,7 @@ export type ComportamentoMaxAggregateOutputType = {
 export type ComportamentoCountAggregateOutputType = {
   id: number
   alunoId: number
-  titiaId: number
+  cuidadorId: number
   data: number
   descricao: number
   criadoEm: number
@@ -70,19 +70,19 @@ export type ComportamentoCountAggregateOutputType = {
 export type ComportamentoAvgAggregateInputType = {
   id?: true
   alunoId?: true
-  titiaId?: true
+  cuidadorId?: true
 }
 
 export type ComportamentoSumAggregateInputType = {
   id?: true
   alunoId?: true
-  titiaId?: true
+  cuidadorId?: true
 }
 
 export type ComportamentoMinAggregateInputType = {
   id?: true
   alunoId?: true
-  titiaId?: true
+  cuidadorId?: true
   data?: true
   descricao?: true
   criadoEm?: true
@@ -91,7 +91,7 @@ export type ComportamentoMinAggregateInputType = {
 export type ComportamentoMaxAggregateInputType = {
   id?: true
   alunoId?: true
-  titiaId?: true
+  cuidadorId?: true
   data?: true
   descricao?: true
   criadoEm?: true
@@ -100,7 +100,7 @@ export type ComportamentoMaxAggregateInputType = {
 export type ComportamentoCountAggregateInputType = {
   id?: true
   alunoId?: true
-  titiaId?: true
+  cuidadorId?: true
   data?: true
   descricao?: true
   criadoEm?: true
@@ -196,7 +196,7 @@ export type ComportamentoGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type ComportamentoGroupByOutputType = {
   id: number
   alunoId: number
-  titiaId: number
+  cuidadorId: number
   data: Date
   descricao: string
   criadoEm: Date
@@ -228,23 +228,23 @@ export type ComportamentoWhereInput = {
   NOT?: Prisma.ComportamentoWhereInput | Prisma.ComportamentoWhereInput[]
   id?: Prisma.IntFilter<"Comportamento"> | number
   alunoId?: Prisma.IntFilter<"Comportamento"> | number
-  titiaId?: Prisma.IntFilter<"Comportamento"> | number
+  cuidadorId?: Prisma.IntFilter<"Comportamento"> | number
   data?: Prisma.DateTimeFilter<"Comportamento"> | Date | string
   descricao?: Prisma.StringFilter<"Comportamento"> | string
   criadoEm?: Prisma.DateTimeFilter<"Comportamento"> | Date | string
   aluno?: Prisma.XOR<Prisma.AlunoScalarRelationFilter, Prisma.AlunoWhereInput>
-  titia?: Prisma.XOR<Prisma.TitiaScalarRelationFilter, Prisma.TitiaWhereInput>
+  cuidador?: Prisma.XOR<Prisma.CuidadorScalarRelationFilter, Prisma.CuidadorWhereInput>
 }
 
 export type ComportamentoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   alunoId?: Prisma.SortOrder
-  titiaId?: Prisma.SortOrder
+  cuidadorId?: Prisma.SortOrder
   data?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   aluno?: Prisma.AlunoOrderByWithRelationInput
-  titia?: Prisma.TitiaOrderByWithRelationInput
+  cuidador?: Prisma.CuidadorOrderByWithRelationInput
 }
 
 export type ComportamentoWhereUniqueInput = Prisma.AtLeast<{
@@ -253,18 +253,18 @@ export type ComportamentoWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ComportamentoWhereInput[]
   NOT?: Prisma.ComportamentoWhereInput | Prisma.ComportamentoWhereInput[]
   alunoId?: Prisma.IntFilter<"Comportamento"> | number
-  titiaId?: Prisma.IntFilter<"Comportamento"> | number
+  cuidadorId?: Prisma.IntFilter<"Comportamento"> | number
   data?: Prisma.DateTimeFilter<"Comportamento"> | Date | string
   descricao?: Prisma.StringFilter<"Comportamento"> | string
   criadoEm?: Prisma.DateTimeFilter<"Comportamento"> | Date | string
   aluno?: Prisma.XOR<Prisma.AlunoScalarRelationFilter, Prisma.AlunoWhereInput>
-  titia?: Prisma.XOR<Prisma.TitiaScalarRelationFilter, Prisma.TitiaWhereInput>
+  cuidador?: Prisma.XOR<Prisma.CuidadorScalarRelationFilter, Prisma.CuidadorWhereInput>
 }, "id">
 
 export type ComportamentoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   alunoId?: Prisma.SortOrder
-  titiaId?: Prisma.SortOrder
+  cuidadorId?: Prisma.SortOrder
   data?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -281,7 +281,7 @@ export type ComportamentoScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ComportamentoScalarWhereWithAggregatesInput | Prisma.ComportamentoScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Comportamento"> | number
   alunoId?: Prisma.IntWithAggregatesFilter<"Comportamento"> | number
-  titiaId?: Prisma.IntWithAggregatesFilter<"Comportamento"> | number
+  cuidadorId?: Prisma.IntWithAggregatesFilter<"Comportamento"> | number
   data?: Prisma.DateTimeWithAggregatesFilter<"Comportamento"> | Date | string
   descricao?: Prisma.StringWithAggregatesFilter<"Comportamento"> | string
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Comportamento"> | Date | string
@@ -292,13 +292,13 @@ export type ComportamentoCreateInput = {
   descricao: string
   criadoEm?: Date | string
   aluno: Prisma.AlunoCreateNestedOneWithoutComportamentosInput
-  titia: Prisma.TitiaCreateNestedOneWithoutComportamentosInput
+  cuidador: Prisma.CuidadorCreateNestedOneWithoutComportamentosInput
 }
 
 export type ComportamentoUncheckedCreateInput = {
   id?: number
   alunoId: number
-  titiaId: number
+  cuidadorId: number
   data?: Date | string
   descricao: string
   criadoEm?: Date | string
@@ -309,13 +309,13 @@ export type ComportamentoUpdateInput = {
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   aluno?: Prisma.AlunoUpdateOneRequiredWithoutComportamentosNestedInput
-  titia?: Prisma.TitiaUpdateOneRequiredWithoutComportamentosNestedInput
+  cuidador?: Prisma.CuidadorUpdateOneRequiredWithoutComportamentosNestedInput
 }
 
 export type ComportamentoUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   alunoId?: Prisma.IntFieldUpdateOperationsInput | number
-  titiaId?: Prisma.IntFieldUpdateOperationsInput | number
+  cuidadorId?: Prisma.IntFieldUpdateOperationsInput | number
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -324,7 +324,7 @@ export type ComportamentoUncheckedUpdateInput = {
 export type ComportamentoCreateManyInput = {
   id?: number
   alunoId: number
-  titiaId: number
+  cuidadorId: number
   data?: Date | string
   descricao: string
   criadoEm?: Date | string
@@ -339,7 +339,7 @@ export type ComportamentoUpdateManyMutationInput = {
 export type ComportamentoUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   alunoId?: Prisma.IntFieldUpdateOperationsInput | number
-  titiaId?: Prisma.IntFieldUpdateOperationsInput | number
+  cuidadorId?: Prisma.IntFieldUpdateOperationsInput | number
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -358,7 +358,7 @@ export type ComportamentoOrderByRelationAggregateInput = {
 export type ComportamentoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   alunoId?: Prisma.SortOrder
-  titiaId?: Prisma.SortOrder
+  cuidadorId?: Prisma.SortOrder
   data?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -367,13 +367,13 @@ export type ComportamentoCountOrderByAggregateInput = {
 export type ComportamentoAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   alunoId?: Prisma.SortOrder
-  titiaId?: Prisma.SortOrder
+  cuidadorId?: Prisma.SortOrder
 }
 
 export type ComportamentoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   alunoId?: Prisma.SortOrder
-  titiaId?: Prisma.SortOrder
+  cuidadorId?: Prisma.SortOrder
   data?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -382,7 +382,7 @@ export type ComportamentoMaxOrderByAggregateInput = {
 export type ComportamentoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   alunoId?: Prisma.SortOrder
-  titiaId?: Prisma.SortOrder
+  cuidadorId?: Prisma.SortOrder
   data?: Prisma.SortOrder
   descricao?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -391,48 +391,48 @@ export type ComportamentoMinOrderByAggregateInput = {
 export type ComportamentoSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   alunoId?: Prisma.SortOrder
-  titiaId?: Prisma.SortOrder
+  cuidadorId?: Prisma.SortOrder
 }
 
-export type ComportamentoCreateNestedManyWithoutTitiaInput = {
-  create?: Prisma.XOR<Prisma.ComportamentoCreateWithoutTitiaInput, Prisma.ComportamentoUncheckedCreateWithoutTitiaInput> | Prisma.ComportamentoCreateWithoutTitiaInput[] | Prisma.ComportamentoUncheckedCreateWithoutTitiaInput[]
-  connectOrCreate?: Prisma.ComportamentoCreateOrConnectWithoutTitiaInput | Prisma.ComportamentoCreateOrConnectWithoutTitiaInput[]
-  createMany?: Prisma.ComportamentoCreateManyTitiaInputEnvelope
+export type ComportamentoCreateNestedManyWithoutCuidadorInput = {
+  create?: Prisma.XOR<Prisma.ComportamentoCreateWithoutCuidadorInput, Prisma.ComportamentoUncheckedCreateWithoutCuidadorInput> | Prisma.ComportamentoCreateWithoutCuidadorInput[] | Prisma.ComportamentoUncheckedCreateWithoutCuidadorInput[]
+  connectOrCreate?: Prisma.ComportamentoCreateOrConnectWithoutCuidadorInput | Prisma.ComportamentoCreateOrConnectWithoutCuidadorInput[]
+  createMany?: Prisma.ComportamentoCreateManyCuidadorInputEnvelope
   connect?: Prisma.ComportamentoWhereUniqueInput | Prisma.ComportamentoWhereUniqueInput[]
 }
 
-export type ComportamentoUncheckedCreateNestedManyWithoutTitiaInput = {
-  create?: Prisma.XOR<Prisma.ComportamentoCreateWithoutTitiaInput, Prisma.ComportamentoUncheckedCreateWithoutTitiaInput> | Prisma.ComportamentoCreateWithoutTitiaInput[] | Prisma.ComportamentoUncheckedCreateWithoutTitiaInput[]
-  connectOrCreate?: Prisma.ComportamentoCreateOrConnectWithoutTitiaInput | Prisma.ComportamentoCreateOrConnectWithoutTitiaInput[]
-  createMany?: Prisma.ComportamentoCreateManyTitiaInputEnvelope
+export type ComportamentoUncheckedCreateNestedManyWithoutCuidadorInput = {
+  create?: Prisma.XOR<Prisma.ComportamentoCreateWithoutCuidadorInput, Prisma.ComportamentoUncheckedCreateWithoutCuidadorInput> | Prisma.ComportamentoCreateWithoutCuidadorInput[] | Prisma.ComportamentoUncheckedCreateWithoutCuidadorInput[]
+  connectOrCreate?: Prisma.ComportamentoCreateOrConnectWithoutCuidadorInput | Prisma.ComportamentoCreateOrConnectWithoutCuidadorInput[]
+  createMany?: Prisma.ComportamentoCreateManyCuidadorInputEnvelope
   connect?: Prisma.ComportamentoWhereUniqueInput | Prisma.ComportamentoWhereUniqueInput[]
 }
 
-export type ComportamentoUpdateManyWithoutTitiaNestedInput = {
-  create?: Prisma.XOR<Prisma.ComportamentoCreateWithoutTitiaInput, Prisma.ComportamentoUncheckedCreateWithoutTitiaInput> | Prisma.ComportamentoCreateWithoutTitiaInput[] | Prisma.ComportamentoUncheckedCreateWithoutTitiaInput[]
-  connectOrCreate?: Prisma.ComportamentoCreateOrConnectWithoutTitiaInput | Prisma.ComportamentoCreateOrConnectWithoutTitiaInput[]
-  upsert?: Prisma.ComportamentoUpsertWithWhereUniqueWithoutTitiaInput | Prisma.ComportamentoUpsertWithWhereUniqueWithoutTitiaInput[]
-  createMany?: Prisma.ComportamentoCreateManyTitiaInputEnvelope
+export type ComportamentoUpdateManyWithoutCuidadorNestedInput = {
+  create?: Prisma.XOR<Prisma.ComportamentoCreateWithoutCuidadorInput, Prisma.ComportamentoUncheckedCreateWithoutCuidadorInput> | Prisma.ComportamentoCreateWithoutCuidadorInput[] | Prisma.ComportamentoUncheckedCreateWithoutCuidadorInput[]
+  connectOrCreate?: Prisma.ComportamentoCreateOrConnectWithoutCuidadorInput | Prisma.ComportamentoCreateOrConnectWithoutCuidadorInput[]
+  upsert?: Prisma.ComportamentoUpsertWithWhereUniqueWithoutCuidadorInput | Prisma.ComportamentoUpsertWithWhereUniqueWithoutCuidadorInput[]
+  createMany?: Prisma.ComportamentoCreateManyCuidadorInputEnvelope
   set?: Prisma.ComportamentoWhereUniqueInput | Prisma.ComportamentoWhereUniqueInput[]
   disconnect?: Prisma.ComportamentoWhereUniqueInput | Prisma.ComportamentoWhereUniqueInput[]
   delete?: Prisma.ComportamentoWhereUniqueInput | Prisma.ComportamentoWhereUniqueInput[]
   connect?: Prisma.ComportamentoWhereUniqueInput | Prisma.ComportamentoWhereUniqueInput[]
-  update?: Prisma.ComportamentoUpdateWithWhereUniqueWithoutTitiaInput | Prisma.ComportamentoUpdateWithWhereUniqueWithoutTitiaInput[]
-  updateMany?: Prisma.ComportamentoUpdateManyWithWhereWithoutTitiaInput | Prisma.ComportamentoUpdateManyWithWhereWithoutTitiaInput[]
+  update?: Prisma.ComportamentoUpdateWithWhereUniqueWithoutCuidadorInput | Prisma.ComportamentoUpdateWithWhereUniqueWithoutCuidadorInput[]
+  updateMany?: Prisma.ComportamentoUpdateManyWithWhereWithoutCuidadorInput | Prisma.ComportamentoUpdateManyWithWhereWithoutCuidadorInput[]
   deleteMany?: Prisma.ComportamentoScalarWhereInput | Prisma.ComportamentoScalarWhereInput[]
 }
 
-export type ComportamentoUncheckedUpdateManyWithoutTitiaNestedInput = {
-  create?: Prisma.XOR<Prisma.ComportamentoCreateWithoutTitiaInput, Prisma.ComportamentoUncheckedCreateWithoutTitiaInput> | Prisma.ComportamentoCreateWithoutTitiaInput[] | Prisma.ComportamentoUncheckedCreateWithoutTitiaInput[]
-  connectOrCreate?: Prisma.ComportamentoCreateOrConnectWithoutTitiaInput | Prisma.ComportamentoCreateOrConnectWithoutTitiaInput[]
-  upsert?: Prisma.ComportamentoUpsertWithWhereUniqueWithoutTitiaInput | Prisma.ComportamentoUpsertWithWhereUniqueWithoutTitiaInput[]
-  createMany?: Prisma.ComportamentoCreateManyTitiaInputEnvelope
+export type ComportamentoUncheckedUpdateManyWithoutCuidadorNestedInput = {
+  create?: Prisma.XOR<Prisma.ComportamentoCreateWithoutCuidadorInput, Prisma.ComportamentoUncheckedCreateWithoutCuidadorInput> | Prisma.ComportamentoCreateWithoutCuidadorInput[] | Prisma.ComportamentoUncheckedCreateWithoutCuidadorInput[]
+  connectOrCreate?: Prisma.ComportamentoCreateOrConnectWithoutCuidadorInput | Prisma.ComportamentoCreateOrConnectWithoutCuidadorInput[]
+  upsert?: Prisma.ComportamentoUpsertWithWhereUniqueWithoutCuidadorInput | Prisma.ComportamentoUpsertWithWhereUniqueWithoutCuidadorInput[]
+  createMany?: Prisma.ComportamentoCreateManyCuidadorInputEnvelope
   set?: Prisma.ComportamentoWhereUniqueInput | Prisma.ComportamentoWhereUniqueInput[]
   disconnect?: Prisma.ComportamentoWhereUniqueInput | Prisma.ComportamentoWhereUniqueInput[]
   delete?: Prisma.ComportamentoWhereUniqueInput | Prisma.ComportamentoWhereUniqueInput[]
   connect?: Prisma.ComportamentoWhereUniqueInput | Prisma.ComportamentoWhereUniqueInput[]
-  update?: Prisma.ComportamentoUpdateWithWhereUniqueWithoutTitiaInput | Prisma.ComportamentoUpdateWithWhereUniqueWithoutTitiaInput[]
-  updateMany?: Prisma.ComportamentoUpdateManyWithWhereWithoutTitiaInput | Prisma.ComportamentoUpdateManyWithWhereWithoutTitiaInput[]
+  update?: Prisma.ComportamentoUpdateWithWhereUniqueWithoutCuidadorInput | Prisma.ComportamentoUpdateWithWhereUniqueWithoutCuidadorInput[]
+  updateMany?: Prisma.ComportamentoUpdateManyWithWhereWithoutCuidadorInput | Prisma.ComportamentoUpdateManyWithWhereWithoutCuidadorInput[]
   deleteMany?: Prisma.ComportamentoScalarWhereInput | Prisma.ComportamentoScalarWhereInput[]
 }
 
@@ -478,14 +478,14 @@ export type ComportamentoUncheckedUpdateManyWithoutAlunoNestedInput = {
   deleteMany?: Prisma.ComportamentoScalarWhereInput | Prisma.ComportamentoScalarWhereInput[]
 }
 
-export type ComportamentoCreateWithoutTitiaInput = {
+export type ComportamentoCreateWithoutCuidadorInput = {
   data?: Date | string
   descricao: string
   criadoEm?: Date | string
   aluno: Prisma.AlunoCreateNestedOneWithoutComportamentosInput
 }
 
-export type ComportamentoUncheckedCreateWithoutTitiaInput = {
+export type ComportamentoUncheckedCreateWithoutCuidadorInput = {
   id?: number
   alunoId: number
   data?: Date | string
@@ -493,30 +493,30 @@ export type ComportamentoUncheckedCreateWithoutTitiaInput = {
   criadoEm?: Date | string
 }
 
-export type ComportamentoCreateOrConnectWithoutTitiaInput = {
+export type ComportamentoCreateOrConnectWithoutCuidadorInput = {
   where: Prisma.ComportamentoWhereUniqueInput
-  create: Prisma.XOR<Prisma.ComportamentoCreateWithoutTitiaInput, Prisma.ComportamentoUncheckedCreateWithoutTitiaInput>
+  create: Prisma.XOR<Prisma.ComportamentoCreateWithoutCuidadorInput, Prisma.ComportamentoUncheckedCreateWithoutCuidadorInput>
 }
 
-export type ComportamentoCreateManyTitiaInputEnvelope = {
-  data: Prisma.ComportamentoCreateManyTitiaInput | Prisma.ComportamentoCreateManyTitiaInput[]
+export type ComportamentoCreateManyCuidadorInputEnvelope = {
+  data: Prisma.ComportamentoCreateManyCuidadorInput | Prisma.ComportamentoCreateManyCuidadorInput[]
   skipDuplicates?: boolean
 }
 
-export type ComportamentoUpsertWithWhereUniqueWithoutTitiaInput = {
+export type ComportamentoUpsertWithWhereUniqueWithoutCuidadorInput = {
   where: Prisma.ComportamentoWhereUniqueInput
-  update: Prisma.XOR<Prisma.ComportamentoUpdateWithoutTitiaInput, Prisma.ComportamentoUncheckedUpdateWithoutTitiaInput>
-  create: Prisma.XOR<Prisma.ComportamentoCreateWithoutTitiaInput, Prisma.ComportamentoUncheckedCreateWithoutTitiaInput>
+  update: Prisma.XOR<Prisma.ComportamentoUpdateWithoutCuidadorInput, Prisma.ComportamentoUncheckedUpdateWithoutCuidadorInput>
+  create: Prisma.XOR<Prisma.ComportamentoCreateWithoutCuidadorInput, Prisma.ComportamentoUncheckedCreateWithoutCuidadorInput>
 }
 
-export type ComportamentoUpdateWithWhereUniqueWithoutTitiaInput = {
+export type ComportamentoUpdateWithWhereUniqueWithoutCuidadorInput = {
   where: Prisma.ComportamentoWhereUniqueInput
-  data: Prisma.XOR<Prisma.ComportamentoUpdateWithoutTitiaInput, Prisma.ComportamentoUncheckedUpdateWithoutTitiaInput>
+  data: Prisma.XOR<Prisma.ComportamentoUpdateWithoutCuidadorInput, Prisma.ComportamentoUncheckedUpdateWithoutCuidadorInput>
 }
 
-export type ComportamentoUpdateManyWithWhereWithoutTitiaInput = {
+export type ComportamentoUpdateManyWithWhereWithoutCuidadorInput = {
   where: Prisma.ComportamentoScalarWhereInput
-  data: Prisma.XOR<Prisma.ComportamentoUpdateManyMutationInput, Prisma.ComportamentoUncheckedUpdateManyWithoutTitiaInput>
+  data: Prisma.XOR<Prisma.ComportamentoUpdateManyMutationInput, Prisma.ComportamentoUncheckedUpdateManyWithoutCuidadorInput>
 }
 
 export type ComportamentoScalarWhereInput = {
@@ -525,7 +525,7 @@ export type ComportamentoScalarWhereInput = {
   NOT?: Prisma.ComportamentoScalarWhereInput | Prisma.ComportamentoScalarWhereInput[]
   id?: Prisma.IntFilter<"Comportamento"> | number
   alunoId?: Prisma.IntFilter<"Comportamento"> | number
-  titiaId?: Prisma.IntFilter<"Comportamento"> | number
+  cuidadorId?: Prisma.IntFilter<"Comportamento"> | number
   data?: Prisma.DateTimeFilter<"Comportamento"> | Date | string
   descricao?: Prisma.StringFilter<"Comportamento"> | string
   criadoEm?: Prisma.DateTimeFilter<"Comportamento"> | Date | string
@@ -535,12 +535,12 @@ export type ComportamentoCreateWithoutAlunoInput = {
   data?: Date | string
   descricao: string
   criadoEm?: Date | string
-  titia: Prisma.TitiaCreateNestedOneWithoutComportamentosInput
+  cuidador: Prisma.CuidadorCreateNestedOneWithoutComportamentosInput
 }
 
 export type ComportamentoUncheckedCreateWithoutAlunoInput = {
   id?: number
-  titiaId: number
+  cuidadorId: number
   data?: Date | string
   descricao: string
   criadoEm?: Date | string
@@ -572,7 +572,7 @@ export type ComportamentoUpdateManyWithWhereWithoutAlunoInput = {
   data: Prisma.XOR<Prisma.ComportamentoUpdateManyMutationInput, Prisma.ComportamentoUncheckedUpdateManyWithoutAlunoInput>
 }
 
-export type ComportamentoCreateManyTitiaInput = {
+export type ComportamentoCreateManyCuidadorInput = {
   id?: number
   alunoId: number
   data?: Date | string
@@ -580,14 +580,14 @@ export type ComportamentoCreateManyTitiaInput = {
   criadoEm?: Date | string
 }
 
-export type ComportamentoUpdateWithoutTitiaInput = {
+export type ComportamentoUpdateWithoutCuidadorInput = {
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   aluno?: Prisma.AlunoUpdateOneRequiredWithoutComportamentosNestedInput
 }
 
-export type ComportamentoUncheckedUpdateWithoutTitiaInput = {
+export type ComportamentoUncheckedUpdateWithoutCuidadorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   alunoId?: Prisma.IntFieldUpdateOperationsInput | number
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -595,7 +595,7 @@ export type ComportamentoUncheckedUpdateWithoutTitiaInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ComportamentoUncheckedUpdateManyWithoutTitiaInput = {
+export type ComportamentoUncheckedUpdateManyWithoutCuidadorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   alunoId?: Prisma.IntFieldUpdateOperationsInput | number
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -605,7 +605,7 @@ export type ComportamentoUncheckedUpdateManyWithoutTitiaInput = {
 
 export type ComportamentoCreateManyAlunoInput = {
   id?: number
-  titiaId: number
+  cuidadorId: number
   data?: Date | string
   descricao: string
   criadoEm?: Date | string
@@ -615,12 +615,12 @@ export type ComportamentoUpdateWithoutAlunoInput = {
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  titia?: Prisma.TitiaUpdateOneRequiredWithoutComportamentosNestedInput
+  cuidador?: Prisma.CuidadorUpdateOneRequiredWithoutComportamentosNestedInput
 }
 
 export type ComportamentoUncheckedUpdateWithoutAlunoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  titiaId?: Prisma.IntFieldUpdateOperationsInput | number
+  cuidadorId?: Prisma.IntFieldUpdateOperationsInput | number
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -628,7 +628,7 @@ export type ComportamentoUncheckedUpdateWithoutAlunoInput = {
 
 export type ComportamentoUncheckedUpdateManyWithoutAlunoInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  titiaId?: Prisma.IntFieldUpdateOperationsInput | number
+  cuidadorId?: Prisma.IntFieldUpdateOperationsInput | number
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   descricao?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -639,69 +639,69 @@ export type ComportamentoUncheckedUpdateManyWithoutAlunoInput = {
 export type ComportamentoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   alunoId?: boolean
-  titiaId?: boolean
+  cuidadorId?: boolean
   data?: boolean
   descricao?: boolean
   criadoEm?: boolean
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["comportamento"]>
 
 export type ComportamentoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   alunoId?: boolean
-  titiaId?: boolean
+  cuidadorId?: boolean
   data?: boolean
   descricao?: boolean
   criadoEm?: boolean
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["comportamento"]>
 
 export type ComportamentoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   alunoId?: boolean
-  titiaId?: boolean
+  cuidadorId?: boolean
   data?: boolean
   descricao?: boolean
   criadoEm?: boolean
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["comportamento"]>
 
 export type ComportamentoSelectScalar = {
   id?: boolean
   alunoId?: boolean
-  titiaId?: boolean
+  cuidadorId?: boolean
   data?: boolean
   descricao?: boolean
   criadoEm?: boolean
 }
 
-export type ComportamentoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "alunoId" | "titiaId" | "data" | "descricao" | "criadoEm", ExtArgs["result"]["comportamento"]>
+export type ComportamentoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "alunoId" | "cuidadorId" | "data" | "descricao" | "criadoEm", ExtArgs["result"]["comportamento"]>
 export type ComportamentoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }
 export type ComportamentoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }
 export type ComportamentoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }
 
 export type $ComportamentoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Comportamento"
   objects: {
     aluno: Prisma.$AlunoPayload<ExtArgs>
-    titia: Prisma.$TitiaPayload<ExtArgs>
+    cuidador: Prisma.$CuidadorPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     alunoId: number
-    titiaId: number
+    cuidadorId: number
     data: Date
     descricao: string
     criadoEm: Date
@@ -1100,7 +1100,7 @@ readonly fields: ComportamentoFieldRefs;
 export interface Prisma__ComportamentoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   aluno<T extends Prisma.AlunoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AlunoDefaultArgs<ExtArgs>>): Prisma.Prisma__AlunoClient<runtime.Types.Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  titia<T extends Prisma.TitiaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TitiaDefaultArgs<ExtArgs>>): Prisma.Prisma__TitiaClient<runtime.Types.Result.GetResult<Prisma.$TitiaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  cuidador<T extends Prisma.CuidadorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CuidadorDefaultArgs<ExtArgs>>): Prisma.Prisma__CuidadorClient<runtime.Types.Result.GetResult<Prisma.$CuidadorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1132,7 +1132,7 @@ export interface Prisma__ComportamentoClient<T, Null = never, ExtArgs extends ru
 export interface ComportamentoFieldRefs {
   readonly id: Prisma.FieldRef<"Comportamento", 'Int'>
   readonly alunoId: Prisma.FieldRef<"Comportamento", 'Int'>
-  readonly titiaId: Prisma.FieldRef<"Comportamento", 'Int'>
+  readonly cuidadorId: Prisma.FieldRef<"Comportamento", 'Int'>
   readonly data: Prisma.FieldRef<"Comportamento", 'DateTime'>
   readonly descricao: Prisma.FieldRef<"Comportamento", 'String'>
   readonly criadoEm: Prisma.FieldRef<"Comportamento", 'DateTime'>

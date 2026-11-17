@@ -30,14 +30,14 @@ export type PresencaAvgAggregateOutputType = {
   id: number | null
   alunoId: number | null
   turmaId: number | null
-  registradoPorTitiaId: number | null
+  registradoPorCuidadorId: number | null
 }
 
 export type PresencaSumAggregateOutputType = {
   id: number | null
   alunoId: number | null
   turmaId: number | null
-  registradoPorTitiaId: number | null
+  registradoPorCuidadorId: number | null
 }
 
 export type PresencaMinAggregateOutputType = {
@@ -47,7 +47,7 @@ export type PresencaMinAggregateOutputType = {
   data: Date | null
   status: string | null
   observacao: string | null
-  registradoPorTitiaId: number | null
+  registradoPorCuidadorId: number | null
   criadoEm: Date | null
 }
 
@@ -58,7 +58,7 @@ export type PresencaMaxAggregateOutputType = {
   data: Date | null
   status: string | null
   observacao: string | null
-  registradoPorTitiaId: number | null
+  registradoPorCuidadorId: number | null
   criadoEm: Date | null
 }
 
@@ -69,7 +69,7 @@ export type PresencaCountAggregateOutputType = {
   data: number
   status: number
   observacao: number
-  registradoPorTitiaId: number
+  registradoPorCuidadorId: number
   criadoEm: number
   _all: number
 }
@@ -79,14 +79,14 @@ export type PresencaAvgAggregateInputType = {
   id?: true
   alunoId?: true
   turmaId?: true
-  registradoPorTitiaId?: true
+  registradoPorCuidadorId?: true
 }
 
 export type PresencaSumAggregateInputType = {
   id?: true
   alunoId?: true
   turmaId?: true
-  registradoPorTitiaId?: true
+  registradoPorCuidadorId?: true
 }
 
 export type PresencaMinAggregateInputType = {
@@ -96,7 +96,7 @@ export type PresencaMinAggregateInputType = {
   data?: true
   status?: true
   observacao?: true
-  registradoPorTitiaId?: true
+  registradoPorCuidadorId?: true
   criadoEm?: true
 }
 
@@ -107,7 +107,7 @@ export type PresencaMaxAggregateInputType = {
   data?: true
   status?: true
   observacao?: true
-  registradoPorTitiaId?: true
+  registradoPorCuidadorId?: true
   criadoEm?: true
 }
 
@@ -118,7 +118,7 @@ export type PresencaCountAggregateInputType = {
   data?: true
   status?: true
   observacao?: true
-  registradoPorTitiaId?: true
+  registradoPorCuidadorId?: true
   criadoEm?: true
   _all?: true
 }
@@ -216,7 +216,7 @@ export type PresencaGroupByOutputType = {
   data: Date
   status: string
   observacao: string | null
-  registradoPorTitiaId: number
+  registradoPorCuidadorId: number
   criadoEm: Date
   _count: PresencaCountAggregateOutputType | null
   _avg: PresencaAvgAggregateOutputType | null
@@ -250,11 +250,11 @@ export type PresencaWhereInput = {
   data?: Prisma.DateTimeFilter<"Presenca"> | Date | string
   status?: Prisma.StringFilter<"Presenca"> | string
   observacao?: Prisma.StringNullableFilter<"Presenca"> | string | null
-  registradoPorTitiaId?: Prisma.IntFilter<"Presenca"> | number
+  registradoPorCuidadorId?: Prisma.IntFilter<"Presenca"> | number
   criadoEm?: Prisma.DateTimeFilter<"Presenca"> | Date | string
   aluno?: Prisma.XOR<Prisma.AlunoScalarRelationFilter, Prisma.AlunoWhereInput>
   turma?: Prisma.XOR<Prisma.TurmaScalarRelationFilter, Prisma.TurmaWhereInput>
-  titia?: Prisma.XOR<Prisma.TitiaScalarRelationFilter, Prisma.TitiaWhereInput>
+  cuidador?: Prisma.XOR<Prisma.CuidadorScalarRelationFilter, Prisma.CuidadorWhereInput>
 }
 
 export type PresencaOrderByWithRelationInput = {
@@ -264,11 +264,11 @@ export type PresencaOrderByWithRelationInput = {
   data?: Prisma.SortOrder
   status?: Prisma.SortOrder
   observacao?: Prisma.SortOrderInput | Prisma.SortOrder
-  registradoPorTitiaId?: Prisma.SortOrder
+  registradoPorCuidadorId?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   aluno?: Prisma.AlunoOrderByWithRelationInput
   turma?: Prisma.TurmaOrderByWithRelationInput
-  titia?: Prisma.TitiaOrderByWithRelationInput
+  cuidador?: Prisma.CuidadorOrderByWithRelationInput
 }
 
 export type PresencaWhereUniqueInput = Prisma.AtLeast<{
@@ -282,11 +282,11 @@ export type PresencaWhereUniqueInput = Prisma.AtLeast<{
   data?: Prisma.DateTimeFilter<"Presenca"> | Date | string
   status?: Prisma.StringFilter<"Presenca"> | string
   observacao?: Prisma.StringNullableFilter<"Presenca"> | string | null
-  registradoPorTitiaId?: Prisma.IntFilter<"Presenca"> | number
+  registradoPorCuidadorId?: Prisma.IntFilter<"Presenca"> | number
   criadoEm?: Prisma.DateTimeFilter<"Presenca"> | Date | string
   aluno?: Prisma.XOR<Prisma.AlunoScalarRelationFilter, Prisma.AlunoWhereInput>
   turma?: Prisma.XOR<Prisma.TurmaScalarRelationFilter, Prisma.TurmaWhereInput>
-  titia?: Prisma.XOR<Prisma.TitiaScalarRelationFilter, Prisma.TitiaWhereInput>
+  cuidador?: Prisma.XOR<Prisma.CuidadorScalarRelationFilter, Prisma.CuidadorWhereInput>
 }, "id" | "alunoId_data">
 
 export type PresencaOrderByWithAggregationInput = {
@@ -296,7 +296,7 @@ export type PresencaOrderByWithAggregationInput = {
   data?: Prisma.SortOrder
   status?: Prisma.SortOrder
   observacao?: Prisma.SortOrderInput | Prisma.SortOrder
-  registradoPorTitiaId?: Prisma.SortOrder
+  registradoPorCuidadorId?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   _count?: Prisma.PresencaCountOrderByAggregateInput
   _avg?: Prisma.PresencaAvgOrderByAggregateInput
@@ -315,7 +315,7 @@ export type PresencaScalarWhereWithAggregatesInput = {
   data?: Prisma.DateTimeWithAggregatesFilter<"Presenca"> | Date | string
   status?: Prisma.StringWithAggregatesFilter<"Presenca"> | string
   observacao?: Prisma.StringNullableWithAggregatesFilter<"Presenca"> | string | null
-  registradoPorTitiaId?: Prisma.IntWithAggregatesFilter<"Presenca"> | number
+  registradoPorCuidadorId?: Prisma.IntWithAggregatesFilter<"Presenca"> | number
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Presenca"> | Date | string
 }
 
@@ -326,7 +326,7 @@ export type PresencaCreateInput = {
   criadoEm?: Date | string
   aluno: Prisma.AlunoCreateNestedOneWithoutPresencasInput
   turma: Prisma.TurmaCreateNestedOneWithoutPresencasInput
-  titia: Prisma.TitiaCreateNestedOneWithoutPresencasInput
+  cuidador: Prisma.CuidadorCreateNestedOneWithoutPresencasInput
 }
 
 export type PresencaUncheckedCreateInput = {
@@ -336,7 +336,7 @@ export type PresencaUncheckedCreateInput = {
   data?: Date | string
   status: string
   observacao?: string | null
-  registradoPorTitiaId: number
+  registradoPorCuidadorId: number
   criadoEm?: Date | string
 }
 
@@ -347,7 +347,7 @@ export type PresencaUpdateInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   aluno?: Prisma.AlunoUpdateOneRequiredWithoutPresencasNestedInput
   turma?: Prisma.TurmaUpdateOneRequiredWithoutPresencasNestedInput
-  titia?: Prisma.TitiaUpdateOneRequiredWithoutPresencasNestedInput
+  cuidador?: Prisma.CuidadorUpdateOneRequiredWithoutPresencasNestedInput
 }
 
 export type PresencaUncheckedUpdateInput = {
@@ -357,7 +357,7 @@ export type PresencaUncheckedUpdateInput = {
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  registradoPorTitiaId?: Prisma.IntFieldUpdateOperationsInput | number
+  registradoPorCuidadorId?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -368,7 +368,7 @@ export type PresencaCreateManyInput = {
   data?: Date | string
   status: string
   observacao?: string | null
-  registradoPorTitiaId: number
+  registradoPorCuidadorId: number
   criadoEm?: Date | string
 }
 
@@ -386,7 +386,7 @@ export type PresencaUncheckedUpdateManyInput = {
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  registradoPorTitiaId?: Prisma.IntFieldUpdateOperationsInput | number
+  registradoPorCuidadorId?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -412,7 +412,7 @@ export type PresencaCountOrderByAggregateInput = {
   data?: Prisma.SortOrder
   status?: Prisma.SortOrder
   observacao?: Prisma.SortOrder
-  registradoPorTitiaId?: Prisma.SortOrder
+  registradoPorCuidadorId?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
 }
 
@@ -420,7 +420,7 @@ export type PresencaAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   alunoId?: Prisma.SortOrder
   turmaId?: Prisma.SortOrder
-  registradoPorTitiaId?: Prisma.SortOrder
+  registradoPorCuidadorId?: Prisma.SortOrder
 }
 
 export type PresencaMaxOrderByAggregateInput = {
@@ -430,7 +430,7 @@ export type PresencaMaxOrderByAggregateInput = {
   data?: Prisma.SortOrder
   status?: Prisma.SortOrder
   observacao?: Prisma.SortOrder
-  registradoPorTitiaId?: Prisma.SortOrder
+  registradoPorCuidadorId?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
 }
 
@@ -441,7 +441,7 @@ export type PresencaMinOrderByAggregateInput = {
   data?: Prisma.SortOrder
   status?: Prisma.SortOrder
   observacao?: Prisma.SortOrder
-  registradoPorTitiaId?: Prisma.SortOrder
+  registradoPorCuidadorId?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
 }
 
@@ -449,48 +449,48 @@ export type PresencaSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   alunoId?: Prisma.SortOrder
   turmaId?: Prisma.SortOrder
-  registradoPorTitiaId?: Prisma.SortOrder
+  registradoPorCuidadorId?: Prisma.SortOrder
 }
 
-export type PresencaCreateNestedManyWithoutTitiaInput = {
-  create?: Prisma.XOR<Prisma.PresencaCreateWithoutTitiaInput, Prisma.PresencaUncheckedCreateWithoutTitiaInput> | Prisma.PresencaCreateWithoutTitiaInput[] | Prisma.PresencaUncheckedCreateWithoutTitiaInput[]
-  connectOrCreate?: Prisma.PresencaCreateOrConnectWithoutTitiaInput | Prisma.PresencaCreateOrConnectWithoutTitiaInput[]
-  createMany?: Prisma.PresencaCreateManyTitiaInputEnvelope
+export type PresencaCreateNestedManyWithoutCuidadorInput = {
+  create?: Prisma.XOR<Prisma.PresencaCreateWithoutCuidadorInput, Prisma.PresencaUncheckedCreateWithoutCuidadorInput> | Prisma.PresencaCreateWithoutCuidadorInput[] | Prisma.PresencaUncheckedCreateWithoutCuidadorInput[]
+  connectOrCreate?: Prisma.PresencaCreateOrConnectWithoutCuidadorInput | Prisma.PresencaCreateOrConnectWithoutCuidadorInput[]
+  createMany?: Prisma.PresencaCreateManyCuidadorInputEnvelope
   connect?: Prisma.PresencaWhereUniqueInput | Prisma.PresencaWhereUniqueInput[]
 }
 
-export type PresencaUncheckedCreateNestedManyWithoutTitiaInput = {
-  create?: Prisma.XOR<Prisma.PresencaCreateWithoutTitiaInput, Prisma.PresencaUncheckedCreateWithoutTitiaInput> | Prisma.PresencaCreateWithoutTitiaInput[] | Prisma.PresencaUncheckedCreateWithoutTitiaInput[]
-  connectOrCreate?: Prisma.PresencaCreateOrConnectWithoutTitiaInput | Prisma.PresencaCreateOrConnectWithoutTitiaInput[]
-  createMany?: Prisma.PresencaCreateManyTitiaInputEnvelope
+export type PresencaUncheckedCreateNestedManyWithoutCuidadorInput = {
+  create?: Prisma.XOR<Prisma.PresencaCreateWithoutCuidadorInput, Prisma.PresencaUncheckedCreateWithoutCuidadorInput> | Prisma.PresencaCreateWithoutCuidadorInput[] | Prisma.PresencaUncheckedCreateWithoutCuidadorInput[]
+  connectOrCreate?: Prisma.PresencaCreateOrConnectWithoutCuidadorInput | Prisma.PresencaCreateOrConnectWithoutCuidadorInput[]
+  createMany?: Prisma.PresencaCreateManyCuidadorInputEnvelope
   connect?: Prisma.PresencaWhereUniqueInput | Prisma.PresencaWhereUniqueInput[]
 }
 
-export type PresencaUpdateManyWithoutTitiaNestedInput = {
-  create?: Prisma.XOR<Prisma.PresencaCreateWithoutTitiaInput, Prisma.PresencaUncheckedCreateWithoutTitiaInput> | Prisma.PresencaCreateWithoutTitiaInput[] | Prisma.PresencaUncheckedCreateWithoutTitiaInput[]
-  connectOrCreate?: Prisma.PresencaCreateOrConnectWithoutTitiaInput | Prisma.PresencaCreateOrConnectWithoutTitiaInput[]
-  upsert?: Prisma.PresencaUpsertWithWhereUniqueWithoutTitiaInput | Prisma.PresencaUpsertWithWhereUniqueWithoutTitiaInput[]
-  createMany?: Prisma.PresencaCreateManyTitiaInputEnvelope
+export type PresencaUpdateManyWithoutCuidadorNestedInput = {
+  create?: Prisma.XOR<Prisma.PresencaCreateWithoutCuidadorInput, Prisma.PresencaUncheckedCreateWithoutCuidadorInput> | Prisma.PresencaCreateWithoutCuidadorInput[] | Prisma.PresencaUncheckedCreateWithoutCuidadorInput[]
+  connectOrCreate?: Prisma.PresencaCreateOrConnectWithoutCuidadorInput | Prisma.PresencaCreateOrConnectWithoutCuidadorInput[]
+  upsert?: Prisma.PresencaUpsertWithWhereUniqueWithoutCuidadorInput | Prisma.PresencaUpsertWithWhereUniqueWithoutCuidadorInput[]
+  createMany?: Prisma.PresencaCreateManyCuidadorInputEnvelope
   set?: Prisma.PresencaWhereUniqueInput | Prisma.PresencaWhereUniqueInput[]
   disconnect?: Prisma.PresencaWhereUniqueInput | Prisma.PresencaWhereUniqueInput[]
   delete?: Prisma.PresencaWhereUniqueInput | Prisma.PresencaWhereUniqueInput[]
   connect?: Prisma.PresencaWhereUniqueInput | Prisma.PresencaWhereUniqueInput[]
-  update?: Prisma.PresencaUpdateWithWhereUniqueWithoutTitiaInput | Prisma.PresencaUpdateWithWhereUniqueWithoutTitiaInput[]
-  updateMany?: Prisma.PresencaUpdateManyWithWhereWithoutTitiaInput | Prisma.PresencaUpdateManyWithWhereWithoutTitiaInput[]
+  update?: Prisma.PresencaUpdateWithWhereUniqueWithoutCuidadorInput | Prisma.PresencaUpdateWithWhereUniqueWithoutCuidadorInput[]
+  updateMany?: Prisma.PresencaUpdateManyWithWhereWithoutCuidadorInput | Prisma.PresencaUpdateManyWithWhereWithoutCuidadorInput[]
   deleteMany?: Prisma.PresencaScalarWhereInput | Prisma.PresencaScalarWhereInput[]
 }
 
-export type PresencaUncheckedUpdateManyWithoutTitiaNestedInput = {
-  create?: Prisma.XOR<Prisma.PresencaCreateWithoutTitiaInput, Prisma.PresencaUncheckedCreateWithoutTitiaInput> | Prisma.PresencaCreateWithoutTitiaInput[] | Prisma.PresencaUncheckedCreateWithoutTitiaInput[]
-  connectOrCreate?: Prisma.PresencaCreateOrConnectWithoutTitiaInput | Prisma.PresencaCreateOrConnectWithoutTitiaInput[]
-  upsert?: Prisma.PresencaUpsertWithWhereUniqueWithoutTitiaInput | Prisma.PresencaUpsertWithWhereUniqueWithoutTitiaInput[]
-  createMany?: Prisma.PresencaCreateManyTitiaInputEnvelope
+export type PresencaUncheckedUpdateManyWithoutCuidadorNestedInput = {
+  create?: Prisma.XOR<Prisma.PresencaCreateWithoutCuidadorInput, Prisma.PresencaUncheckedCreateWithoutCuidadorInput> | Prisma.PresencaCreateWithoutCuidadorInput[] | Prisma.PresencaUncheckedCreateWithoutCuidadorInput[]
+  connectOrCreate?: Prisma.PresencaCreateOrConnectWithoutCuidadorInput | Prisma.PresencaCreateOrConnectWithoutCuidadorInput[]
+  upsert?: Prisma.PresencaUpsertWithWhereUniqueWithoutCuidadorInput | Prisma.PresencaUpsertWithWhereUniqueWithoutCuidadorInput[]
+  createMany?: Prisma.PresencaCreateManyCuidadorInputEnvelope
   set?: Prisma.PresencaWhereUniqueInput | Prisma.PresencaWhereUniqueInput[]
   disconnect?: Prisma.PresencaWhereUniqueInput | Prisma.PresencaWhereUniqueInput[]
   delete?: Prisma.PresencaWhereUniqueInput | Prisma.PresencaWhereUniqueInput[]
   connect?: Prisma.PresencaWhereUniqueInput | Prisma.PresencaWhereUniqueInput[]
-  update?: Prisma.PresencaUpdateWithWhereUniqueWithoutTitiaInput | Prisma.PresencaUpdateWithWhereUniqueWithoutTitiaInput[]
-  updateMany?: Prisma.PresencaUpdateManyWithWhereWithoutTitiaInput | Prisma.PresencaUpdateManyWithWhereWithoutTitiaInput[]
+  update?: Prisma.PresencaUpdateWithWhereUniqueWithoutCuidadorInput | Prisma.PresencaUpdateWithWhereUniqueWithoutCuidadorInput[]
+  updateMany?: Prisma.PresencaUpdateManyWithWhereWithoutCuidadorInput | Prisma.PresencaUpdateManyWithWhereWithoutCuidadorInput[]
   deleteMany?: Prisma.PresencaScalarWhereInput | Prisma.PresencaScalarWhereInput[]
 }
 
@@ -578,7 +578,7 @@ export type PresencaUncheckedUpdateManyWithoutAlunoNestedInput = {
   deleteMany?: Prisma.PresencaScalarWhereInput | Prisma.PresencaScalarWhereInput[]
 }
 
-export type PresencaCreateWithoutTitiaInput = {
+export type PresencaCreateWithoutCuidadorInput = {
   data?: Date | string
   status: string
   observacao?: string | null
@@ -587,7 +587,7 @@ export type PresencaCreateWithoutTitiaInput = {
   turma: Prisma.TurmaCreateNestedOneWithoutPresencasInput
 }
 
-export type PresencaUncheckedCreateWithoutTitiaInput = {
+export type PresencaUncheckedCreateWithoutCuidadorInput = {
   id?: number
   alunoId: number
   turmaId: number
@@ -597,30 +597,30 @@ export type PresencaUncheckedCreateWithoutTitiaInput = {
   criadoEm?: Date | string
 }
 
-export type PresencaCreateOrConnectWithoutTitiaInput = {
+export type PresencaCreateOrConnectWithoutCuidadorInput = {
   where: Prisma.PresencaWhereUniqueInput
-  create: Prisma.XOR<Prisma.PresencaCreateWithoutTitiaInput, Prisma.PresencaUncheckedCreateWithoutTitiaInput>
+  create: Prisma.XOR<Prisma.PresencaCreateWithoutCuidadorInput, Prisma.PresencaUncheckedCreateWithoutCuidadorInput>
 }
 
-export type PresencaCreateManyTitiaInputEnvelope = {
-  data: Prisma.PresencaCreateManyTitiaInput | Prisma.PresencaCreateManyTitiaInput[]
+export type PresencaCreateManyCuidadorInputEnvelope = {
+  data: Prisma.PresencaCreateManyCuidadorInput | Prisma.PresencaCreateManyCuidadorInput[]
   skipDuplicates?: boolean
 }
 
-export type PresencaUpsertWithWhereUniqueWithoutTitiaInput = {
+export type PresencaUpsertWithWhereUniqueWithoutCuidadorInput = {
   where: Prisma.PresencaWhereUniqueInput
-  update: Prisma.XOR<Prisma.PresencaUpdateWithoutTitiaInput, Prisma.PresencaUncheckedUpdateWithoutTitiaInput>
-  create: Prisma.XOR<Prisma.PresencaCreateWithoutTitiaInput, Prisma.PresencaUncheckedCreateWithoutTitiaInput>
+  update: Prisma.XOR<Prisma.PresencaUpdateWithoutCuidadorInput, Prisma.PresencaUncheckedUpdateWithoutCuidadorInput>
+  create: Prisma.XOR<Prisma.PresencaCreateWithoutCuidadorInput, Prisma.PresencaUncheckedCreateWithoutCuidadorInput>
 }
 
-export type PresencaUpdateWithWhereUniqueWithoutTitiaInput = {
+export type PresencaUpdateWithWhereUniqueWithoutCuidadorInput = {
   where: Prisma.PresencaWhereUniqueInput
-  data: Prisma.XOR<Prisma.PresencaUpdateWithoutTitiaInput, Prisma.PresencaUncheckedUpdateWithoutTitiaInput>
+  data: Prisma.XOR<Prisma.PresencaUpdateWithoutCuidadorInput, Prisma.PresencaUncheckedUpdateWithoutCuidadorInput>
 }
 
-export type PresencaUpdateManyWithWhereWithoutTitiaInput = {
+export type PresencaUpdateManyWithWhereWithoutCuidadorInput = {
   where: Prisma.PresencaScalarWhereInput
-  data: Prisma.XOR<Prisma.PresencaUpdateManyMutationInput, Prisma.PresencaUncheckedUpdateManyWithoutTitiaInput>
+  data: Prisma.XOR<Prisma.PresencaUpdateManyMutationInput, Prisma.PresencaUncheckedUpdateManyWithoutCuidadorInput>
 }
 
 export type PresencaScalarWhereInput = {
@@ -633,7 +633,7 @@ export type PresencaScalarWhereInput = {
   data?: Prisma.DateTimeFilter<"Presenca"> | Date | string
   status?: Prisma.StringFilter<"Presenca"> | string
   observacao?: Prisma.StringNullableFilter<"Presenca"> | string | null
-  registradoPorTitiaId?: Prisma.IntFilter<"Presenca"> | number
+  registradoPorCuidadorId?: Prisma.IntFilter<"Presenca"> | number
   criadoEm?: Prisma.DateTimeFilter<"Presenca"> | Date | string
 }
 
@@ -643,7 +643,7 @@ export type PresencaCreateWithoutTurmaInput = {
   observacao?: string | null
   criadoEm?: Date | string
   aluno: Prisma.AlunoCreateNestedOneWithoutPresencasInput
-  titia: Prisma.TitiaCreateNestedOneWithoutPresencasInput
+  cuidador: Prisma.CuidadorCreateNestedOneWithoutPresencasInput
 }
 
 export type PresencaUncheckedCreateWithoutTurmaInput = {
@@ -652,7 +652,7 @@ export type PresencaUncheckedCreateWithoutTurmaInput = {
   data?: Date | string
   status: string
   observacao?: string | null
-  registradoPorTitiaId: number
+  registradoPorCuidadorId: number
   criadoEm?: Date | string
 }
 
@@ -688,7 +688,7 @@ export type PresencaCreateWithoutAlunoInput = {
   observacao?: string | null
   criadoEm?: Date | string
   turma: Prisma.TurmaCreateNestedOneWithoutPresencasInput
-  titia: Prisma.TitiaCreateNestedOneWithoutPresencasInput
+  cuidador: Prisma.CuidadorCreateNestedOneWithoutPresencasInput
 }
 
 export type PresencaUncheckedCreateWithoutAlunoInput = {
@@ -697,7 +697,7 @@ export type PresencaUncheckedCreateWithoutAlunoInput = {
   data?: Date | string
   status: string
   observacao?: string | null
-  registradoPorTitiaId: number
+  registradoPorCuidadorId: number
   criadoEm?: Date | string
 }
 
@@ -727,7 +727,7 @@ export type PresencaUpdateManyWithWhereWithoutAlunoInput = {
   data: Prisma.XOR<Prisma.PresencaUpdateManyMutationInput, Prisma.PresencaUncheckedUpdateManyWithoutAlunoInput>
 }
 
-export type PresencaCreateManyTitiaInput = {
+export type PresencaCreateManyCuidadorInput = {
   id?: number
   alunoId: number
   turmaId: number
@@ -737,7 +737,7 @@ export type PresencaCreateManyTitiaInput = {
   criadoEm?: Date | string
 }
 
-export type PresencaUpdateWithoutTitiaInput = {
+export type PresencaUpdateWithoutCuidadorInput = {
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -746,7 +746,7 @@ export type PresencaUpdateWithoutTitiaInput = {
   turma?: Prisma.TurmaUpdateOneRequiredWithoutPresencasNestedInput
 }
 
-export type PresencaUncheckedUpdateWithoutTitiaInput = {
+export type PresencaUncheckedUpdateWithoutCuidadorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   alunoId?: Prisma.IntFieldUpdateOperationsInput | number
   turmaId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -756,7 +756,7 @@ export type PresencaUncheckedUpdateWithoutTitiaInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type PresencaUncheckedUpdateManyWithoutTitiaInput = {
+export type PresencaUncheckedUpdateManyWithoutCuidadorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   alunoId?: Prisma.IntFieldUpdateOperationsInput | number
   turmaId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -772,7 +772,7 @@ export type PresencaCreateManyTurmaInput = {
   data?: Date | string
   status: string
   observacao?: string | null
-  registradoPorTitiaId: number
+  registradoPorCuidadorId: number
   criadoEm?: Date | string
 }
 
@@ -782,7 +782,7 @@ export type PresencaUpdateWithoutTurmaInput = {
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   aluno?: Prisma.AlunoUpdateOneRequiredWithoutPresencasNestedInput
-  titia?: Prisma.TitiaUpdateOneRequiredWithoutPresencasNestedInput
+  cuidador?: Prisma.CuidadorUpdateOneRequiredWithoutPresencasNestedInput
 }
 
 export type PresencaUncheckedUpdateWithoutTurmaInput = {
@@ -791,7 +791,7 @@ export type PresencaUncheckedUpdateWithoutTurmaInput = {
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  registradoPorTitiaId?: Prisma.IntFieldUpdateOperationsInput | number
+  registradoPorCuidadorId?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -801,7 +801,7 @@ export type PresencaUncheckedUpdateManyWithoutTurmaInput = {
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  registradoPorTitiaId?: Prisma.IntFieldUpdateOperationsInput | number
+  registradoPorCuidadorId?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -811,7 +811,7 @@ export type PresencaCreateManyAlunoInput = {
   data?: Date | string
   status: string
   observacao?: string | null
-  registradoPorTitiaId: number
+  registradoPorCuidadorId: number
   criadoEm?: Date | string
 }
 
@@ -821,7 +821,7 @@ export type PresencaUpdateWithoutAlunoInput = {
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   turma?: Prisma.TurmaUpdateOneRequiredWithoutPresencasNestedInput
-  titia?: Prisma.TitiaUpdateOneRequiredWithoutPresencasNestedInput
+  cuidador?: Prisma.CuidadorUpdateOneRequiredWithoutPresencasNestedInput
 }
 
 export type PresencaUncheckedUpdateWithoutAlunoInput = {
@@ -830,7 +830,7 @@ export type PresencaUncheckedUpdateWithoutAlunoInput = {
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  registradoPorTitiaId?: Prisma.IntFieldUpdateOperationsInput | number
+  registradoPorCuidadorId?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -840,7 +840,7 @@ export type PresencaUncheckedUpdateManyWithoutAlunoInput = {
   data?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   observacao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  registradoPorTitiaId?: Prisma.IntFieldUpdateOperationsInput | number
+  registradoPorCuidadorId?: Prisma.IntFieldUpdateOperationsInput | number
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -853,11 +853,11 @@ export type PresencaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   data?: boolean
   status?: boolean
   observacao?: boolean
-  registradoPorTitiaId?: boolean
+  registradoPorCuidadorId?: boolean
   criadoEm?: boolean
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
   turma?: boolean | Prisma.TurmaDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["presenca"]>
 
 export type PresencaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -867,11 +867,11 @@ export type PresencaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   data?: boolean
   status?: boolean
   observacao?: boolean
-  registradoPorTitiaId?: boolean
+  registradoPorCuidadorId?: boolean
   criadoEm?: boolean
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
   turma?: boolean | Prisma.TurmaDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["presenca"]>
 
 export type PresencaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -881,11 +881,11 @@ export type PresencaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   data?: boolean
   status?: boolean
   observacao?: boolean
-  registradoPorTitiaId?: boolean
+  registradoPorCuidadorId?: boolean
   criadoEm?: boolean
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
   turma?: boolean | Prisma.TurmaDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["presenca"]>
 
 export type PresencaSelectScalar = {
@@ -895,25 +895,25 @@ export type PresencaSelectScalar = {
   data?: boolean
   status?: boolean
   observacao?: boolean
-  registradoPorTitiaId?: boolean
+  registradoPorCuidadorId?: boolean
   criadoEm?: boolean
 }
 
-export type PresencaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "alunoId" | "turmaId" | "data" | "status" | "observacao" | "registradoPorTitiaId" | "criadoEm", ExtArgs["result"]["presenca"]>
+export type PresencaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "alunoId" | "turmaId" | "data" | "status" | "observacao" | "registradoPorCuidadorId" | "criadoEm", ExtArgs["result"]["presenca"]>
 export type PresencaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
   turma?: boolean | Prisma.TurmaDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }
 export type PresencaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
   turma?: boolean | Prisma.TurmaDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }
 export type PresencaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   aluno?: boolean | Prisma.AlunoDefaultArgs<ExtArgs>
   turma?: boolean | Prisma.TurmaDefaultArgs<ExtArgs>
-  titia?: boolean | Prisma.TitiaDefaultArgs<ExtArgs>
+  cuidador?: boolean | Prisma.CuidadorDefaultArgs<ExtArgs>
 }
 
 export type $PresencaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -921,7 +921,7 @@ export type $PresencaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     aluno: Prisma.$AlunoPayload<ExtArgs>
     turma: Prisma.$TurmaPayload<ExtArgs>
-    titia: Prisma.$TitiaPayload<ExtArgs>
+    cuidador: Prisma.$CuidadorPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -930,7 +930,7 @@ export type $PresencaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     data: Date
     status: string
     observacao: string | null
-    registradoPorTitiaId: number
+    registradoPorCuidadorId: number
     criadoEm: Date
   }, ExtArgs["result"]["presenca"]>
   composites: {}
@@ -1328,7 +1328,7 @@ export interface Prisma__PresencaClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   aluno<T extends Prisma.AlunoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AlunoDefaultArgs<ExtArgs>>): Prisma.Prisma__AlunoClient<runtime.Types.Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   turma<T extends Prisma.TurmaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TurmaDefaultArgs<ExtArgs>>): Prisma.Prisma__TurmaClient<runtime.Types.Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  titia<T extends Prisma.TitiaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TitiaDefaultArgs<ExtArgs>>): Prisma.Prisma__TitiaClient<runtime.Types.Result.GetResult<Prisma.$TitiaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  cuidador<T extends Prisma.CuidadorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CuidadorDefaultArgs<ExtArgs>>): Prisma.Prisma__CuidadorClient<runtime.Types.Result.GetResult<Prisma.$CuidadorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1364,7 +1364,7 @@ export interface PresencaFieldRefs {
   readonly data: Prisma.FieldRef<"Presenca", 'DateTime'>
   readonly status: Prisma.FieldRef<"Presenca", 'String'>
   readonly observacao: Prisma.FieldRef<"Presenca", 'String'>
-  readonly registradoPorTitiaId: Prisma.FieldRef<"Presenca", 'Int'>
+  readonly registradoPorCuidadorId: Prisma.FieldRef<"Presenca", 'Int'>
   readonly criadoEm: Prisma.FieldRef<"Presenca", 'DateTime'>
 }
     

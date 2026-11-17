@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 //import swaggerUi from "swagger-ui-express";
 //import { swaggerSpec } from "./config/swagger.js";
 
-import titiaRoutes from "./routes/titiaRoutes.js";
+import titiaRoutes from "./routes/cuidadorRoutes.js";
 
 dotenv.config();
 

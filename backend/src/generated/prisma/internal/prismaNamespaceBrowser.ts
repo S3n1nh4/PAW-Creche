@@ -52,12 +52,12 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Admin: 'Admin',
-  Titia: 'Titia',
+  Cuidador: 'Cuidador',
   Turma: 'Turma',
-  TurmaTitia: 'TurmaTitia',
+  TurmaCuidador: 'TurmaCuidador',
   Aluno: 'Aluno',
   Presenca: 'Presenca',
-  PresencaTitia: 'PresencaTitia',
+  PresencaCuidador: 'PresencaCuidador',
   Comportamento: 'Comportamento'
 } as const
 
@@ -89,7 +89,7 @@ export const AdminScalarFieldEnum = {
 export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
 
 
-export const TitiaScalarFieldEnum = {
+export const CuidadorScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
   email: 'email',
@@ -101,7 +101,7 @@ export const TitiaScalarFieldEnum = {
   criadoEm: 'criadoEm'
 } as const
 
-export type TitiaScalarFieldEnum = (typeof TitiaScalarFieldEnum)[keyof typeof TitiaScalarFieldEnum]
+export type CuidadorScalarFieldEnum = (typeof CuidadorScalarFieldEnum)[keyof typeof CuidadorScalarFieldEnum]
 
 
 export const TurmaScalarFieldEnum = {
@@ -116,12 +116,12 @@ export const TurmaScalarFieldEnum = {
 export type TurmaScalarFieldEnum = (typeof TurmaScalarFieldEnum)[keyof typeof TurmaScalarFieldEnum]
 
 
-export const TurmaTitiaScalarFieldEnum = {
+export const TurmaCuidadorScalarFieldEnum = {
   turmaId: 'turmaId',
-  titiaId: 'titiaId'
+  cuidadorId: 'cuidadorId'
 } as const
 
-export type TurmaTitiaScalarFieldEnum = (typeof TurmaTitiaScalarFieldEnum)[keyof typeof TurmaTitiaScalarFieldEnum]
+export type TurmaCuidadorScalarFieldEnum = (typeof TurmaCuidadorScalarFieldEnum)[keyof typeof TurmaCuidadorScalarFieldEnum]
 
 
 export const AlunoScalarFieldEnum = {
@@ -147,16 +147,16 @@ export const PresencaScalarFieldEnum = {
   data: 'data',
   status: 'status',
   observacao: 'observacao',
-  registradoPorTitiaId: 'registradoPorTitiaId',
+  registradoPorCuidadorId: 'registradoPorCuidadorId',
   criadoEm: 'criadoEm'
 } as const
 
 export type PresencaScalarFieldEnum = (typeof PresencaScalarFieldEnum)[keyof typeof PresencaScalarFieldEnum]
 
 
-export const PresencaTitiaScalarFieldEnum = {
+export const PresencaCuidadorScalarFieldEnum = {
   id: 'id',
-  titiaId: 'titiaId',
+  cuidadorId: 'cuidadorId',
   data: 'data',
   status: 'status',
   entrada: 'entrada',
@@ -166,13 +166,13 @@ export const PresencaTitiaScalarFieldEnum = {
   criadoEm: 'criadoEm'
 } as const
 
-export type PresencaTitiaScalarFieldEnum = (typeof PresencaTitiaScalarFieldEnum)[keyof typeof PresencaTitiaScalarFieldEnum]
+export type PresencaCuidadorScalarFieldEnum = (typeof PresencaCuidadorScalarFieldEnum)[keyof typeof PresencaCuidadorScalarFieldEnum]
 
 
 export const ComportamentoScalarFieldEnum = {
   id: 'id',
   alunoId: 'alunoId',
-  titiaId: 'titiaId',
+  cuidadorId: 'cuidadorId',
   data: 'data',
   descricao: 'descricao',
   criadoEm: 'criadoEm'

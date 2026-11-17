@@ -228,7 +228,7 @@ export type TurmaWhereInput = {
   turno?: Prisma.StringFilter<"Turma"> | string
   ativo?: Prisma.BoolFilter<"Turma"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Turma"> | Date | string
-  titias?: Prisma.TurmaTitiaListRelationFilter
+  cuidadores?: Prisma.TurmaCuidadorListRelationFilter
   alunos?: Prisma.AlunoListRelationFilter
   presencas?: Prisma.PresencaListRelationFilter
 }
@@ -240,7 +240,7 @@ export type TurmaOrderByWithRelationInput = {
   turno?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
-  titias?: Prisma.TurmaTitiaOrderByRelationAggregateInput
+  cuidadores?: Prisma.TurmaCuidadorOrderByRelationAggregateInput
   alunos?: Prisma.AlunoOrderByRelationAggregateInput
   presencas?: Prisma.PresencaOrderByRelationAggregateInput
 }
@@ -256,7 +256,7 @@ export type TurmaWhereUniqueInput = Prisma.AtLeast<{
   turno?: Prisma.StringFilter<"Turma"> | string
   ativo?: Prisma.BoolFilter<"Turma"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Turma"> | Date | string
-  titias?: Prisma.TurmaTitiaListRelationFilter
+  cuidadores?: Prisma.TurmaCuidadorListRelationFilter
   alunos?: Prisma.AlunoListRelationFilter
   presencas?: Prisma.PresencaListRelationFilter
 }, "id" | "nome_anoLetivo_turno">
@@ -293,7 +293,7 @@ export type TurmaCreateInput = {
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
-  titias?: Prisma.TurmaTitiaCreateNestedManyWithoutTurmaInput
+  cuidadores?: Prisma.TurmaCuidadorCreateNestedManyWithoutTurmaInput
   alunos?: Prisma.AlunoCreateNestedManyWithoutTurmaInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutTurmaInput
 }
@@ -305,7 +305,7 @@ export type TurmaUncheckedCreateInput = {
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
-  titias?: Prisma.TurmaTitiaUncheckedCreateNestedManyWithoutTurmaInput
+  cuidadores?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutTurmaInput
   alunos?: Prisma.AlunoUncheckedCreateNestedManyWithoutTurmaInput
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutTurmaInput
 }
@@ -316,7 +316,7 @@ export type TurmaUpdateInput = {
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  titias?: Prisma.TurmaTitiaUpdateManyWithoutTurmaNestedInput
+  cuidadores?: Prisma.TurmaCuidadorUpdateManyWithoutTurmaNestedInput
   alunos?: Prisma.AlunoUpdateManyWithoutTurmaNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutTurmaNestedInput
 }
@@ -328,7 +328,7 @@ export type TurmaUncheckedUpdateInput = {
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  titias?: Prisma.TurmaTitiaUncheckedUpdateManyWithoutTurmaNestedInput
+  cuidadores?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutTurmaNestedInput
   alunos?: Prisma.AlunoUncheckedUpdateManyWithoutTurmaNestedInput
   presencas?: Prisma.PresencaUncheckedUpdateManyWithoutTurmaNestedInput
 }
@@ -412,18 +412,18 @@ export type TurmaNullableScalarRelationFilter = {
   isNot?: Prisma.TurmaWhereInput | null
 }
 
-export type TurmaCreateNestedOneWithoutTitiasInput = {
-  create?: Prisma.XOR<Prisma.TurmaCreateWithoutTitiasInput, Prisma.TurmaUncheckedCreateWithoutTitiasInput>
-  connectOrCreate?: Prisma.TurmaCreateOrConnectWithoutTitiasInput
+export type TurmaCreateNestedOneWithoutCuidadoresInput = {
+  create?: Prisma.XOR<Prisma.TurmaCreateWithoutCuidadoresInput, Prisma.TurmaUncheckedCreateWithoutCuidadoresInput>
+  connectOrCreate?: Prisma.TurmaCreateOrConnectWithoutCuidadoresInput
   connect?: Prisma.TurmaWhereUniqueInput
 }
 
-export type TurmaUpdateOneRequiredWithoutTitiasNestedInput = {
-  create?: Prisma.XOR<Prisma.TurmaCreateWithoutTitiasInput, Prisma.TurmaUncheckedCreateWithoutTitiasInput>
-  connectOrCreate?: Prisma.TurmaCreateOrConnectWithoutTitiasInput
-  upsert?: Prisma.TurmaUpsertWithoutTitiasInput
+export type TurmaUpdateOneRequiredWithoutCuidadoresNestedInput = {
+  create?: Prisma.XOR<Prisma.TurmaCreateWithoutCuidadoresInput, Prisma.TurmaUncheckedCreateWithoutCuidadoresInput>
+  connectOrCreate?: Prisma.TurmaCreateOrConnectWithoutCuidadoresInput
+  upsert?: Prisma.TurmaUpsertWithoutCuidadoresInput
   connect?: Prisma.TurmaWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TurmaUpdateToOneWithWhereWithoutTitiasInput, Prisma.TurmaUpdateWithoutTitiasInput>, Prisma.TurmaUncheckedUpdateWithoutTitiasInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TurmaUpdateToOneWithWhereWithoutCuidadoresInput, Prisma.TurmaUpdateWithoutCuidadoresInput>, Prisma.TurmaUncheckedUpdateWithoutCuidadoresInput>
 }
 
 export type TurmaCreateNestedOneWithoutAlunosInput = {
@@ -456,7 +456,7 @@ export type TurmaUpdateOneRequiredWithoutPresencasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TurmaUpdateToOneWithWhereWithoutPresencasInput, Prisma.TurmaUpdateWithoutPresencasInput>, Prisma.TurmaUncheckedUpdateWithoutPresencasInput>
 }
 
-export type TurmaCreateWithoutTitiasInput = {
+export type TurmaCreateWithoutCuidadoresInput = {
   nome: string
   anoLetivo: number
   turno: string
@@ -466,7 +466,7 @@ export type TurmaCreateWithoutTitiasInput = {
   presencas?: Prisma.PresencaCreateNestedManyWithoutTurmaInput
 }
 
-export type TurmaUncheckedCreateWithoutTitiasInput = {
+export type TurmaUncheckedCreateWithoutCuidadoresInput = {
   id?: number
   nome: string
   anoLetivo: number
@@ -477,23 +477,23 @@ export type TurmaUncheckedCreateWithoutTitiasInput = {
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutTurmaInput
 }
 
-export type TurmaCreateOrConnectWithoutTitiasInput = {
+export type TurmaCreateOrConnectWithoutCuidadoresInput = {
   where: Prisma.TurmaWhereUniqueInput
-  create: Prisma.XOR<Prisma.TurmaCreateWithoutTitiasInput, Prisma.TurmaUncheckedCreateWithoutTitiasInput>
+  create: Prisma.XOR<Prisma.TurmaCreateWithoutCuidadoresInput, Prisma.TurmaUncheckedCreateWithoutCuidadoresInput>
 }
 
-export type TurmaUpsertWithoutTitiasInput = {
-  update: Prisma.XOR<Prisma.TurmaUpdateWithoutTitiasInput, Prisma.TurmaUncheckedUpdateWithoutTitiasInput>
-  create: Prisma.XOR<Prisma.TurmaCreateWithoutTitiasInput, Prisma.TurmaUncheckedCreateWithoutTitiasInput>
+export type TurmaUpsertWithoutCuidadoresInput = {
+  update: Prisma.XOR<Prisma.TurmaUpdateWithoutCuidadoresInput, Prisma.TurmaUncheckedUpdateWithoutCuidadoresInput>
+  create: Prisma.XOR<Prisma.TurmaCreateWithoutCuidadoresInput, Prisma.TurmaUncheckedCreateWithoutCuidadoresInput>
   where?: Prisma.TurmaWhereInput
 }
 
-export type TurmaUpdateToOneWithWhereWithoutTitiasInput = {
+export type TurmaUpdateToOneWithWhereWithoutCuidadoresInput = {
   where?: Prisma.TurmaWhereInput
-  data: Prisma.XOR<Prisma.TurmaUpdateWithoutTitiasInput, Prisma.TurmaUncheckedUpdateWithoutTitiasInput>
+  data: Prisma.XOR<Prisma.TurmaUpdateWithoutCuidadoresInput, Prisma.TurmaUncheckedUpdateWithoutCuidadoresInput>
 }
 
-export type TurmaUpdateWithoutTitiasInput = {
+export type TurmaUpdateWithoutCuidadoresInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
   turno?: Prisma.StringFieldUpdateOperationsInput | string
@@ -503,7 +503,7 @@ export type TurmaUpdateWithoutTitiasInput = {
   presencas?: Prisma.PresencaUpdateManyWithoutTurmaNestedInput
 }
 
-export type TurmaUncheckedUpdateWithoutTitiasInput = {
+export type TurmaUncheckedUpdateWithoutCuidadoresInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
@@ -520,7 +520,7 @@ export type TurmaCreateWithoutAlunosInput = {
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
-  titias?: Prisma.TurmaTitiaCreateNestedManyWithoutTurmaInput
+  cuidadores?: Prisma.TurmaCuidadorCreateNestedManyWithoutTurmaInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutTurmaInput
 }
 
@@ -531,7 +531,7 @@ export type TurmaUncheckedCreateWithoutAlunosInput = {
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
-  titias?: Prisma.TurmaTitiaUncheckedCreateNestedManyWithoutTurmaInput
+  cuidadores?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutTurmaInput
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutTurmaInput
 }
 
@@ -557,7 +557,7 @@ export type TurmaUpdateWithoutAlunosInput = {
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  titias?: Prisma.TurmaTitiaUpdateManyWithoutTurmaNestedInput
+  cuidadores?: Prisma.TurmaCuidadorUpdateManyWithoutTurmaNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutTurmaNestedInput
 }
 
@@ -568,7 +568,7 @@ export type TurmaUncheckedUpdateWithoutAlunosInput = {
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  titias?: Prisma.TurmaTitiaUncheckedUpdateManyWithoutTurmaNestedInput
+  cuidadores?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutTurmaNestedInput
   presencas?: Prisma.PresencaUncheckedUpdateManyWithoutTurmaNestedInput
 }
 
@@ -578,7 +578,7 @@ export type TurmaCreateWithoutPresencasInput = {
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
-  titias?: Prisma.TurmaTitiaCreateNestedManyWithoutTurmaInput
+  cuidadores?: Prisma.TurmaCuidadorCreateNestedManyWithoutTurmaInput
   alunos?: Prisma.AlunoCreateNestedManyWithoutTurmaInput
 }
 
@@ -589,7 +589,7 @@ export type TurmaUncheckedCreateWithoutPresencasInput = {
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
-  titias?: Prisma.TurmaTitiaUncheckedCreateNestedManyWithoutTurmaInput
+  cuidadores?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutTurmaInput
   alunos?: Prisma.AlunoUncheckedCreateNestedManyWithoutTurmaInput
 }
 
@@ -615,7 +615,7 @@ export type TurmaUpdateWithoutPresencasInput = {
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  titias?: Prisma.TurmaTitiaUpdateManyWithoutTurmaNestedInput
+  cuidadores?: Prisma.TurmaCuidadorUpdateManyWithoutTurmaNestedInput
   alunos?: Prisma.AlunoUpdateManyWithoutTurmaNestedInput
 }
 
@@ -626,7 +626,7 @@ export type TurmaUncheckedUpdateWithoutPresencasInput = {
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  titias?: Prisma.TurmaTitiaUncheckedUpdateManyWithoutTurmaNestedInput
+  cuidadores?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutTurmaNestedInput
   alunos?: Prisma.AlunoUncheckedUpdateManyWithoutTurmaNestedInput
 }
 
@@ -636,13 +636,13 @@ export type TurmaUncheckedUpdateWithoutPresencasInput = {
  */
 
 export type TurmaCountOutputType = {
-  titias: number
+  cuidadores: number
   alunos: number
   presencas: number
 }
 
 export type TurmaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  titias?: boolean | TurmaCountOutputTypeCountTitiasArgs
+  cuidadores?: boolean | TurmaCountOutputTypeCountCuidadoresArgs
   alunos?: boolean | TurmaCountOutputTypeCountAlunosArgs
   presencas?: boolean | TurmaCountOutputTypeCountPresencasArgs
 }
@@ -660,8 +660,8 @@ export type TurmaCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * TurmaCountOutputType without action
  */
-export type TurmaCountOutputTypeCountTitiasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.TurmaTitiaWhereInput
+export type TurmaCountOutputTypeCountCuidadoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TurmaCuidadorWhereInput
 }
 
 /**
@@ -686,7 +686,7 @@ export type TurmaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   turno?: boolean
   ativo?: boolean
   criadoEm?: boolean
-  titias?: boolean | Prisma.Turma$titiasArgs<ExtArgs>
+  cuidadores?: boolean | Prisma.Turma$cuidadoresArgs<ExtArgs>
   alunos?: boolean | Prisma.Turma$alunosArgs<ExtArgs>
   presencas?: boolean | Prisma.Turma$presencasArgs<ExtArgs>
   _count?: boolean | Prisma.TurmaCountOutputTypeDefaultArgs<ExtArgs>
@@ -721,7 +721,7 @@ export type TurmaSelectScalar = {
 
 export type TurmaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "anoLetivo" | "turno" | "ativo" | "criadoEm", ExtArgs["result"]["turma"]>
 export type TurmaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  titias?: boolean | Prisma.Turma$titiasArgs<ExtArgs>
+  cuidadores?: boolean | Prisma.Turma$cuidadoresArgs<ExtArgs>
   alunos?: boolean | Prisma.Turma$alunosArgs<ExtArgs>
   presencas?: boolean | Prisma.Turma$presencasArgs<ExtArgs>
   _count?: boolean | Prisma.TurmaCountOutputTypeDefaultArgs<ExtArgs>
@@ -732,7 +732,7 @@ export type TurmaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $TurmaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Turma"
   objects: {
-    titias: Prisma.$TurmaTitiaPayload<ExtArgs>[]
+    cuidadores: Prisma.$TurmaCuidadorPayload<ExtArgs>[]
     alunos: Prisma.$AlunoPayload<ExtArgs>[]
     presencas: Prisma.$PresencaPayload<ExtArgs>[]
   }
@@ -1137,7 +1137,7 @@ readonly fields: TurmaFieldRefs;
  */
 export interface Prisma__TurmaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  titias<T extends Prisma.Turma$titiasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Turma$titiasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TurmaTitiaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cuidadores<T extends Prisma.Turma$cuidadoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Turma$cuidadoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TurmaCuidadorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   alunos<T extends Prisma.Turma$alunosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Turma$alunosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   presencas<T extends Prisma.Turma$presencasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Turma$presencasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PresencaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1568,27 +1568,27 @@ export type TurmaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * Turma.titias
+ * Turma.cuidadores
  */
-export type Turma$titiasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Turma$cuidadoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the TurmaTitia
+   * Select specific fields to fetch from the TurmaCuidador
    */
-  select?: Prisma.TurmaTitiaSelect<ExtArgs> | null
+  select?: Prisma.TurmaCuidadorSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the TurmaTitia
+   * Omit specific fields from the TurmaCuidador
    */
-  omit?: Prisma.TurmaTitiaOmit<ExtArgs> | null
+  omit?: Prisma.TurmaCuidadorOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.TurmaTitiaInclude<ExtArgs> | null
-  where?: Prisma.TurmaTitiaWhereInput
-  orderBy?: Prisma.TurmaTitiaOrderByWithRelationInput | Prisma.TurmaTitiaOrderByWithRelationInput[]
-  cursor?: Prisma.TurmaTitiaWhereUniqueInput
+  include?: Prisma.TurmaCuidadorInclude<ExtArgs> | null
+  where?: Prisma.TurmaCuidadorWhereInput
+  orderBy?: Prisma.TurmaCuidadorOrderByWithRelationInput | Prisma.TurmaCuidadorOrderByWithRelationInput[]
+  cursor?: Prisma.TurmaCuidadorWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.TurmaTitiaScalarFieldEnum | Prisma.TurmaTitiaScalarFieldEnum[]
+  distinct?: Prisma.TurmaCuidadorScalarFieldEnum | Prisma.TurmaCuidadorScalarFieldEnum[]
 }
 
 /**

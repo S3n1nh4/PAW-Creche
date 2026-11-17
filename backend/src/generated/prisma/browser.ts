@@ -23,20 +23,20 @@ export * from './enums.js';
  */
 export type Admin = Prisma.AdminModel
 /**
- * Model Titia
+ * Model Cuidador
  * 
  */
-export type Titia = Prisma.TitiaModel
+export type Cuidador = Prisma.CuidadorModel
 /**
  * Model Turma
  * 
  */
 export type Turma = Prisma.TurmaModel
 /**
- * Model TurmaTitia
+ * Model TurmaCuidador
  * 
  */
-export type TurmaTitia = Prisma.TurmaTitiaModel
+export type TurmaCuidador = Prisma.TurmaCuidadorModel
 /**
  * Model Aluno
  * 
@@ -48,10 +48,10 @@ export type Aluno = Prisma.AlunoModel
  */
 export type Presenca = Prisma.PresencaModel
 /**
- * Model PresencaTitia
+ * Model PresencaCuidador
  * 
  */
-export type PresencaTitia = Prisma.PresencaTitiaModel
+export type PresencaCuidador = Prisma.PresencaCuidadorModel
 /**
  * Model Comportamento
  * 

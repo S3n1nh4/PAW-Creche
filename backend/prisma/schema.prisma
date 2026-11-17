@@ -15,12 +15,12 @@ model Admin {
   ativo     Boolean  @default(true)
   criadoEm  DateTime @default(now()) @map("criado_em") @db.Timestamptz
 
-  presencasTitia PresencaTitia[]
+  presencasCuidador PresencaCuidador[]
 
   @@map("admin")
 }
 
-model Titia {
+model Cuidador {
   id           Int      @id @default(autoincrement())
   nome         String
   email        String
@@ -31,12 +31,12 @@ model Titia {
   ativo        Boolean  @default(true)
   criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz
 
-  turmas         TurmaTitia[]
-  presencas      Presenca[]
-  presencasTitia PresencaTitia[]
-  comportamentos Comportamento[]
+  turmas            TurmaCuidador[]
+  presencas         Presenca[]
+  presencasCuidador PresencaCuidador[]
+  comportamentos    Comportamento[]
 
-  @@map("titia")
+  @@map("cuidador")
 }
 
 model Turma {
@@ -47,24 +47,24 @@ model Turma {
   ativo     Boolean  @default(true)
   criadoEm  DateTime @default(now()) @map("criado_em") @db.Timestamptz
 
-  titias    TurmaTitia[]
-  alunos    Aluno[]
-  presencas Presenca[]
+  cuidadores TurmaCuidador[]
+  alunos     Aluno[]
+  presencas  Presenca[]
 
   @@unique([nome, anoLetivo, turno])
   @@map("turma")
 }
 
-model TurmaTitia {
-  turmaId Int @map("turma_id")
-  titiaId Int @map("titia_id")
+model TurmaCuidador {
+  turmaId    Int @map("turma_id")
+  cuidadorId Int @map("cuidador_id")
 
-  turma Turma @relation(fields: [turmaId], references: [id])
-  titia Titia @relation(fields: [titiaId], references: [id])
+  turma    Turma    @relation(fields: [turmaId], references: [id])
+  cuidador Cuidador @relation(fields: [cuidadorId], references: [id])
 
-  @@id([turmaId, titiaId])
-  @@index([titiaId], map: "turma_titia_titia_idx")
-  @@map("turma_titia")
+  @@id([turmaId, cuidadorId])
+  @@index([cuidadorId], map: "turma_cuidador_cuidador_idx")
+  @@map("turma_cuidador")
 }
 
 model Aluno {
@@ -88,28 +88,28 @@ model Aluno {
 }
 
 model Presenca {
-  id                   Int      @id @default(autoincrement())
-  alunoId              Int      @map("aluno_id")
-  turmaId              Int      @map("turma_id")
-  data                 DateTime @default(now()) @db.Date
-  status               String
-  observacao           String?
-  registradoPorTitiaId Int      @map("registrado_por_titia_id")
-  criadoEm             DateTime @default(now()) @map("criado_em") @db.Timestamptz
+  id                      Int      @id @default(autoincrement())
+  alunoId                 Int      @map("aluno_id")
+  turmaId                 Int      @map("turma_id")
+  data                    DateTime @default(now()) @db.Date
+  status                  String
+  observacao              String?
+  registradoPorCuidadorId Int      @map("registrado_por_cuidador_id")
+  criadoEm                DateTime @default(now()) @map("criado_em") @db.Timestamptz
 
-  aluno Aluno @relation(fields: [alunoId], references: [id])
-  turma Turma @relation(fields: [turmaId], references: [id])
-  titia Titia @relation(fields: [registradoPorTitiaId], references: [id])
+  aluno    Aluno    @relation(fields: [alunoId], references: [id])
+  turma    Turma    @relation(fields: [turmaId], references: [id])
+  cuidador Cuidador @relation(fields: [registradoPorCuidadorId], references: [id])
 
   @@unique([alunoId, data])
   @@index([turmaId, data], map: "presenca_turma_data_idx")
-  @@index([registradoPorTitiaId], map: "presenca_autor_idx")
+  @@index([registradoPorCuidadorId], map: "presenca_autor_idx")
   @@map("presenca")
 }
 
-model PresencaTitia {
+model PresencaCuidador {
   id                   Int       @id @default(autoincrement())
-  titiaId              Int       @map("titia_id")
+  cuidadorId           Int       @map("cuidador_id")
   data                 DateTime  @default(now()) @db.Date
   status               String
   entrada              DateTime? @db.Timestamptz
@@ -118,26 +118,26 @@ model PresencaTitia {
   registradoPorAdminId Int       @map("registrado_por_admin_id")
   criadoEm             DateTime  @default(now()) @map("criado_em") @db.Timestamptz
 
-  titia Titia @relation(fields: [titiaId], references: [id])
-  admin Admin @relation(fields: [registradoPorAdminId], references: [id])
+  cuidador Cuidador @relation(fields: [cuidadorId], references: [id])
+  admin    Admin    @relation(fields: [registradoPorAdminId], references: [id])
 
-  @@unique([titiaId, data])
-  @@index([registradoPorAdminId], map: "presenca_titia_admin_idx")
-  @@map("presenca_titia")
+  @@unique([cuidadorId, data])
+  @@index([registradoPorAdminId], map: "presenca_cuidador_admin_idx")
+  @@map("presenca_cuidador")
 }
 
 model Comportamento {
-  id        Int      @id @default(autoincrement())
-  alunoId   Int      @map("aluno_id")
-  titiaId   Int      @map("titia_id")
-  data      DateTime @default(now()) @db.Date
-  descricao String
-  criadoEm  DateTime @default(now()) @map("criado_em") @db.Timestamptz
+  id         Int      @id @default(autoincrement())
+  alunoId    Int      @map("aluno_id")
+  cuidadorId Int      @map("cuidador_id")
+  data       DateTime @default(now()) @db.Date
+  descricao  String
+  criadoEm   DateTime @default(now()) @map("criado_em") @db.Timestamptz
 
-  aluno Aluno @relation(fields: [alunoId], references: [id])
-  titia Titia @relation(fields: [titiaId], references: [id])
+  aluno    Aluno    @relation(fields: [alunoId], references: [id])
+  cuidador Cuidador @relation(fields: [cuidadorId], references: [id])
 
   @@index([alunoId, data], map: "comportamento_aluno_data_idx")
-  @@index([titiaId], map: "comportamento_titia_idx")
+  @@index([cuidadorId], map: "comportamento_cuidador_idx")
   @@map("comportamento")
 }

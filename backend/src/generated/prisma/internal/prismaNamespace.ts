@@ -398,12 +398,12 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Admin: 'Admin',
-  Titia: 'Titia',
+  Cuidador: 'Cuidador',
   Turma: 'Turma',
-  TurmaTitia: 'TurmaTitia',
+  TurmaCuidador: 'TurmaCuidador',
   Aluno: 'Aluno',
   Presenca: 'Presenca',
-  PresencaTitia: 'PresencaTitia',
+  PresencaCuidador: 'PresencaCuidador',
   Comportamento: 'Comportamento'
 } as const
 
@@ -420,7 +420,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "admin" | "titia" | "turma" | "turmaTitia" | "aluno" | "presenca" | "presencaTitia" | "comportamento"
+    modelProps: "admin" | "cuidador" | "turma" | "turmaCuidador" | "aluno" | "presenca" | "presencaCuidador" | "comportamento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -498,77 +498,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Titia: {
-      payload: Prisma.$TitiaPayload<ExtArgs>
-      fields: Prisma.TitiaFieldRefs
+    Cuidador: {
+      payload: Prisma.$CuidadorPayload<ExtArgs>
+      fields: Prisma.CuidadorFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.TitiaFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload> | null
+          args: Prisma.CuidadorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.TitiaFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload>
+          args: Prisma.CuidadorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload>
         }
         findFirst: {
-          args: Prisma.TitiaFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload> | null
+          args: Prisma.CuidadorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.TitiaFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload>
+          args: Prisma.CuidadorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload>
         }
         findMany: {
-          args: Prisma.TitiaFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload>[]
+          args: Prisma.CuidadorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload>[]
         }
         create: {
-          args: Prisma.TitiaCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload>
+          args: Prisma.CuidadorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload>
         }
         createMany: {
-          args: Prisma.TitiaCreateManyArgs<ExtArgs>
+          args: Prisma.CuidadorCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.TitiaCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload>[]
+          args: Prisma.CuidadorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload>[]
         }
         delete: {
-          args: Prisma.TitiaDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload>
+          args: Prisma.CuidadorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload>
         }
         update: {
-          args: Prisma.TitiaUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload>
+          args: Prisma.CuidadorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload>
         }
         deleteMany: {
-          args: Prisma.TitiaDeleteManyArgs<ExtArgs>
+          args: Prisma.CuidadorDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.TitiaUpdateManyArgs<ExtArgs>
+          args: Prisma.CuidadorUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.TitiaUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload>[]
+          args: Prisma.CuidadorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload>[]
         }
         upsert: {
-          args: Prisma.TitiaUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TitiaPayload>
+          args: Prisma.CuidadorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CuidadorPayload>
         }
         aggregate: {
-          args: Prisma.TitiaAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTitia>
+          args: Prisma.CuidadorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCuidador>
         }
         groupBy: {
-          args: Prisma.TitiaGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TitiaGroupByOutputType>[]
+          args: Prisma.CuidadorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CuidadorGroupByOutputType>[]
         }
         count: {
-          args: Prisma.TitiaCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TitiaCountAggregateOutputType> | number
+          args: Prisma.CuidadorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CuidadorCountAggregateOutputType> | number
         }
       }
     }
@@ -646,77 +646,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    TurmaTitia: {
-      payload: Prisma.$TurmaTitiaPayload<ExtArgs>
-      fields: Prisma.TurmaTitiaFieldRefs
+    TurmaCuidador: {
+      payload: Prisma.$TurmaCuidadorPayload<ExtArgs>
+      fields: Prisma.TurmaCuidadorFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.TurmaTitiaFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload> | null
+          args: Prisma.TurmaCuidadorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.TurmaTitiaFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload>
+          args: Prisma.TurmaCuidadorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload>
         }
         findFirst: {
-          args: Prisma.TurmaTitiaFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload> | null
+          args: Prisma.TurmaCuidadorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.TurmaTitiaFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload>
+          args: Prisma.TurmaCuidadorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload>
         }
         findMany: {
-          args: Prisma.TurmaTitiaFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload>[]
+          args: Prisma.TurmaCuidadorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload>[]
         }
         create: {
-          args: Prisma.TurmaTitiaCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload>
+          args: Prisma.TurmaCuidadorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload>
         }
         createMany: {
-          args: Prisma.TurmaTitiaCreateManyArgs<ExtArgs>
+          args: Prisma.TurmaCuidadorCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.TurmaTitiaCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload>[]
+          args: Prisma.TurmaCuidadorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload>[]
         }
         delete: {
-          args: Prisma.TurmaTitiaDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload>
+          args: Prisma.TurmaCuidadorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload>
         }
         update: {
-          args: Prisma.TurmaTitiaUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload>
+          args: Prisma.TurmaCuidadorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload>
         }
         deleteMany: {
-          args: Prisma.TurmaTitiaDeleteManyArgs<ExtArgs>
+          args: Prisma.TurmaCuidadorDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.TurmaTitiaUpdateManyArgs<ExtArgs>
+          args: Prisma.TurmaCuidadorUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.TurmaTitiaUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload>[]
+          args: Prisma.TurmaCuidadorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload>[]
         }
         upsert: {
-          args: Prisma.TurmaTitiaUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaTitiaPayload>
+          args: Prisma.TurmaCuidadorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TurmaCuidadorPayload>
         }
         aggregate: {
-          args: Prisma.TurmaTitiaAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateTurmaTitia>
+          args: Prisma.TurmaCuidadorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTurmaCuidador>
         }
         groupBy: {
-          args: Prisma.TurmaTitiaGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TurmaTitiaGroupByOutputType>[]
+          args: Prisma.TurmaCuidadorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TurmaCuidadorGroupByOutputType>[]
         }
         count: {
-          args: Prisma.TurmaTitiaCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.TurmaTitiaCountAggregateOutputType> | number
+          args: Prisma.TurmaCuidadorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TurmaCuidadorCountAggregateOutputType> | number
         }
       }
     }
@@ -868,77 +868,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    PresencaTitia: {
-      payload: Prisma.$PresencaTitiaPayload<ExtArgs>
-      fields: Prisma.PresencaTitiaFieldRefs
+    PresencaCuidador: {
+      payload: Prisma.$PresencaCuidadorPayload<ExtArgs>
+      fields: Prisma.PresencaCuidadorFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.PresencaTitiaFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload> | null
+          args: Prisma.PresencaCuidadorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.PresencaTitiaFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload>
+          args: Prisma.PresencaCuidadorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload>
         }
         findFirst: {
-          args: Prisma.PresencaTitiaFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload> | null
+          args: Prisma.PresencaCuidadorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.PresencaTitiaFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload>
+          args: Prisma.PresencaCuidadorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload>
         }
         findMany: {
-          args: Prisma.PresencaTitiaFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload>[]
+          args: Prisma.PresencaCuidadorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload>[]
         }
         create: {
-          args: Prisma.PresencaTitiaCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload>
+          args: Prisma.PresencaCuidadorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload>
         }
         createMany: {
-          args: Prisma.PresencaTitiaCreateManyArgs<ExtArgs>
+          args: Prisma.PresencaCuidadorCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.PresencaTitiaCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload>[]
+          args: Prisma.PresencaCuidadorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload>[]
         }
         delete: {
-          args: Prisma.PresencaTitiaDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload>
+          args: Prisma.PresencaCuidadorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload>
         }
         update: {
-          args: Prisma.PresencaTitiaUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload>
+          args: Prisma.PresencaCuidadorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload>
         }
         deleteMany: {
-          args: Prisma.PresencaTitiaDeleteManyArgs<ExtArgs>
+          args: Prisma.PresencaCuidadorDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.PresencaTitiaUpdateManyArgs<ExtArgs>
+          args: Prisma.PresencaCuidadorUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.PresencaTitiaUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload>[]
+          args: Prisma.PresencaCuidadorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload>[]
         }
         upsert: {
-          args: Prisma.PresencaTitiaUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaTitiaPayload>
+          args: Prisma.PresencaCuidadorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PresencaCuidadorPayload>
         }
         aggregate: {
-          args: Prisma.PresencaTitiaAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregatePresencaTitia>
+          args: Prisma.PresencaCuidadorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePresencaCuidador>
         }
         groupBy: {
-          args: Prisma.PresencaTitiaGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PresencaTitiaGroupByOutputType>[]
+          args: Prisma.PresencaCuidadorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PresencaCuidadorGroupByOutputType>[]
         }
         count: {
-          args: Prisma.PresencaTitiaCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PresencaTitiaCountAggregateOutputType> | number
+          args: Prisma.PresencaCuidadorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PresencaCuidadorCountAggregateOutputType> | number
         }
       }
     }
@@ -1067,7 +1067,7 @@ export const AdminScalarFieldEnum = {
 export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
 
 
-export const TitiaScalarFieldEnum = {
+export const CuidadorScalarFieldEnum = {
   id: 'id',
   nome: 'nome',
   email: 'email',
@@ -1079,7 +1079,7 @@ export const TitiaScalarFieldEnum = {
   criadoEm: 'criadoEm'
 } as const
 
-export type TitiaScalarFieldEnum = (typeof TitiaScalarFieldEnum)[keyof typeof TitiaScalarFieldEnum]
+export type CuidadorScalarFieldEnum = (typeof CuidadorScalarFieldEnum)[keyof typeof CuidadorScalarFieldEnum]
 
 
 export const TurmaScalarFieldEnum = {
@@ -1094,12 +1094,12 @@ export const TurmaScalarFieldEnum = {
 export type TurmaScalarFieldEnum = (typeof TurmaScalarFieldEnum)[keyof typeof TurmaScalarFieldEnum]
 
 
-export const TurmaTitiaScalarFieldEnum = {
+export const TurmaCuidadorScalarFieldEnum = {
   turmaId: 'turmaId',
-  titiaId: 'titiaId'
+  cuidadorId: 'cuidadorId'
 } as const
 
-export type TurmaTitiaScalarFieldEnum = (typeof TurmaTitiaScalarFieldEnum)[keyof typeof TurmaTitiaScalarFieldEnum]
+export type TurmaCuidadorScalarFieldEnum = (typeof TurmaCuidadorScalarFieldEnum)[keyof typeof TurmaCuidadorScalarFieldEnum]
 
 
 export const AlunoScalarFieldEnum = {
@@ -1125,16 +1125,16 @@ export const PresencaScalarFieldEnum = {
   data: 'data',
   status: 'status',
   observacao: 'observacao',
-  registradoPorTitiaId: 'registradoPorTitiaId',
+  registradoPorCuidadorId: 'registradoPorCuidadorId',
   criadoEm: 'criadoEm'
 } as const
 
 export type PresencaScalarFieldEnum = (typeof PresencaScalarFieldEnum)[keyof typeof PresencaScalarFieldEnum]
 
 
-export const PresencaTitiaScalarFieldEnum = {
+export const PresencaCuidadorScalarFieldEnum = {
   id: 'id',
-  titiaId: 'titiaId',
+  cuidadorId: 'cuidadorId',
   data: 'data',
   status: 'status',
   entrada: 'entrada',
@@ -1144,13 +1144,13 @@ export const PresencaTitiaScalarFieldEnum = {
   criadoEm: 'criadoEm'
 } as const
 
-export type PresencaTitiaScalarFieldEnum = (typeof PresencaTitiaScalarFieldEnum)[keyof typeof PresencaTitiaScalarFieldEnum]
+export type PresencaCuidadorScalarFieldEnum = (typeof PresencaCuidadorScalarFieldEnum)[keyof typeof PresencaCuidadorScalarFieldEnum]
 
 
 export const ComportamentoScalarFieldEnum = {
   id: 'id',
   alunoId: 'alunoId',
-  titiaId: 'titiaId',
+  cuidadorId: 'cuidadorId',
   data: 'data',
   descricao: 'descricao',
   criadoEm: 'criadoEm'
@@ -1417,12 +1417,12 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   admin?: Prisma.AdminOmit
-  titia?: Prisma.TitiaOmit
+  cuidador?: Prisma.CuidadorOmit
   turma?: Prisma.TurmaOmit
-  turmaTitia?: Prisma.TurmaTitiaOmit
+  turmaCuidador?: Prisma.TurmaCuidadorOmit
   aluno?: Prisma.AlunoOmit
   presenca?: Prisma.PresencaOmit
-  presencaTitia?: Prisma.PresencaTitiaOmit
+  presencaCuidador?: Prisma.PresencaCuidadorOmit
   comportamento?: Prisma.ComportamentoOmit
 }
 
