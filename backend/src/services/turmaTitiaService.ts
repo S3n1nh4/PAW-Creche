@@ -38,9 +38,9 @@ export async function Vincular(turmaId: number,titiaId: number): Promise<TurmaTi
     if (!titia) {
         throw new Error(`Titia com ID ${titiaId} não encontrada.`);
     }
-    const associacoes = await repo.buscarTitiarPorTurma(turmaId);
-    const vinculoExistente = associacoes.some(
-        associacao => associacao.titiaId === titiaId
+    const vinculos = await repo.buscarTitiarPorTurma(turmaId);
+    const vinculoExistente = vinculos.some(
+        vinculos => vinculos.titiaId === titiaId
     );
 
     if (vinculoExistente) {
@@ -51,5 +51,9 @@ export async function Vincular(turmaId: number,titiaId: number): Promise<TurmaTi
         turmaId,
         titiaId
     });
+}
+
+
+export async function (params:type) {
     
 }
