@@ -1,15 +1,15 @@
 import {Router} from "express";
-import * as controller from "../controllers/titiaController.js";
+import * as controller from "../controllers/cuidadorController.js";
 
 const router = Router();
 
-router.get("/titia", controller.listar);
-router.get("/titia/:id", controller.buscarPorId);
-router.get("/titia/:email", controller.buscarPorEmail);
-router.post("/titia/:id", controller.criar);
-router.put("/titia/:id", controller.atualizar);
-// router.put("/titia/:id", controller.desativar);
-router.delete("/titia/:id", controller.deletar);
+router.get("/cuidador", controller.listar);
+router.get("/cuidador/:id", controller.buscarPorId);
+router.get("/cuidador/:email", controller.buscarPorEmail);
+router.post("/cuidador/:id", controller.criar);
+router.put("/cuidador/:id", controller.atualizar);
+// router.put("/cuidador/:id", controller.desativar);
+router.delete("/cuidador/:id", controller.deletar);
 
 
 export default router;

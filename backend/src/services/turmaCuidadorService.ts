@@ -26,7 +26,7 @@ export async function buscarTurmasDasCuidadors(cuidadorId:number) {
         throw new Error(`Cuidador com ID ${cuidadorId} não encontrada.`);
     }
 
-    return await repo.buscarTurmasDoscuidadores(cuidadorId)
+    return await repo.buscarTurmasDosCuidadores(cuidadorId)
     
 }
 

@@ -13,7 +13,7 @@ export async function buscarCuidadorPorTurma(turmaId: number): Promise<TurmaCuid
 }
 
 
-export async function buscarTurmasDoscuidadores(cuidadorId:number): Promise<TurmaCuidador[]> {
+export async function buscarTurmasDosCuidadores(cuidadorId:number): Promise<TurmaCuidador[]> {
     return await prisma.turmaCuidador.findMany({
             where: {cuidadorId}
     });

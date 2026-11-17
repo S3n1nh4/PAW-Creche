@@ -1,7 +1,7 @@
 import express, { type Request, type Response } from "express";
 import * as Service  from "../services/turmaService.js";
 import type { TurmaCreateInput, TurmaUpdateInput } from "../generated/prisma/models/Turma.js";
-import { errorMonitor } from "events";
+
 
 
 export async function listar(req: Request, res: Response) {
@@ -59,6 +59,6 @@ export async function deletar(req: Request, res: Response) {
         await Service.deletarTurma(id);
         return res.status(204).send();
     }catch(erro:any){
-        return res.status(500).json({mensage: erro.message});
+        return res.status(500).json({mensagem: erro.message});
     }
 }
