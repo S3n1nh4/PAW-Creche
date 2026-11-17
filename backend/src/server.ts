@@ -4,7 +4,9 @@ import dotenv from "dotenv";
 //import swaggerUi from "swagger-ui-express";
 //import { swaggerSpec } from "./config/swagger.js";
 
-import titiaRoutes from "./routes/cuidadorRoutes.js";
+import cuidadorRoutes from "./routes/cuidadorRoutes.js";
+import turmaRoutes from "./routes/turmaRoutes.js";
+import turmaCuidadorRoutes from "./routes/turmaCuidadorRoutes.js";
 
 dotenv.config();
 
@@ -15,13 +17,15 @@ const app = express();
 //app.use(cors({ origin: process.env.FRONTEND_URL || "http://localhost:5173" }));
 app.use(express.json());
 
-//const PORT: number = Number(process.env.PORT || 3000);
+const PORT: number = Number(process.env.PORT || 3000);
 
 // Documentação interativa Swagger UI
 //app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Rotas da aplicação
-app.use(titiaRoutes);
+app.use(cuidadorRoutes);
+app.use(turmaRoutes);
+app.use(turmaCuidadorRoutes);
 
 
 // Middleware global de tratamento de erros
@@ -29,7 +33,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   return res.status(400).json({ mensagem: err.message });
 });
 
-//app.listen(PORT, () => {
-//  console.log(`A API subiu na porta ${PORT}`);
-//  console.log(`Documentação disponível em: http://localhost:${PORT}/docs`);
-//});
+app.listen(PORT, () => {
+  console.log(`A API subiu na porta ${PORT}`);
+  console.log(`Documentação disponível em: http://localhost:${PORT}/docs`);
+});
