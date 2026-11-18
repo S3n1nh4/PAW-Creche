@@ -3,13 +3,13 @@ import * as controller from "../controllers/cuidadorController.js";
 
 const router = Router();
 
-router.get("/cuidador", controller.listar);
-router.get("/cuidador/:id", controller.buscarPorId);
-router.get("/cuidador/:email", controller.buscarPorEmail);
-router.post("/cuidador/:id", controller.criar);
-router.put("/cuidador/:id", controller.atualizar);
+router.get("/cuidadores", controller.listar);
+router.get("/cuidadores/:id", controller.buscarPorId);
+router.get("/cuidadores/email/:email", controller.buscarPorEmail);
+router.post("/cuidadores", controller.criar);
+router.put("/cuidadores/:id", controller.atualizar);
 // router.put("/cuidador/:id", controller.desativar);
-router.delete("/cuidador/:id", controller.deletar);
+router.delete("/cuidadores/:id", controller.deletar);
 
 
 export default router;
