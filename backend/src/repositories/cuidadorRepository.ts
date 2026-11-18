@@ -1,7 +1,5 @@
 import {prisma} from "../config/prisma.js";
-import type { Cuidador } from "../generated/prisma/client.js";
 import type { CuidadorCreateInput, CuidadorUpdateInput } from "../generated/prisma/models/Cuidador.js";
-//import type { CuidadorInput } from "@paw_creche/shared/Cuidador"; 
 
 export async function buscarTodos() {
   return await prisma.cuidador.findMany();

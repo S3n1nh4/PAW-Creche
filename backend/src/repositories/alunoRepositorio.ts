@@ -1,5 +1,4 @@
 import {prisma} from "../config/prisma.js";
-import type { Aluno } from "../generated/prisma/client.js";
 import type { AlunoCreateInput, AlunoUpdateInput } from "../generated/prisma/models/Aluno.js";
 
 export async function buscarTodos() {

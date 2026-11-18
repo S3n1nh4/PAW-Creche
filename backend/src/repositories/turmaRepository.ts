@@ -1,5 +1,4 @@
 import {prisma} from "../config/prisma.js";
-import type {Turma} from "../generated/prisma/client.js";
 import type {TurmaCreateInput, TurmaUpdateInput} from "../generated/prisma/models/Turma.js";
 
 export async function buscarTodas() {
