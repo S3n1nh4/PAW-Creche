@@ -1,4 +1,12 @@
 {
+  "name": "paw-creche",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend",
+    "shared"
+  ],
   "devDependencies": {
     "prisma": "^7.10.1"
   },
