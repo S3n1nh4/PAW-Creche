@@ -2,7 +2,6 @@ import bcrypt from "bcryptjs";
 import * as cuidadorRepo from "../repositories/cuidadorRepository.js";
 import * as adminRepo from "../repositories/adminRepostirio.js";
 import type { LoginInput } from "@creche/shared/auth"; 
-import { email } from "zod/mini";
 
 export async function autenticar({ email, senha }: LoginInput) {
   let usuario = await adminRepo.buscarPorEmail(email);
