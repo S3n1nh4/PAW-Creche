@@ -14,12 +14,11 @@ export const alunoSchema = z.object({
     .meta({example: "15/10/2018",description: "Data de nascimento no formato DD/MM/AAAA",}),
 
     turmaId: z
-    .number({ error: "O ID da turma é obrigatório" })
-    .int("O ID da turma deve ser um número inteiro")
-    .positive("O ID da turma deve ser maior que zero")
+    .number()
+    .int()
+    .positive()
     .nullable()
-    .optional()
-    .meta({ example: 1 }),
+    .default(null),
 
     responsavelNome: z
     .string({ error:"o nome é obrigatorio"})
@@ -35,17 +34,17 @@ export const alunoSchema = z.object({
 
     responsavelEmail: z
     .preprocess((valor) => (valor === "" || valor === undefined ? null : valor),
-      z.email("E-mail com formato inválido").nullable(),)
+      z.email("E-mail com formato inválido").nullable())
     .meta({example: "garibaldo@gmail.com"}),
 
     observacoes: z
     .string()
-    .min(10, "O observações  deve ter pelo menos 10 dígitos")
-    .max(200, "O observações  deve ter no máximo 200 dígitos")
-    .meta({example: "A aluna sena é exemplar"})
-    .optional(),
+    .min(10, "As observações devem ter pelo menos 10 caracteres")
+    .max(200, "As observações devem ter no máximo 200 caracteres")
+    .nullable()
+    .default(null),
 
-    ativo: z.boolean().optional(),
+    ativo: z.boolean().default(true),
 
 });
 

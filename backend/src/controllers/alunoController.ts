@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from "express";
 import * as Service  from "../services/alunoService.js";
-import type { AlunoCreateInput, AlunoUpdateInput } from "../generated/prisma/models/Aluno.js";
+import type { AlunoInput } from "@creche/shared/aluno";
 
 export async function listar(req: Request, res: Response) {
     const alunos = await Service.buscarAlunos();
@@ -40,7 +40,7 @@ export async function buscarPorTurma(req: Request, res: Response) {
 
 export async function criar(req: Request, res: Response) {
     try {
-        const dados: AlunoCreateInput = req.body;
+        const dados: AlunoInput = req.body;
         const aluno = await Service.criarAluno(dados);
         return res.status(201).json(aluno);
     } catch (erro:any) {
@@ -51,7 +51,7 @@ export async function criar(req: Request, res: Response) {
 export async function atualizar(req: Request, res: Response) {
     try {
         const id: number = Number(req.params.id);
-        const dados: AlunoCreateInput = req.body;
+        const dados: AlunoInput = req.body;
         const aluno = await Service.atualizarAluno(id, dados);
         return res.json(aluno);
     } catch (erro: any) {

@@ -1,6 +1,6 @@
 import * as repo from "../repositories/adminRepostirio.js";
 import type { Admin } from "../generated/prisma/client.js";
-import type { AdminCreateInput, AdminUpdateInput } from "../generated/prisma/models/Admin.js";
+import type { AdminInput,CadastroAdminInput } from "@creche/shared/admin";
 
 export async function buscarAdmins(): Promise<Admin[]> {
     return await repo.buscarTodos();
@@ -18,11 +18,11 @@ export async function buscarPorEmail(email: string): Promise<Admin | null > {
     return await repo.buscarPorEmail(email);
 }
 
-export async function criarAdmin(dados: AdminCreateInput): Promise<Admin> {
+export async function criarAdmin(dados: CadastroAdminInput): Promise<Admin> {
     return await repo.criar(dados);
 }
 
-export async function atualizarAdmin(id: number, dados: AdminUpdateInput): Promise<Admin> {
+export async function atualizarAdmin(id: number, dados: CadastroAdminInput ): Promise<Admin> {
     const admin = await repo.buscarPorId(id);
     if (!admin) {
         throw new Error(`admin com ID ${id} não encontrada.`);

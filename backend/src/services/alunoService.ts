@@ -1,6 +1,6 @@
 import * as repo from "../repositories/alunoRepositorio.js";
 import type { Aluno } from "../generated/prisma/client.js";
-import type { AlunoCreateInput, AlunoUpdateInput } from "../generated/prisma/models/Aluno.js";
+import type { AlunoInput } from "@creche/shared/aluno";
 
 export async function buscarAlunos(): Promise<Aluno[]> {
     return await repo.buscarTodos();
@@ -25,11 +25,11 @@ export async function buscarPorNome(nome: string): Promise<Aluno[]> {
     }
     return aluno;
 }
-export async function criarAluno(dados: AlunoCreateInput): Promise<Aluno> {
+export async function criarAluno(dados: AlunoInput): Promise<Aluno> {
     return await repo.criar(dados);
 }
 
-export async function atualizarAluno(id: number, dados: AlunoUpdateInput): Promise<Aluno> {
+export async function atualizarAluno(id: number, dados: AlunoInput): Promise<Aluno> {
     const Aluno = await repo.buscarPorId(id);
     if (!Aluno) {
         throw new Error(`Aluno com ID ${id} não encontrada.`);
