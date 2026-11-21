@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from "express";
 import * as Service  from "../services/adminService.js";
-import type { AdminInput, CadastroAdminInput } from "@creche/shared/admin";
+import type { AdminInput, CadastroAdminInput , AtualizarAdminInput } from "@creche/shared/admin";
 
 
 export async function listar(req: Request, res: Response) {
@@ -20,7 +20,7 @@ export async function buscarPorId(req: Request, res: Response) {
 
 export async function buscarPorEmail(req: Request, res: Response) {
     try {
-        const email = (req.query.email);
+        const email = (req.params.email);
         if (typeof email !== "string" || !email.trim()){
             return res.status(404).json({mensagem: "email invalido"})
         }
@@ -45,7 +45,7 @@ export async function criar(req: Request, res: Response) {
 export async function atualizar(req: Request, res: Response) {
     try {
         const id: number = Number(req.params.id);
-        const dados: CadastroAdminInput = req.body;
+        const dados: AtualizarAdminInput = req.body;
         const admin = await Service.atualizarAdmin(id, dados);
         return res.json(admin);
     } catch (erro: any) {

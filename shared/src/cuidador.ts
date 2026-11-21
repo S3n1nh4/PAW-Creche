@@ -36,7 +36,15 @@ export const cadastroCuidadorSchema = cuidadorSchema.extend({
     .meta({ example: "senhaForte123"}),
 });
 
+export const atualizarCuidadorSchema = cuidadorSchema.extend({
+    senha: z.string()
+    .min(8, "A senha deve ter pelo menos 8 caracteres")
+    .max(72, "A senha deve ter no máximo 72 caracteres")
+    .optional(),
+});
+
 export type CuidadorInput = z.infer<typeof cuidadorSchema>;
 export type CadastroCuidadorInput = z.infer<typeof cadastroCuidadorSchema>;
+export type AtualizarCuidadorInput = z.infer<typeof atualizarCuidadorSchema>;
 
 export type Cuidador = CuidadorInput & {id: number};

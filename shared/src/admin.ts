@@ -21,9 +21,16 @@ export const cadastroAdminSchema = adminSchema.extend({
     .max(72, "A senha deve ter no maximo 72 caracteres")
     .meta({ example: "senhaForte123"}),
 });
+export const atualizarAdminSchema = adminSchema.extend({
+    senha: z.string()
+    .min(8, "A senha deve ter pelo menos 8 caracteres")
+    .max(72, "A senha deve ter no máximo 72 caracteres")
+    .optional(),
+});
 
 export type AdminInput = z.infer<typeof adminSchema>;
 export type CadastroAdminInput = z.infer<typeof cadastroAdminSchema>;
+export type AtualizarAdminInput = z.infer<typeof atualizarAdminSchema>;
 
 
 //É pra usar esse viu 

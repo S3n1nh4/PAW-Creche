@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from "express";
 import * as Service  from "../services/cuidadorService.js";
-import type { CuidadorInput, CadastroCuidadorInput } from "@creche/shared/cuidador";
+import type { CuidadorInput, CadastroCuidadorInput, AtualizarCuidadorInput } from "@creche/shared/cuidador";
 
 
 export async function listar(req: Request, res: Response) {
@@ -20,7 +20,7 @@ export async function buscarPorId(req: Request, res: Response) {
 
 export async function buscarPorEmail(req: Request, res: Response) {
     try {
-        const email = (req.query.email);
+        const email = (req.params.email);
         if (typeof email !== "string" || !email.trim()){
             return res.status(404).json({mensagem: "email invalido"})
         }
@@ -45,7 +45,7 @@ export async function criar(req: Request, res: Response) {
 export async function atualizar(req: Request, res: Response) {
     try {
         const id: number = Number(req.params.id);
-        const dados: CadastroCuidadorInput = req.body;
+        const dados: AtualizarCuidadorInput = req.body;
         const cuidador = await Service.atualizarCuidador(id, dados);
         return res.json(cuidador);
     } catch (erro: any) {

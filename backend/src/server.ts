@@ -1,12 +1,15 @@
 import express, { type Request, type Response, type NextFunction } from "express";
 import dotenv from "dotenv";
-//import cors from "cors";
-//import swaggerUi from "swagger-ui-express";
-//import { swaggerSpec } from "./config/swagger.js";
+import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger.js";
 
 import cuidadorRoutes from "./routes/cuidadorRoutes.js";
 import turmaRoutes from "./routes/turmaRoutes.js";
 import turmaCuidadorRoutes from "./routes/turmaCuidadorRoutes.js";
+import alunoRoutes from "./routes/alunoRoutes.js";
+import comportamentoRoutes from "./routes/comportamentoRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 dotenv.config();
 
@@ -14,18 +17,21 @@ dotenv.config();
 const app = express();
 
 // Libera o front (outra origem: porta 5173) para chamar a API pelo navegador
-//app.use(cors({ origin: process.env.FRONTEND_URL || "http://localhost:5173" }));
+app.use(cors({ origin: process.env.FRONTEND_URL || "http://localhost:5173" }));
 app.use(express.json());
 
 const PORT: number = Number(process.env.PORT || 3000);
 
 // Documentação interativa Swagger UI
-//app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Rotas da aplicação
 app.use(cuidadorRoutes);
 app.use(turmaRoutes);
 app.use(turmaCuidadorRoutes);
+app.use(adminRoutes);
+app.use(comportamentoRoutes);
+app.use(alunoRoutes);
 
 
 // Middleware global de tratamento de erros

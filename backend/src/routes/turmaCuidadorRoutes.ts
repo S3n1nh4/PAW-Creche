@@ -7,9 +7,9 @@ const router = Router();
 
 router.get("/turmaCuidador", controller.listar);
 router.get("/turmaCuidador/turma/:turmaId", controller.buscarCuidadorPorTurma);
-router.get("/turmaCuidador/cuidador/:cuiadorId", controller.buscarTurmasDosCuidadores);
-router.post("/turmaCuidador/:turmaId/:cuiadorId", validarBody(turmaCuidadorSchema), controller.vincular);
-router.delete("/turmaCuidador/:turmaId/:cuiadorId", controller.desvincular);
+router.get("/turmaCuidador/cuidador/:cuidadorId", controller.buscarTurmasDosCuidadores);
+router.post("/turmaCuidador/:turmaId/:cuidadorId", validarBody(turmaCuidadorSchema), controller.vincular);
+router.delete("/turmaCuidador/:turmaId/:cuidadorId", controller.desvincular);
 
 
 export default router;

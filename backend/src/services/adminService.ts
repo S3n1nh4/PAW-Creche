@@ -1,7 +1,7 @@
 import * as repo from "../repositories/adminRepostirio.js";
 import type { Admin as AdminPrisma } from "../generated/prisma/client.js";
 import bcrypt from "bcryptjs";
-import type { AdminInput, CadastroAdminInput } from "@creche/shared/admin";
+import type { AdminInput, CadastroAdminInput, AtualizarAdminInput } from "@creche/shared/admin";
 
 type Admin = Omit<AdminPrisma, "senhaHash">;
 
@@ -36,11 +36,14 @@ export async function criarAdmin(dados: CadastroAdminInput ): Promise<Admin> {
     return await repo.criar({nome: dados.nome, email: dados.email, senhaHash});
 }
 
-export async function atualizarAdmin(id: number, dados: CadastroAdminInput ): Promise<Admin> {
+export async function atualizarAdmin(id: number, dados: AtualizarAdminInput ): Promise<Admin> {
     const admin = await repo.buscarPorId(id);
     if (!admin) {
         throw new Error(`admin com ID ${id} não encontrada.`);
     }
+    const { senha, ...dadosAtualizacao } = dados;
+    
+    const dadosFinal = {...dadosAtualizacao,...(senha && {senhaHash: await bcrypt.hash(senha, SALT_ROUNDS) })};
     return await repo.atualizar(id, dados);
 }
 

@@ -1,7 +1,7 @@
 import * as repo from "../repositories/cuidadorRepository.js";
 import type { Cuidador as CuidadorPrisma } from "../generated/prisma/client.js";
 import bcrypt from "bcryptjs";
-import type { CuidadorInput, CadastroCuidadorInput } from "@creche/shared/cuidador";
+import type { CuidadorInput, CadastroCuidadorInput, AtualizarCuidadorInput } from "@creche/shared/cuidador";
 
 type Cuidador = Omit<CuidadorPrisma, "senha">;
 
@@ -39,11 +39,15 @@ export async function criarCuidador(dados: CadastroCuidadorInput): Promise<Cuida
     });
 }
 
-export async function atualizarCuidador(id: number, dados: CadastroCuidadorInput): Promise<Cuidador> {
+export async function atualizarCuidador(id: number, dados: AtualizarCuidadorInput): Promise<Cuidador> {
     const cuidador = await repo.buscarPorId(id);
     if (!cuidador) {
         throw new Error(`Cuidador com ID ${id} não encontrada.`);
     }
+    const { senha, ...dadosAtualizacao } = dados;
+
+    const dadosFinal = {...dadosAtualizacao,...(senha && {senhaHash: await bcrypt.hash(senha, SALT_ROUNDS) })};
+
     return await repo.atualizar(id, dados);
 }
 
