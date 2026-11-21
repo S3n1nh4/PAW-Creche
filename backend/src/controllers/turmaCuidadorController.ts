@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from "express";
 import * as Service  from "../services/turmaCuidadorService.js";
-import type { TurmaCuidadorUncheckedCreateInput } from "../generated/prisma/models/TurmaCuidador.js";
+import type { TurmaCuidadorInput } from "@creche/shared/turmaCuidador";
 
 
 export async function listar(req: Request, res: Response) {
@@ -30,9 +30,8 @@ export async function buscarTurmasDosCuidadores(req: Request, res: Response) {
 
 export async function vincular(req: Request, res: Response) {
     try{
-        const turmaId = Number(req.params.turmaId);
-        const cuidadorId = Number(req.params.cuidadorId);
-        const turmaCuidador = await Service.Vincular(cuidadorId,turmaId);
+        const dados: TurmaCuidadorInput = req.body
+        const turmaCuidador = await Service.Vincular(dados);
         return res.status(201).json(turmaCuidador);
     }catch(erro:any){
         return res.status(400).json({mensagem: erro.message});

@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from "express";
 import * as Service  from "../services/adminService.js";
-import type { AdminCreateInput, AdminUpdateInput } from "../generated/prisma/models/Admin.js";
+import type { AdminInput, CadastroAdminInput } from "@creche/shared/admin";
 
 
 export async function listar(req: Request, res: Response) {
@@ -33,7 +33,7 @@ export async function buscarPorEmail(req: Request, res: Response) {
 
 export async function criar(req: Request, res: Response) {
     try {
-        const dados: AdminCreateInput = req.body;
+        const dados: CadastroAdminInput = req.body;
         const admin = await Service.criarAdmin(dados);
         return res.status(201).json(admin);
     } catch (erro:any) {
@@ -45,7 +45,7 @@ export async function criar(req: Request, res: Response) {
 export async function atualizar(req: Request, res: Response) {
     try {
         const id: number = Number(req.params.id);
-        const dados: AdminUpdateInput = req.body;
+        const dados: CadastroAdminInput = req.body;
         const admin = await Service.atualizarAdmin(id, dados);
         return res.json(admin);
     } catch (erro: any) {

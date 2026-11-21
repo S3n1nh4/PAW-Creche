@@ -1,6 +1,12 @@
 import * as repo from "../repositories/adminRepostirio.js";
-import type { Admin } from "../generated/prisma/client.js";
-import type { AdminInput,CadastroAdminInput } from "@creche/shared/admin";
+import type { Admin as AdminPrisma } from "../generated/prisma/client.js";
+import bcrypt from "bcryptjs";
+import type { AdminInput, CadastroAdminInput } from "@creche/shared/admin";
+
+type Admin = Omit<AdminPrisma, "senhaHash">;
+
+
+const SALT_ROUNDS = 10;
 
 export async function buscarAdmins(): Promise<Admin[]> {
     return await repo.buscarTodos();
@@ -18,8 +24,16 @@ export async function buscarPorEmail(email: string): Promise<Admin | null > {
     return await repo.buscarPorEmail(email);
 }
 
-export async function criarAdmin(dados: CadastroAdminInput): Promise<Admin> {
-    return await repo.criar(dados);
+export async function criarAdmin(dados: CadastroAdminInput ): Promise<Admin> {
+    if (!dados.nome || !dados.email ) {
+    throw new Error("Campos obrigatórios ausentes: nome e email.");
+    }
+    const existente = await repo.buscarPorEmail(dados.email);
+    if (existente) {
+        throw new Error("Já existe um secretário cadastrado com este email.");
+    }
+    const senhaHash = await bcrypt.hash(dados.senha, SALT_ROUNDS); 
+    return await repo.criar({nome: dados.nome, email: dados.email, senhaHash});
 }
 
 export async function atualizarAdmin(id: number, dados: CadastroAdminInput ): Promise<Admin> {

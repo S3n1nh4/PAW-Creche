@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from "express";
 import * as Service  from "../services/turmaService.js";
-import type { TurmaCreateInput, TurmaUpdateInput } from "../generated/prisma/models/Turma.js";
+import type { TurmaInput } from "@creche/shared/turma";
 
 
 
@@ -33,7 +33,7 @@ export async function buscarPorNome(req: Request, res: Response) {
 
 export async function criar(req: Request, res: Response) {
     try{
-        const dados: TurmaCreateInput = req.body;
+        const dados: TurmaInput = req.body;
         const turma = await Service.criarTurma(dados);
         return res.status(201).json(turma);
     }catch(erro:any){
@@ -45,7 +45,7 @@ export async function criar(req: Request, res: Response) {
 export async function atualizar(req: Request, res: Response) {
     try {
         const id: number = Number(req.params.id);
-        const dados: TurmaUpdateInput = req.body;
+        const dados: TurmaInput = req.body;
         const turma = await Service.atualizarTurma(id,dados);
         return res.json(turma);
     }catch(erro:any){

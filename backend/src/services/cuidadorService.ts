@@ -1,7 +1,11 @@
 import * as repo from "../repositories/cuidadorRepository.js";
-import type { Cuidador } from "../generated/prisma/client.js";
-import type { CuidadorCreateInput, CuidadorUpdateInput } from "../generated/prisma/models/Cuidador.js";
+import type { Cuidador as CuidadorPrisma } from "../generated/prisma/client.js";
+import bcrypt from "bcryptjs";
+import type { CuidadorInput, CadastroCuidadorInput } from "@creche/shared/cuidador";
 
+type Cuidador = Omit<CuidadorPrisma, "senha">;
+
+const SALT_ROUNDS = 10;
 
 export async function buscarCuidadores(): Promise<Cuidador[]> {
     return await repo.buscarTodos();
@@ -19,15 +23,23 @@ export async function buscarCuidadorPorEmail(email: string): Promise<Cuidador | 
     return await repo.buscarPorEmail(email);
 }
 
-export async function criarCuidador(dados: CuidadorCreateInput): Promise<Cuidador> {
+export async function criarCuidador(dados: CadastroCuidadorInput): Promise<Cuidador> {
     const cuidadorExistente = await repo.buscarPorEmail(dados.email);
     if (cuidadorExistente) {
         throw new Error(`Já existe uma Cuidador com o email ${dados.email}.`);
     }
-    return await repo.criar(dados);
+    const senhaHash = await bcrypt.hash(dados.senha, SALT_ROUNDS);
+    return await repo.criar({
+        nome: dados.nome,
+        email: dados.email,
+        telefone: dados.telefone,
+        senhaHash,
+        salarioBase: dados.salarioBase,
+        ativo: dados.ativo,
+    });
 }
 
-export async function atualizarCuidador(id: number, dados: CuidadorUpdateInput): Promise<Cuidador> {
+export async function atualizarCuidador(id: number, dados: CadastroCuidadorInput): Promise<Cuidador> {
     const cuidador = await repo.buscarPorId(id);
     if (!cuidador) {
         throw new Error(`Cuidador com ID ${id} não encontrada.`);

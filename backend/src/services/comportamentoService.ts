@@ -2,7 +2,7 @@ import * as repo from "../repositories/comportamentoRepository.js";
 import * as alunoRepo from "../repositories/alunoRepositorio.js";
 import * as cuidadorRepo from "../repositories/cuidadorRepository.js"
 import type { Comportamento } from "../generated/prisma/client.js";
-import type { ComportamentoUncheckedCreateInput, ComportamentoUncheckedUpdateInput } from "../generated/prisma/models/Comportamento.js";
+import type { ComportamentoInput } from "@creche/shared/comportamento";
 
 
 export async function buscarComportamentos(): Promise<Comportamento[]> {
@@ -29,7 +29,7 @@ export async function buscarComportamentoPorCuidador(cuidadorId: number): Promis
     return await repo.buscarPorCuidador(cuidadorId);
 }
 
-export async function criarComportamento(dados: ComportamentoUncheckedCreateInput): Promise<Comportamento> {
+export async function criarComportamento(dados: ComportamentoInput): Promise<Comportamento> {
     const cuidador = await cuidadorRepo.buscarPorId(dados.cuidadorId);
     if (!cuidador) {
         throw new Error(`Cuidador com ID ${dados.cuidadorId} não encontrada.`);
@@ -42,10 +42,10 @@ export async function criarComportamento(dados: ComportamentoUncheckedCreateInpu
     return await repo.criar(dados);
 }
 
-export async function atualizar(id: number , dados: ComportamentoUncheckedUpdateInput): Promise<Comportamento> {
+export async function atualizar(id: number , dados: ComportamentoInput): Promise<Comportamento> {
     const comportamento = await repo.buscarPorId(id);
     if (!comportamento) {
-        throw new Error(`Comportamento com ID ${dados.id} não encontrada.`);
+        throw new Error(`Comportamento com ID ${id} não encontrada.`);
     }
     return await repo.atualizar(id,dados);
 }

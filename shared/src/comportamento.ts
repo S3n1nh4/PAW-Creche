@@ -21,7 +21,6 @@ export const comportamentoSchema = z.object({
       /^\d{2}\/\d{2}\/\d{4}$/,
       "A data deve estar no formato DD/MM/AAAA (exemplo: 15/10/2026)"
     )
-    .optional()
     .meta({example: "15/10/2026",description: "Data do comportamento no formato DD/MM/AAAA",}),
 
     descricao: z

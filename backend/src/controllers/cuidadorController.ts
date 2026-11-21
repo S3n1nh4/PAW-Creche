@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from "express";
 import * as Service  from "../services/cuidadorService.js";
-import type { CuidadorCreateInput, CuidadorUpdateInput } from "../generated/prisma/models/Cuidador.js";
+import type { CuidadorInput, CadastroCuidadorInput } from "@creche/shared/cuidador";
 
 
 export async function listar(req: Request, res: Response) {
@@ -33,7 +33,7 @@ export async function buscarPorEmail(req: Request, res: Response) {
 
 export async function criar(req: Request, res: Response) {
     try {
-        const dados: CuidadorCreateInput = req.body;
+        const dados: CadastroCuidadorInput = req.body;
         const cuidador = await Service.criarCuidador(dados);
         return res.status(201).json(cuidador);
     } catch (erro:any) {
@@ -45,7 +45,7 @@ export async function criar(req: Request, res: Response) {
 export async function atualizar(req: Request, res: Response) {
     try {
         const id: number = Number(req.params.id);
-        const dados: CuidadorUpdateInput = req.body;
+        const dados: CadastroCuidadorInput = req.body;
         const cuidador = await Service.atualizarCuidador(id, dados);
         return res.json(cuidador);
     } catch (erro: any) {

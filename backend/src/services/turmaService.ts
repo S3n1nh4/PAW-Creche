@@ -1,6 +1,6 @@
 import * as repo from "../repositories/turmaRepository.js"
 import type {Turma} from "../generated/prisma/client.js";
-import type {TurmaCreateInput, TurmaUpdateInput} from "../generated/prisma/models/Turma.js";
+import type { TurmaInput } from "@creche/shared/turma";
 
 
 export async function buscarTurmas(): Promise<Turma[]> {
@@ -23,7 +23,7 @@ export async function buscarTurmaPorNome(nome : string): Promise<Turma | null> {
     return turma;
 }
 
-export async function criarTurma(dados : TurmaCreateInput): Promise< Turma| null> {
+export async function criarTurma(dados : TurmaInput): Promise< Turma| null> {
     const turmaExistente = await repo.buscarPorNome(dados.nome);
         if (turmaExistente) {
             throw new Error(`Já existe uma Turma com o nome ${dados.nome}.`);
@@ -31,7 +31,7 @@ export async function criarTurma(dados : TurmaCreateInput): Promise< Turma| null
         return await repo.criar(dados)
 }
 
-export async function atualizarTurma(id: number,dados : TurmaUpdateInput): Promise<Turma| null>{
+export async function atualizarTurma(id: number,dados : TurmaInput): Promise<Turma| null>{
     const turma = await repo.buscarPorId(id);
         if (!turma) {
             throw new Error(`turma com ID ${id} não encontrada.`);

@@ -15,19 +15,16 @@ export const cuidadorSchema =  z.object({
 
     email: z
     .preprocess((valor) => (valor === "" || valor === undefined ? null : valor),
-      z.email("E-mail com formato inválido").nullable(),)
+      z.email("E-mail com formato inválido"),)
     .meta({example: "betatriz@gmail.com"}),
 
-    dataAdmissao: z
-    .coerce.date()
-    .optional(),
 
     salarioBase: z
     .number()
     .min(0, "O salário não pode ser negativo")
-    .optional(),
+    ,
 
-    ativo: z.boolean().optional(),
+    ativo: z.boolean().default(true),
 
 });
 

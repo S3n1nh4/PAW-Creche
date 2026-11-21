@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from "express";
 import * as Service  from "../services/comportamentoService.js";
-import type { ComportamentoUncheckedCreateInput, ComportamentoUncheckedUpdateInput } from "../generated/prisma/models/Comportamento.js";
+import type { ComportamentoInput } from "@creche/shared/comportamento";
 
 
 export async function listar(req: Request, res: Response) {
@@ -40,7 +40,7 @@ export async function buscarPorAluno(req: Request, res: Response) {
 
 export async function criar(req: Request, res: Response) {
     try {
-        const dados: ComportamentoUncheckedCreateInput = req.body;
+        const dados: ComportamentoInput = req.body;
         const comportamento = await Service.criarComportamento(dados);
         return res.status(201).json(comportamento);
     } catch (erro:any) {
@@ -52,7 +52,7 @@ export async function criar(req: Request, res: Response) {
 export async function atualizar(req: Request, res: Response) {
     try {
         const id: number = Number(req.params.id);
-        const dados: ComportamentoUncheckedUpdateInput = req.body;
+        const dados: ComportamentoInput = req.body;
         const comportamento = await Service.atualizar(id, dados);
         return res.json(comportamento);
     } catch (erro: any) {

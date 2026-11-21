@@ -23,7 +23,7 @@ export const turmaSchema = z.object({
 
     ativo: z
     .boolean()
-    .optional(),
+    .default(true),
 
 });
 

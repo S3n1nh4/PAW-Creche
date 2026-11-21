@@ -3,7 +3,7 @@ import * as turmaRepo from "../repositories/turmaRepository.js";
 import * as cuidadorRepo from "../repositories/cuidadorRepository.js";
 import type { TurmaCuidador } from "../generated/prisma/client.js";
 import { prisma } from "../config/prisma.js";
-
+import type { TurmaCuidadorInput } from "@creche/shared/turmaCuidador";
 
 
 export async function buscarTodosOsVinculos(): Promise<TurmaCuidador[]> {
@@ -30,28 +30,25 @@ export async function buscarTurmasDasCuidadors(cuidadorId:number) {
     
 }
 
-export async function Vincular(turmaId: number, cuidadorId: number): Promise<TurmaCuidador | null > {
-     const turma = await turmaRepo.buscarPorId(turmaId);
+export async function Vincular(dados: TurmaCuidadorInput): Promise<TurmaCuidador | null > {
+     const turma = await turmaRepo.buscarPorId(dados.turmaId);
     if (!turma) {
-        throw new Error(`Turma com ID ${turmaId} não encontrada.`);
+        throw new Error(`Turma com ID ${dados.turmaId} não encontrada.`);
     }
-    const Cuidador = await cuidadorRepo.buscarPorId(cuidadorId);
+    const Cuidador = await cuidadorRepo.buscarPorId(dados.cuidadorId);
     if (!Cuidador) {
-        throw new Error(`Cuidador com ID ${cuidadorId} não encontrada.`);
+        throw new Error(`Cuidador com ID ${dados.cuidadorId} não encontrada.`);
     }
-    const vinculos = await repo.buscarCuidadorPorTurma(turmaId);
+    const vinculos = await repo.buscarCuidadorPorTurma(dados.turmaId);
     const vinculoExistente = vinculos.some(
-        vinculos => vinculos.cuidadorId === cuidadorId
+        vinculos => vinculos.cuidadorId === dados.cuidadorId
     );
 
     if (vinculoExistente) {
         throw new Error("Essa Cuidador já está vinculada a essa turma.");
     }
 
-    return await repo.vincular({
-        turmaId,
-        cuidadorId
-    });
+    return await repo.vincular(dados);
 }
 
 

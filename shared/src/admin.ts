@@ -9,7 +9,7 @@ export const adminSchema = z.object({
 
     email: z
     .preprocess((valor) => (valor === "" || valor === undefined ? null : valor),
-      z.email("E-mail com formato inválido").nullable(),)
+      z.email("E-mail com formato inválido"),)
     .meta({example: "analu@gmail.com"}),
 
 });
