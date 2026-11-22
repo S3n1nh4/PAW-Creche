@@ -1,17 +1,11 @@
 import { useState, useEffect, type SyntheticEvent } from 'react';
-
-export interface Turma {
-  id: number | string;
-  nome: string;
-  turno: string;
-  ano: string;
-}
+import type { TurmaInput } from "@creche/shared/turma";
 
 interface ModalModificarTurmaProps {
   isOpen: boolean;
-  turma: Turma | null;
+  turma: TurmaInput | null;
   onClose: () => void;
-  onSalvar: (turmaAtualizada: Turma) => void;
+  onSalvar: (turmaAtualizada: TurmaInput) => void;
 }
 
 export default function ModalModificarTurma({
@@ -22,13 +16,13 @@ export default function ModalModificarTurma({
 }: ModalModificarTurmaProps) {
   const [nome, setNome] = useState('');
   const [turno, setTurno] = useState('');
-  const [ano, setAno] = useState('');
+  const [anoLetivo, setAnoLetivo] = useState('');
 
   useEffect(() => {
     if (turma) {
       setNome(turma.nome);
       setTurno(turma.turno);
-      setAno(turma.ano);
+      setAnoLetivo(turma.anoLetivo ? String(turma.anoLetivo) : '');
     }
   }, [turma]);
 
@@ -36,9 +30,10 @@ export default function ModalModificarTurma({
 
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!nome.trim() || !turno.trim() || !ano.trim()) return;
+    const anoNumero = Number(anoLetivo.trim());
+    if (!nome.trim() || !turno.trim() || !anoLetivo.trim() || Number.isNaN(anoNumero)) return;
 
-    onSalvar({ ...turma, nome, turno, ano });
+    onSalvar({ ...turma, nome, turno, anoLetivo: anoNumero });
     onClose();
   };
 
@@ -99,8 +94,8 @@ export default function ModalModificarTurma({
             type="text"
             placeholder="2026"
             maxLength={4}
-            value={ano}
-            onChange={(e) => setAno(e.target.value)}
+            value={anoLetivo}
+            onChange={(e) => setAnoLetivo(e.target.value)}
             className="w-[155px] h-[38px] bg-[#F1F5F9] rounded-[6px] px-3 text-[13px] text-[#475569] placeholder-[#94A3B8] border border-[#CBD5E1] focus:bg-white focus:text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#36A3DC] mb-12"
           />
 

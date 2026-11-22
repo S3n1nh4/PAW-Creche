@@ -1,9 +1,10 @@
 import { useState, type SyntheticEvent } from 'react';
+import type { TurmaInput } from "@creche/shared/turma";
 
 interface ModalCriarTurmaProps {
   isOpen: boolean;
   onClose: () => void;
-  onCriar: (novaTurma: { nome: string; turno: string; ano: string }) => void;
+  onCriar: (novaTurma: TurmaInput) => void | Promise<void>;
 }
 
 export default function ModalCriarTurma({
@@ -13,18 +14,19 @@ export default function ModalCriarTurma({
 }: ModalCriarTurmaProps) {
   const [nome, setNome] = useState('');
   const [turno, setTurno] = useState('');
-  const [ano, setAno] = useState('');
+  const [anoLetivo, setAnoLetivo] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!nome.trim() || !turno.trim() || !ano.trim()) return;
+    const anoNumero = Number(anoLetivo.trim());
+    if (!nome.trim() || !turno.trim() || !anoLetivo.trim() || Number.isNaN(anoNumero)) return;
 
-    onCriar({ nome, turno, ano });
+    await onCriar({ nome: nome.trim(), turno: turno.trim(), anoLetivo: anoNumero, ativo: true });
     setNome('');
     setTurno('');
-    setAno('');
+    setAnoLetivo('');
     onClose();
   };
 
@@ -85,8 +87,8 @@ export default function ModalCriarTurma({
             type="text"
             placeholder="AAAA"
             maxLength={4}
-            value={ano}
-            onChange={(e) => setAno(e.target.value)}
+            value={anoLetivo}
+            onChange={(e) => setAnoLetivo(e.target.value)}
             className="w-[155px] h-[38px] bg-[#F1F5F9] rounded-[6px] px-3 text-[13px] text-[#0F172A] placeholder-[#94A3B8] border border-[#CBD5E1] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#36A3DC] mb-12"
           />
 

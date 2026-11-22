@@ -1,4 +1,4 @@
-import logo from '../../assets/imagens/Pequenos_Passos_Logo__1_-removebg-preview.png';
+import logo from '../assets/imagens/Pequenos_Passos_Logo__1_-removebg-preview.png';
 
 interface ModalRemoverTurmaProps {
   isOpen: boolean;
@@ -35,7 +35,7 @@ export default function ModalRemoverTurma({
           </h2>
         </div>
 
-        {/* Botões alinhados à direita como no protótipo */}
+        {/* Botões */}
         <div className="flex items-center justify-end gap-4 mt-6">
           <button
             type="button"
