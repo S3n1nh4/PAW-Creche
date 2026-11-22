@@ -1,8 +1,8 @@
 import './App.css';
-import Login from './pages/LoginPage';
+import CriarTurma from './components/modais/ModalCriarTurma';
 
 function App() {
-  return <Login />;
+  return <CriarTurma />;
 }
 
 export default App;
