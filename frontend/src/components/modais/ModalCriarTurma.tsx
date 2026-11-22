@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useState, type SyntheticEvent } from 'react';
 
 interface ModalCriarTurmaProps {
   isOpen: boolean;
@@ -17,7 +17,7 @@ export default function ModalCriarTurma({
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!nome.trim() || !turno.trim() || !ano.trim()) return;
 

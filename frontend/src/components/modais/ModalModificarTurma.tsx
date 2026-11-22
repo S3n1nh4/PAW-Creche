@@ -1,4 +1,4 @@
-import { useState, useEffect, type FormEvent } from 'react';
+import { useState, useEffect, type SyntheticEvent } from 'react';
 
 export interface Turma {
   id: number | string;
@@ -34,7 +34,7 @@ export default function ModalModificarTurma({
 
   if (!isOpen || !turma) return null;
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!nome.trim() || !turno.trim() || !ano.trim()) return;
 

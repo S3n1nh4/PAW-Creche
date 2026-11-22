@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useState, type SyntheticEvent } from 'react';
 import logo from '../assets/imagens/Pequenos_Passos_Logo__1_-removebg-preview.png';
 import fundologin from '../assets/imagens/fundo login.jpg';
 
@@ -7,7 +7,7 @@ export default function Login() {
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email.trim() || !senha.trim()) {
       setErro('Por favor, preencha o e-mail e a senha.');
