@@ -1,5 +1,7 @@
 # PAW Creche — Banco de dados
 
+> Atualização: a implementação atual de presença e ponto, os comandos do Compose em `backend` e o procedimento de compatibilidade do banco estão em [docs/PRESENCAS.md](docs/PRESENCAS.md). As seções abaixo documentam o modelo inicial com titias; não representam integralmente o Prisma atual com cuidadores.
+
 PostgreSQL 18 para desenvolvimento da plataforma de gestão de creche. Este repositório prepara somente o banco; front-end e back-end TypeScript serão desenvolvidos pela equipe. Usamos a imagem oficial diretamente, sem necessidade de Dockerfile.
 
 ## Iniciar

@@ -6,5 +6,6 @@ import { loginSchema } from "@creche/shared/auth";
 const router = Router();
 
 router.post("/login", validarBody(loginSchema), controller.login);
+router.post("/logout", controller.logout);
 
 export default router;

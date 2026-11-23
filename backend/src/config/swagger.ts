@@ -14,6 +14,7 @@ import { turmaSchema } from "@creche/shared/turma";
 import { comportamentoSchema } from "@creche/shared/comportamento";
 import { turmaCuidadorSchema } from "@creche/shared/turmaCuidador";
 import { loginSchema } from "@creche/shared/auth";
+import { registrarPresencas } from "./presencaSwagger.js";
 
 extendZodWithOpenApi(z);
 
@@ -420,7 +421,7 @@ registry.registerPath({
     body: jsonBody(loginSchema),
   },
   responses: {
-    200: jsonResponse("Login realizado com sucesso"),
+    200: jsonResponse("Login realizado: dados do usuário (sem senha), token, tokenType=Bearer e expiresIn=28800"),
     400: jsonResponse("Erro de validação"),
     401: jsonResponse("E-mail ou senha inválidos"),
   },
@@ -430,6 +431,7 @@ registry.registerPath({
 // 10. Geração do documento OpenAPI
 // -------------------------------------------------------------
 
+registrarPresencas(registry);
 const generator = new OpenApiGeneratorV3(registry.definitions);
 
 export const swaggerSpec = generator.generateDocument({

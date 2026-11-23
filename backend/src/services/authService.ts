@@ -5,14 +5,14 @@ import type { LoginInput } from "@creche/shared/auth";
 
 export async function autenticar({ email, senha }: LoginInput) {
   let usuario = await adminRepo.buscarPorEmail(email);
-  let tipoUsuario = "ADMIN";
+  let tipoUsuario: "ADMIN" | "CUIDADOR" = "ADMIN";
 
   if (!usuario) {
     usuario = await cuidadorRepo.buscarPorEmail(email);
     tipoUsuario = "CUIDADOR";
   }
 
-  if (!usuario || !usuario.senhaHash) {
+  if (!usuario || !usuario.ativo || !usuario.senhaHash) {
     return null;
   }
   const senhaConfere = await bcrypt.compare(senha, usuario.senhaHash);

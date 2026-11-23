@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test:presencas": "tsx --test tests/presencas.test.ts",
+    "test:presencas:integration": "tsx --test tests/presencas.integration.test.ts",
     "start": "node dist/server.js",
     "postinstall": "prisma skills sync || exit 0"
   },
