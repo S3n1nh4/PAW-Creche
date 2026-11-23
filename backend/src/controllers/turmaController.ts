@@ -20,7 +20,7 @@ export async function buscarPorId(req: Request, res: Response) {
 }
 export async function buscarPorNome(req: Request, res: Response) {
     try{
-        const nome = (req.params.id);
+        const nome = req.params.nome;
         if (typeof nome !== "string" || !nome.trim()){
             return res.status(404).json({mensagem: "nome invalido"})
         }

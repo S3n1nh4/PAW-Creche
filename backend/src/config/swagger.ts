@@ -61,6 +61,7 @@ function registrarCrud({
   schemaCadastro?: ZodType;
   schemaAtualizacao?: ZodType;
 }) {
+  const security = path === "/admins" || path === "/cuidadores" ? [{ bearerAuth: [] }] : [];
   const model = registry.register(
     nomeModelo,
     (schema as any).extend({
@@ -73,6 +74,7 @@ function registrarCrud({
     method: "get",
     path,
     summary: `Lista ${tag.toLowerCase()}`,
+    security,
     tags: [tag],
     responses: {
       200: jsonResponse("Lista retornada com sucesso", z.array(model)),
@@ -84,6 +86,7 @@ function registrarCrud({
     method: "get",
     path: `${path}/{id}`,
     summary: `Busca ${nomeModelo.toLowerCase()} por ID`,
+    security,
     tags: [tag],
     request: { params: idParam },
     responses: {
@@ -97,6 +100,7 @@ function registrarCrud({
     method: "post",
     path,
     summary: `Cadastra ${nomeModelo.toLowerCase()}`,
+    security,
     tags: [tag],
     request: {
       body: jsonBody(schemaCadastro),
@@ -112,6 +116,7 @@ function registrarCrud({
     method: "put",
     path: `${path}/{id}`,
     summary: `Atualiza ${nomeModelo.toLowerCase()}`,
+    security,
     tags: [tag],
     request: {
       params: idParam,
@@ -129,6 +134,7 @@ function registrarCrud({
     method: "delete",
     path: `${path}/{id}`,
     summary: `Remove ${nomeModelo.toLowerCase()}`,
+    security,
     tags: [tag],
     request: { params: idParam },
     responses: {
@@ -192,6 +198,7 @@ registry.registerPath({
   method: "get",
   path: "/admins/email/{email}",
   summary: "Busca administrador por e-mail",
+  security: [{ bearerAuth: [] }],
   tags: ["Administradores"],
   request: {
     params: z.object({
@@ -208,6 +215,7 @@ registry.registerPath({
   method: "put",
   path: "/admins/desativar/{id}",
   summary: "Desativa um administrador",
+  security: [{ bearerAuth: [] }],
   tags: ["Administradores"],
   request: {
     params: idParam,
@@ -226,6 +234,7 @@ registry.registerPath({
   method: "get",
   path: "/cuidadores/email/{email}",
   summary: "Busca cuidador por e-mail",
+  security: [{ bearerAuth: [] }],
   tags: ["Cuidadores"],
   request: {
     params: z.object({

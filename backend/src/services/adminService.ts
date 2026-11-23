@@ -5,11 +5,16 @@ import type { AdminInput, CadastroAdminInput, AtualizarAdminInput } from "@crech
 
 type Admin = Omit<AdminPrisma, "senhaHash">;
 
+function semSenha(admin: AdminPrisma): Admin {
+    const { senhaHash, ...dadosPublicos } = admin;
+    return dadosPublicos;
+}
+
 
 const SALT_ROUNDS = 10;
 
 export async function buscarAdmins(): Promise<Admin[]> {
-    return await repo.buscarTodos();
+    return (await repo.buscarTodos()).map(semSenha);
 }
 
 export async function buscarAdminPorId(id: number): Promise<Admin | null> {
@@ -17,11 +22,12 @@ export async function buscarAdminPorId(id: number): Promise<Admin | null> {
     if (!admin) {
         throw new Error(`admin com ID ${id} não encontrada.`);
     }
-    return admin;
+    return semSenha(admin);
 }
 
 export async function buscarPorEmail(email: string): Promise<Admin | null > {
-    return await repo.buscarPorEmail(email);
+    const admin = await repo.buscarPorEmail(email);
+    return admin ? semSenha(admin) : null;
 }
 
 export async function criarAdmin(dados: CadastroAdminInput ): Promise<Admin> {
@@ -33,7 +39,7 @@ export async function criarAdmin(dados: CadastroAdminInput ): Promise<Admin> {
         throw new Error("Já existe um secretário cadastrado com este email.");
     }
     const senhaHash = await bcrypt.hash(dados.senha, SALT_ROUNDS); 
-    return await repo.criar({nome: dados.nome, email: dados.email, senhaHash});
+    return semSenha(await repo.criar({nome: dados.nome, email: dados.email, senhaHash}));
 }
 
 export async function atualizarAdmin(id: number, dados: AtualizarAdminInput ): Promise<Admin> {
@@ -44,7 +50,7 @@ export async function atualizarAdmin(id: number, dados: AtualizarAdminInput ): P
     const { senha, ...dadosAtualizacao } = dados;
     
     const dadosFinal = {...dadosAtualizacao,...(senha && {senhaHash: await bcrypt.hash(senha, SALT_ROUNDS) })};
-    return await repo.atualizar(id, dados);
+    return semSenha(await repo.atualizar(id, dadosFinal));
 }
 
 export async function desativarAdmin(id: number): Promise<Admin> {
@@ -52,7 +58,7 @@ export async function desativarAdmin(id: number): Promise<Admin> {
     if (!admin) {
         throw new Error(`Admin com ID ${id} não encontrada.`);
     }
-    return await repo.desativarAdmin(id);
+    return semSenha(await repo.desativarAdmin(id));
  }
 
 export async function deletarAdmin(id: number): Promise<Admin> {
@@ -60,5 +66,5 @@ export async function deletarAdmin(id: number): Promise<Admin> {
     if (!admin) {
         throw new Error(`admin com ID ${id} não encontrada.`);
     }
-    return await repo.deletar(id);
+    return semSenha(await repo.deletar(id));
 }

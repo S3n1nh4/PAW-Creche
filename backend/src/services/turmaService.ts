@@ -8,7 +8,7 @@ export async function buscarTurmas(): Promise<Turma[]> {
 }
 
 export async function buscarPorId(id: number): Promise<Turma | null> {
-    const turma = repo.buscarPorId(id);
+    const turma = await repo.buscarPorId(id);
     if(!turma){
         throw new Error(`Turma com ID ${id} não encontrado.`);
     }   
@@ -16,7 +16,7 @@ export async function buscarPorId(id: number): Promise<Turma | null> {
 }
 
 export async function buscarTurmaPorNome(nome : string): Promise<Turma | null> {
-    const turma = repo.buscarPorNome(nome);
+    const turma = await repo.buscarPorNome(nome);
     if(!turma){
         throw new Error(`Turma com nome ${nome} não encontrado.`);
     }

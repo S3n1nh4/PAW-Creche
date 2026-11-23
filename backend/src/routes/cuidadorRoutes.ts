@@ -1,9 +1,11 @@
 import {Router} from "express";
 import * as controller from "../controllers/cuidadorController.js";
 import { validarBody } from "../middlewares/validarSchema.js";
+import { autenticarPresenca } from "../middlewares/autenticarPresenca.js";
 import { cuidadorSchema, cadastroCuidadorSchema, atualizarCuidadorSchema } from "@creche/shared/cuidador";
 
 const router = Router();
+router.use("/cuidadores", autenticarPresenca("ADMIN"));
 
 router.get("/cuidadores", controller.listar);
 router.get("/cuidadores/:id", controller.buscarPorId);
