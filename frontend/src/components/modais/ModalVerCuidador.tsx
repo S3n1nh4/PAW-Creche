@@ -59,15 +59,6 @@ export default function ModalVerCuidador({
 
             <div>
               <span className="block text-[13px] font-bold text-[#0F172A] mb-1">
-                Admissão
-              </span>
-              <span className="block text-[13px] text-[#334155]">
-                {cuidador.admissao}
-              </span>
-            </div>
-
-            <div>
-              <span className="block text-[13px] font-bold text-[#0F172A] mb-1">
                 Turmas
               </span>
               <span className="block text-[13px] text-[#334155]">

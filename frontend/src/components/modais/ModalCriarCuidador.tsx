@@ -16,30 +16,28 @@ export default function ModalCriarCuidador({
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
-  const [admissao, setAdmissao] = useState('');
-  const [salario, setSalario] = useState('');
+  const [salarioBase, setSalarioBase] = useState('');
   const [turmas, setTurmas] = useState('');
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!nome.trim() || !email.trim()) return;
+    const salarioNumero = Number(salarioBase.trim());
+    if (!nome.trim() || !email.trim() || !salarioBase.trim() || Number.isNaN(salarioNumero)) return;
 
     await onCriar({
       nome: nome.trim(),
       email: email.trim(),
       telefone: telefone.trim(),
-      admissao: admissao.trim(),
-      salario: salario.trim(),
+      salarioBase: salarioNumero,
       turmas: turmas.trim(),
     });
 
     setNome('');
     setEmail('');
     setTelefone('');
-    setAdmissao('');
-    setSalario('');
+    setSalarioBase('');
     setTurmas('');
     onClose();
   };
@@ -108,20 +106,6 @@ export default function ModalCriarCuidador({
 
             <div>
               <label className="block text-[13px] font-bold text-[#0F172A] mb-1.5">
-                Admissão
-              </label>
-              <input
-                type="text"
-                placeholder="DD/MM/AAAA"
-                maxLength={10}
-                value={admissao}
-                onChange={(e) => setAdmissao(e.target.value)}
-                className="w-[140px] h-[34px] bg-[#F1F5F9] rounded-[6px] px-3 text-[12.5px] text-[#0F172A] placeholder-[#94A3B8] border border-[#CBD5E1] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#36A3DC]"
-              />
-            </div>
-
-            <div>
-              <label className="block text-[13px] font-bold text-[#0F172A] mb-1.5">
                 Turmas
               </label>
               <input
@@ -159,8 +143,8 @@ export default function ModalCriarCuidador({
               <input
                 type="text"
                 placeholder="R$"
-                value={salario}
-                onChange={(e) => setSalario(e.target.value)}
+                value={salarioBase}
+                onChange={(e) => setSalarioBase(e.target.value)}
                 className="w-[140px] h-[34px] bg-[#F1F5F9] rounded-[6px] px-3 text-[12.5px] text-[#0F172A] placeholder-[#94A3B8] border border-[#CBD5E1] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#36A3DC]"
               />
             </div>
