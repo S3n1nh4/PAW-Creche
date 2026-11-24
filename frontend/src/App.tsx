@@ -2,7 +2,13 @@ import './App.css';
 import CriarTurma from './components/modais/ModalCriarTurma';
 
 function App() {
-  return <CriarTurma />;
+  return (
+    <CriarTurma
+      isOpen={true}
+      onClose={() => {}}
+      onCriar={() => {}}
+    />
+  );
 }
 
 export default App;
