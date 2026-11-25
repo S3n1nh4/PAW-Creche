@@ -3,8 +3,8 @@ import { FiEdit2, FiPlus, FiSearch, FiTrash2, FiUsers } from 'react-icons/fi';
 import type { Turma } from '@creche/shared/turma';
 import type { Aluno } from '@creche/shared/aluno';
 import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
-import ModalFormTurma from '../../components/modais/ModalFormTurma';
-import ModalRemoverTurma from '../../components/modais/ModalRemoverTurma';
+import ModalFormTurma from '../components/modais/ModalFormTurma';
+import ModalRemoverTurma from '../components/modais/ModalRemoverTurma';
 import {
   atualizarTurma,
   criarTurma,
@@ -12,7 +12,7 @@ import {
   listarTurmas,
   listarVinculos,
   mensagemDeErro,
-} from '../../services/api';
+} from '../services/api';
 
 const plural = (n: number, singular: string, pluralizado: string) =>
   `${n} ${n === 1 ? singular : pluralizado}`;

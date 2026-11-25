@@ -5,9 +5,9 @@ import type { Turma } from '@creche/shared/turma';
 import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
 import ModalCriarCuidador, {
   type DadoCriacaoCuidador,
-} from '../../components/modais/ModalCriarCuidador';
-import ModalVerCuidador from '../../components/modais/ModalVerCuidador';
-import ModalDesativarCuidador from '../../components/modais/ModalDesativarCuidador';
+} from '../components/modais/ModalCriarCuidador';
+import ModalVerCuidador from '../components/modais/ModalVerCuidador';
+import ModalDesativarCuidador from '../components/modais/ModalDesativarCuidador';
 import {
   criarCuidador,
   listarCuidadores,
@@ -17,7 +17,7 @@ import {
   removerCuidador,
   vincularCuidador,
   type CuidadorResumo,
-} from '../../services/api';
+} from '../services/api';
 
 function formatarData(valor: string) {
   const data = new Date(valor);

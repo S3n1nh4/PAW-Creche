@@ -2,9 +2,9 @@ import './App.css';
 import { useState } from 'react';
 import Login from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
-import MainTurmas from './pages/Turmas/MainTurmas';
-import MainCuidadores from './pages/Cuidadores/MainCuidadores';
-import MainPontodePresenca from './pages/Ponto de Presença/MainPontodePresença';
+import MainTurmas from './pages/MainTurmas';
+import MainCuidadores from './pages/MainCuidadores';
+import MainPontodePresenca from './pages/MainPontodePresença';
 import Layout, { type Pagina } from './components/Layout';
 import { logout, usuarioSalvo, type Usuario } from './services/api';
 

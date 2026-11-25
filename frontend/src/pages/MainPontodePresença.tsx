@@ -6,9 +6,9 @@ import {
 } from '@creche/shared/presencaCuidador';
 import type { Turma } from '@creche/shared/turma';
 import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
-import ModalVerPontoCuidador from '../../components/modais/ModalVerPontoCuidador.tsx';
-import ModalRemoverPontoCuidador from '../../components/modais/ModalRemoverPontoCuidador';
-import Paginacao from '../../components/Paginacao.tsx';
+import ModalVerPontoCuidador from '../components/modais/ModalVerPontoCuidador.tsx';
+import ModalRemoverPontoCuidador from '../components/modais/ModalRemoverPontoCuidador.tsx';
+import Paginacao from '../components/Paginacao.tsx';
 import {
   atualizarPonto,
   criarPonto,
@@ -21,8 +21,8 @@ import {
   type CuidadorResumo,
   type PresencaCuidador,
   type StatusPresenca,
-} from '../../services/api';
-import { paraISO } from '../../utils/formatadores';
+} from '../services/api.ts';
+import { paraISO } from '../utils/formatadores.ts';
 
 const POR_PAGINA = 8;
 
