@@ -14,7 +14,16 @@ function App() {
   const [pagina, setPagina] = useState<Pagina>('dashboard');
 
   // Sem login: só a tela de login. Ao entrar, cai direto no Dashboard.
-  if (!usuario) return <Login />;
+  if (!usuario){
+    return (
+        <Login
+          onEntrar={(usuarioLogado) => {
+            setUsuario(usuarioLogado);
+            setPagina('dashboard');
+          }}
+        />)
+
+  } 
 
   function sair() {
     logout().catch(() => {});
