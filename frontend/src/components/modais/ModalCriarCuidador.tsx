@@ -31,7 +31,7 @@ export default function ModalCriarCuidador({
       email: email.trim(),
       telefone: telefone.trim(),
       salarioBase: salarioNumero,
-      turmas: turmas.trim(),
+      ativo: true,
     });
 
     setNome('');

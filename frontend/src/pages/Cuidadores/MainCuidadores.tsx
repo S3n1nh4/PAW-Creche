@@ -296,12 +296,13 @@ export default function MainCuidadores() {
       {(criando || emEdicao) && (
         <ModalCriarCuidador
           key={emEdicao?.id ?? 'novo'}
-          turmas={turmas}
+          isOpen={criando || emEdicao !== null}
+          onCriar={recarregar}
           onClose={() => {
             setCriando(false);
             setEmEdicao(null);
+            recarregar();
           }}
-          onSalvo={recarregar}
         />
       )}
       {/* =================== fim ★ CRIAR / EDITAR =================== */}
