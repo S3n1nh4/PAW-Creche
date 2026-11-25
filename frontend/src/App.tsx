@@ -1,13 +1,9 @@
 import './App.css';
-import CriarTurma from './components/modais/ModalFormTurma';
+import Login from './pages/LoginPage';
 
 function App() {
   return (
-    <CriarTurma
-      isOpen={true}
-      onClose={() => {}}
-      onCriar={() => {}}
-    />
+    <Login/>
   );
 }
 

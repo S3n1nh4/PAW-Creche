@@ -5,3 +5,9 @@ lembrar de executar apos as telas de turmas e as de cuidadores estiverem prontas
 pegar os models de turma e os de cuidadores do back
 
 unifiquei o criar e modificar turma em um modal so e não precisa fazer o mesmo para cuidador
+
+modificar componente pai main cuidadores para fazer associação de cuidador e turma
+
+modificar criarCuidador
+
+redirecionar login para dashboard
