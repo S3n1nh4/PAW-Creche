@@ -4,4 +4,4 @@ lembrar de executar apos as telas de turmas e as de cuidadores estiverem prontas
 
 pegar os models de turma e os de cuidadores do back
 
-back tem que colocar a data de admissão e as turmas no schema de cuidador
+unifiquei o criar e modificar turma em um modal so e não precisa fazer o mesmo para cuidador

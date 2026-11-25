@@ -1,32 +1,58 @@
-import { useState, type SyntheticEvent } from 'react';
-import type { TurmaInput } from "@creche/shared/turma";
+import { useState, useEffect, type SyntheticEvent } from 'react';
+import { FiX } from 'react-icons/fi';
+import type { TurmaInput } from '@creche/shared/turma';
 
-interface ModalCriarTurmaProps {
+interface ModalFormTurmaProps {
   isOpen: boolean;
+  turmaInicial?: TurmaInput | null;
   onClose: () => void;
-  onCriar: (novaTurma: TurmaInput) => void | Promise<void>;
+  onSubmitTurma: (dados: TurmaInput) => void | Promise<void>;
 }
 
-export default function ModalCriarTurma({
+export default function ModalFormTurma({
   isOpen,
+  turmaInicial = null,
   onClose,
-  onCriar,
-}: ModalCriarTurmaProps) {
+  onSubmitTurma,
+}: ModalFormTurmaProps) {
+  const isEdicao = Boolean(turmaInicial);
+
   const [nome, setNome] = useState('');
   const [turno, setTurno] = useState('');
   const [anoLetivo, setAnoLetivo] = useState('');
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    if (turmaInicial) {
+      setNome(turmaInicial.nome);
+      setTurno(turmaInicial.turno);
+      setAnoLetivo(turmaInicial.anoLetivo ? String(turmaInicial.anoLetivo) : '');
+    } else {
+      setNome('');
+      setTurno('');
+      setAnoLetivo('');
+    }
+  }, [isOpen, turmaInicial]);
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const anoNumero = Number(anoLetivo.trim());
-    if (!nome.trim() || !turno.trim() || !anoLetivo.trim() || Number.isNaN(anoNumero)) return;
 
-    await onCriar({ nome: nome.trim(), turno: turno.trim(), anoLetivo: anoNumero, ativo: true });
-    setNome('');
-    setTurno('');
-    setAnoLetivo('');
+    const anoNumero = Number(anoLetivo.trim());
+    if (!nome.trim() || !turno.trim() || !anoLetivo.trim() || Number.isNaN(anoNumero)) {
+      return;
+    }
+
+    await onSubmitTurma({
+      ...(turmaInicial ?? {}),
+      nome: nome.trim(),
+      turno: turno.trim(),
+      anoLetivo: anoNumero,
+      ativo: turmaInicial ? turmaInicial.ativo : true,
+    });
+
     onClose();
   };
 
@@ -42,17 +68,16 @@ export default function ModalCriarTurma({
             className="text-[22px] font-bold text-[#0F172A] pl-2"
             style={{ fontFamily: "'Utendo', sans-serif" }}
           >
-            Criar Turma
+            {isEdicao ? 'Modificar Turma' : 'Criar Turma'}
           </h2>
+
           <button
             type="button"
             onClick={onClose}
             aria-label="Fechar modal"
             className="text-[#0F172A] hover:opacity-70 transition-opacity cursor-pointer p-1"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
-            </svg>
+            <FiX size={20} strokeWidth={2} />
           </button>
         </div>
 
@@ -63,7 +88,7 @@ export default function ModalCriarTurma({
           </label>
           <input
             type="text"
-            placeholder="Digite o nome aqui.."
+            placeholder={isEdicao ? 'Turma 1' : 'Digite o nome aqui..'}
             value={nome}
             onChange={(e) => setNome(e.target.value)}
             className="w-full h-[38px] bg-[#F1F5F9] rounded-[6px] px-3 text-[13px] text-[#0F172A] placeholder-[#94A3B8] border border-[#CBD5E1] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#36A3DC] mb-5"
@@ -74,7 +99,7 @@ export default function ModalCriarTurma({
           </label>
           <input
             type="text"
-            placeholder="Digite o turno aqui..."
+            placeholder={isEdicao ? 'Integral' : 'Digite o turno aqui...'}
             value={turno}
             onChange={(e) => setTurno(e.target.value)}
             className="w-full h-[38px] bg-[#F1F5F9] rounded-[6px] px-3 text-[13px] text-[#0F172A] placeholder-[#94A3B8] border border-[#CBD5E1] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#36A3DC] mb-5"
@@ -85,10 +110,11 @@ export default function ModalCriarTurma({
           </label>
           <input
             type="text"
-            placeholder="AAAA"
+            inputMode="numeric"
+            placeholder={isEdicao ? '2026' : 'AAAA'}
             maxLength={4}
             value={anoLetivo}
-            onChange={(e) => setAnoLetivo(e.target.value)}
+            onChange={(e) => setAnoLetivo(e.target.value.replace(/\D/g, ''))}
             className="w-[155px] h-[38px] bg-[#F1F5F9] rounded-[6px] px-3 text-[13px] text-[#0F172A] placeholder-[#94A3B8] border border-[#CBD5E1] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#36A3DC] mb-12"
           />
 
@@ -97,7 +123,7 @@ export default function ModalCriarTurma({
               type="submit"
               className="w-[155px] h-[44px] bg-[#36A3DC] hover:bg-[#2B8EC2] text-white font-bold text-[13px] rounded-full transition-colors cursor-pointer"
             >
-              Criar
+              {isEdicao ? 'Salvar Alterações' : 'Criar'}
             </button>
           </div>
         </form>

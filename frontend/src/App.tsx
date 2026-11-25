@@ -1,5 +1,5 @@
 import './App.css';
-import CriarTurma from './components/modais/ModalCriarTurma';
+import CriarTurma from './components/modais/ModalFormTurma';
 
 function App() {
   return (
