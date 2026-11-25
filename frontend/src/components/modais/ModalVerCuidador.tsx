@@ -1,18 +1,31 @@
 import { FiUser, FiX } from 'react-icons/fi';
-import type { CuidadorInput } from "@creche/shared/cuidador";
+import type { CuidadorInput } from '@creche/shared/cuidador';
 
 interface ModalVerCuidadorProps {
   isOpen: boolean;
   cuidador: CuidadorInput | null;
+  turmas?: string[];
   onClose: () => void;
+}
+
+function formatarMoeda(valor: number) { //nova função de formatar moeda para salarioBase
+  if (!Number.isFinite(valor)) return '—';
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(valor);
 }
 
 export default function ModalVerCuidador({
   isOpen,
   cuidador,
+  turmas = [],
   onClose,
 }: ModalVerCuidadorProps) {
   if (!isOpen || !cuidador) return null;
+
+  const textoTurmas =
+    turmas.length > 0 ? turmas.join(' e ') : 'Nenhuma turma vinculada';
 
   return (
     <div
@@ -53,7 +66,7 @@ export default function ModalVerCuidador({
                 Email
               </span>
               <span className="block text-[13px] text-[#334155] break-all">
-                {cuidador.email}
+                {cuidador.email || '—'}
               </span>
             </div>
 
@@ -62,7 +75,7 @@ export default function ModalVerCuidador({
                 Turmas
               </span>
               <span className="block text-[13px] text-[#334155]">
-                {cuidador.turmas}
+                {textoTurmas}
               </span>
             </div>
           </div>
@@ -77,7 +90,7 @@ export default function ModalVerCuidador({
                 Telefone
               </span>
               <span className="block text-[13px] text-[#334155]">
-                {cuidador.telefone}
+                {cuidador.telefone || '—'}
               </span>
             </div>
 
@@ -86,7 +99,7 @@ export default function ModalVerCuidador({
                 Salário
               </span>
               <span className="block text-[13px] text-[#334155]">
-                {cuidador.salarioBase}
+                {formatarMoeda(cuidador.salarioBase)}
               </span>
             </div>
           </div>

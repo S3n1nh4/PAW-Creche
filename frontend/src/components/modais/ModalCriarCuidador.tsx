@@ -1,15 +1,23 @@
 import { useState, type SyntheticEvent } from 'react';
 import { FiUser, FiX } from 'react-icons/fi';
-import type { CuidadorInput } from "@creche/shared/cuidador";
+import type { CuidadorInput } from '@creche/shared/cuidador';
+import type { Turma } from '@creche/shared/turma';
+
+export interface DadoCriacaoCuidador { //associação de id turma para cuidador, vai retornar os ids de turmas que ele esta
+  cuidador: CuidadorInput;
+  turmaIds: number[]; //estado que permite selecionar uma ou mais turmas 
+}
 
 interface ModalCriarCuidadorProps {
   isOpen: boolean;
+  turmasDisponiveis?: Turma[];
   onClose: () => void;
-  onCriar: (novoCuidador: CuidadorInput) => void | Promise<void>;
+  onCriar: (dados: DadoCriacaoCuidador) => void | Promise<void>;
 }
 
 export default function ModalCriarCuidador({
   isOpen,
+  turmasDisponiveis = [],
   onClose,
   onCriar,
 }: ModalCriarCuidadorProps) {
@@ -17,28 +25,47 @@ export default function ModalCriarCuidador({
   const [email, setEmail] = useState('');
   const [telefone, setTelefone] = useState('');
   const [salarioBase, setSalarioBase] = useState('');
-  const [turmas, setTurmas] = useState('');
+  const [turmas, setTurmas] = useState<number[]>([]);
 
   if (!isOpen) return null;
 
+  const toggleTurma = (turmaId: number) => {
+    setTurmas((atual) =>
+      atual.includes(turmaId)
+        ? atual.filter((id) => id !== turmaId)
+        : [...atual, turmaId]
+    );
+  };
+
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const salarioNumero = Number(salarioBase.trim());
-    if (!nome.trim() || !email.trim() || !salarioBase.trim() || Number.isNaN(salarioNumero)) return;
+    const salarioNumero = Number(salarioBase.trim().replace(',', '.'));
+    if (
+      !nome.trim() ||
+      !email.trim() ||
+      !telefone.trim() ||
+      !salarioBase.trim() ||
+      Number.isNaN(salarioNumero)
+    ) {
+      return;
+    }
 
     await onCriar({
-      nome: nome.trim(),
-      email: email.trim(),
-      telefone: telefone.trim(),
-      salarioBase: salarioNumero,
-      ativo: true,
+      cuidador: {
+        nome: nome.trim(),
+        email: email.trim(),
+        telefone: telefone.trim(),
+        salarioBase: salarioNumero,
+        ativo: true,
+      },
+      turmaIds: turmas,
     });
 
     setNome('');
     setEmail('');
     setTelefone('');
     setSalarioBase('');
-    setTurmas('');
+    setTurmas([]);
     onClose();
   };
 
@@ -108,13 +135,31 @@ export default function ModalCriarCuidador({
               <label className="block text-[13px] font-bold text-[#0F172A] mb-1.5">
                 Turmas
               </label>
-              <input
-                type="text"
-                placeholder="Digite a turma.."
-                value={turmas}
-                onChange={(e) => setTurmas(e.target.value)}
-                className="w-full h-[34px] bg-[#F1F5F9] rounded-[6px] px-3 text-[12.5px] text-[#0F172A] placeholder-[#94A3B8] border border-[#CBD5E1] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#36A3DC]"
-              />
+              <div className="flex flex-wrap gap-1.5 max-h-[84px] overflow-y-auto bg-[#F1F5F9] p-2 rounded-[6px] border border-[#CBD5E1]">
+                {turmasDisponiveis.length > 0 ? (
+                  turmasDisponiveis.map((turma) => {
+                    const selecionada = turmas.includes(turma.id);
+                    return (
+                      <button
+                        key={turma.id}
+                        type="button"
+                        onClick={() => toggleTurma(turma.id)}
+                        className={`px-2.5 py-1 rounded-full text-[11.5px] transition-colors cursor-pointer ${
+                          selecionada
+                            ? 'bg-[#36A3DC] text-white font-bold'
+                            : 'bg-white text-[#475569] border border-[#CBD5E1] hover:bg-[#E1F2FE]'
+                        }`}
+                      >
+                        {turma.nome}
+                      </button>
+                    );
+                  })
+                ) : (
+                  <span className="text-[12px] text-[#94A3B8]">
+                    Nenhuma turma disponível
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 
@@ -142,6 +187,7 @@ export default function ModalCriarCuidador({
               </label>
               <input
                 type="text"
+                inputMode="decimal"
                 placeholder="R$"
                 value={salarioBase}
                 onChange={(e) => setSalarioBase(e.target.value)}

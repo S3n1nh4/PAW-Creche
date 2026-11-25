@@ -3,15 +3,19 @@ import { FiEdit2, FiEye, FiFilter, FiPlus, FiSearch, FiTrash2 } from 'react-icon
 import type { CuidadorInput } from '@creche/shared/cuidador';
 import type { Turma } from '@creche/shared/turma';
 import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
-import ModalCriarCuidador from '../../components/modais/ModalCriarCuidador';
+import ModalCriarCuidador, {
+  type DadoCriacaoCuidador,
+} from '../../components/modais/ModalCriarCuidador';
 import ModalVerCuidador from '../../components/modais/ModalVerCuidador';
 import ModalDesativarCuidador from '../../components/modais/ModalDesativarCuidador';
 import {
+  criarCuidador,
   listarCuidadores,
   listarTurmas,
   listarVinculos,
   mensagemDeErro,
   removerCuidador,
+  vincularCuidador,
   type CuidadorResumo,
 } from '../../services/api';
 
@@ -103,6 +107,25 @@ export default function MainCuidadores() {
       cancelado = true;
     };
   }, [versao]);
+
+  async function criarCuidadorComTurmas({ //parte de associação de turmaCuidador
+  cuidador,
+  turmaIds,
+  senha,
+}: DadoCriacaoCuidador & { senha: string }) {
+  try {
+    const criado = await criarCuidador({ ...cuidador, senha });
+    if (turmaIds.length > 0) {
+      await Promise.all(
+        turmaIds.map((turmaId) => vincularCuidador(turmaId, criado.id))
+      );
+    }
+    setErro('');
+    recarregar();
+  } catch (e) {
+    setErro(mensagemDeErro(e, 'Não foi possível criar o cuidador ou vincular turmas.'));
+  }
+}
 
   // ===================== ★ REMOVER (lógica) =====================
   // Chamada pelo modal de confirmação ("Deseja remover esse cuidador?" -> Sim).
@@ -295,9 +318,16 @@ export default function MainCuidadores() {
           mostra os erros da API perto dos campos e, se der certo, chama onSalvo() e onClose(). */}
       {(criando || emEdicao) && (
         <ModalCriarCuidador
-          key={emEdicao?.id ?? 'novo'}
+          key={emEdicao?.id ?? 'novo'} 
           isOpen={criando || emEdicao !== null}
-          onCriar={recarregar}
+          turmasDisponiveis={turmas} //MODIFICAÇÕES: associação turmaCuidador em forma de id de turma adicionado
+          onCriar={({cuidador, turmaIds}) =>
+            criarCuidadorComTurmas({
+              cuidador,
+              turmaIds,
+              senha: 'SenhaTemporaria123', //senha pois cuidador tem cadastro com senha na api
+            })
+          }
           onClose={() => {
             setCriando(false);
             setEmEdicao(null);
@@ -310,6 +340,14 @@ export default function MainCuidadores() {
       <ModalVerCuidador
         isOpen={vendo !== null}
         cuidador={vendo ? paraModal(vendo) : null}
+        turmas={ //MODIFICAÇÃO: parte da associação turmaCuidador
+          vendo
+            ? vinculos
+                .filter((v)=> v.cuidadorId === vendo.id)
+                .map((v)=> turmas.find((t)=> t.id === v.turmaId)?.nome)
+                .filter((nome): nome is string => Boolean(nome))
+            : []
+        }
         onClose={() => setVendo(null)}
       />
 
