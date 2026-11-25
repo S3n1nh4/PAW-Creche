@@ -2,6 +2,7 @@
 
 /* Paleta e fontes do protótipo (Figma "Pequenos Passos") */
 @theme {
+  --color-pp-botao: #1E78A5;
   --color-pp-50: #E0F2F9;
   --color-pp-100: #C0E3F3;
   --color-pp-300: #33A5D7;
