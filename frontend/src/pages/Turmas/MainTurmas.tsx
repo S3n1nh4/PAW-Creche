@@ -1,4 +1,4 @@
-import { useEffect, useState, type ComponentType } from 'react';
+import { useEffect, useState } from 'react';
 import { FiEdit2, FiPlus, FiSearch, FiTrash2, FiUsers } from 'react-icons/fi';
 import type { Turma } from '@creche/shared/turma';
 import type { Aluno } from '@creche/shared/aluno';
@@ -6,15 +6,7 @@ import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
 import CriarTurmas from './CriarTurmas';
 import AlterarTurmas from './AlterarTurmas';
 import DeletarTurmas from './DeletarTurmas';
-import ModalCuidadoresTurma from '../../components/modais/ModalFormTurma';
-import {
-  listarAlunos,
-  listarCuidadores,
-  listarTurmas,
-  listarVinculos,
-  mensagemDeErro,
-  type CuidadorResumo,
-} from '../../services/api';
+import { listarAlunos, listarTurmas, listarVinculos, mensagemDeErro } from '../../services/api';
 
 const plural = (n: number, singular: string, pluralizado: string) =>
   `${n} ${n === 1 ? singular : pluralizado}`;
@@ -22,7 +14,6 @@ const plural = (n: number, singular: string, pluralizado: string) =>
 export default function MainTurmas() {
   const [turmas, setTurmas] = useState<Turma[]>([]);
   const [alunos, setAlunos] = useState<Aluno[]>([]);
-  const [cuidadores, setCuidadores] = useState<CuidadorResumo[]>([]);
   const [vinculos, setVinculos] = useState<TurmaCuidador[]>([]);
   const [busca, setBusca] = useState('');
   const [erro, setErro] = useState('');
@@ -32,35 +23,19 @@ export default function MainTurmas() {
   const [criando, setCriando] = useState(false);
   const [emEdicao, setEmEdicao] = useState<Turma | null>(null);
   const [removendo, setRemovendo] = useState<Turma | null>(null);
-  const [gerenciando, setGerenciando] = useState<Turma | null>(null);
 
   // Mudar este número faz o useEffect buscar tudo de novo na API
   const [versao, setVersao] = useState(0);
   const recarregar = () => setVersao((v) => v + 1);
 
-  const DeletarTurmasModal = DeletarTurmas as unknown as ComponentType<{
-    turma: Turma;
-    onClose: () => void;
-    onRemovida: () => void;
-  }>;
-
-  const ModalCuidadoresTurmaModal = ModalCuidadoresTurma as unknown as ComponentType<{
-    turma: Turma;
-    cuidadores: CuidadorResumo[];
-    vinculos: TurmaCuidador[];
-    onClose: () => void;
-    onAlterado: () => void;
-  }>;
-
   // Lista os registros vindos da API
   useEffect(() => {
     let cancelado = false;
-    Promise.all([listarTurmas(), listarAlunos(), listarCuidadores(), listarVinculos()])
-      .then(([t, a, c, v]) => {
+    Promise.all([listarTurmas(), listarAlunos(), listarVinculos()])
+      .then(([t, a, v]) => {
         if (cancelado) return;
         setTurmas(t);
         setAlunos(a);
-        setCuidadores(c);
         setVinculos(v);
         setErro('');
       })
@@ -122,12 +97,13 @@ export default function MainTurmas() {
               <div className="flex items-start justify-between">
                 <h2 className="font-titulo text-[17px]">{turma.nome}</h2>
                 <div className="flex items-center gap-3">
+                  {/* Associar cuidadores: ligar aqui quando o ModalCuidadoresTurma existir */}
                   <button
                     type="button"
-                    onClick={() => setGerenciando(turma)}
-                    aria-label={`Cuidadores da ${turma.nome}`}
-                    title="Cuidadores da turma"
-                    className="hover:opacity-70 cursor-pointer"
+                    disabled
+                    aria-label={`Cuidadores da ${turma.nome} (em breve)`}
+                    title="Em breve"
+                    className="opacity-50 cursor-not-allowed"
                   >
                     <FiUsers size={17} />
                   </button>
@@ -175,21 +151,7 @@ export default function MainTurmas() {
       )}
 
       {removendo && (
-        <DeletarTurmasModal
-          turma={removendo}
-          onClose={() => setRemovendo(null)}
-          onRemovida={recarregar}
-        />
-      )}
-
-      {gerenciando && (
-        <ModalCuidadoresTurmaModal
-          turma={gerenciando}
-          cuidadores={cuidadores}
-          vinculos={vinculos}
-          onClose={() => setGerenciando(null)}
-          onAlterado={recarregar}
-        />
+        <DeletarTurmas turma={removendo} onClose={() => setRemovendo(null)} onRemovida={recarregar} />
       )}
     </div>
   );

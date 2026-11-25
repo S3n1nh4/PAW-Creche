@@ -1,16 +1,16 @@
-import logo from '../assets/imagens/Pequenos_Passos_Logo__1_-removebg-preview.png';
+import logo from '../../assets/imagens/Pequenos_Passos_Logo__1_-removebg-preview.png';
 
-interface ModalRemoverCuidadorProps {
+interface ModalDesativarCuidadorProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirmar: () => void;
 }
 
-export default function ModalRemoverCuidador({
+export default function ModalDesativarCuidador({
   isOpen,
   onClose,
   onConfirmar,
-}: ModalRemoverCuidadorProps) {
+}: ModalDesativarCuidadorProps) {
   if (!isOpen) return null;
 
   return (

@@ -1,4 +1,4 @@
-import logo from '../assets/imagens/Pequenos_Passos_Logo__1_-removebg-preview.png';
+import logo from '../../assets/imagens/Pequenos_Passos_Logo__1_-removebg-preview.png';
 
 interface ModalRemoverTurmaProps {
   isOpen: boolean;

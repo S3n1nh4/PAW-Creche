@@ -5,7 +5,7 @@ import type { Turma } from '@creche/shared/turma';
 import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
 import ModalCriarCuidador from '../../components/modais/ModalCriarCuidador';
 import ModalVerCuidador from '../../components/modais/ModalVerCuidador';
-import ModalRemoverCuidador from '../../components/modais/ModalDesativarCuidador';
+import ModalDesativarCuidador from '../../components/modais/ModalDesativarCuidador';
 import {
   listarCuidadores,
   listarTurmas,
@@ -316,7 +316,7 @@ export default function MainCuidadores() {
       {/* ===================== ★ REMOVER (confirmação) =====================
           Modal "Deseja remover esse cuidador?" (Não / Sim).
           "Sim" chama remover(); o próprio modal se fecha depois de confirmar. */}
-      <ModalRemoverCuidador
+      <ModalDesativarCuidador
         isOpen={removendo !== null}
         onClose={() => setRemovendo(null)}
         onConfirmar={() => {
