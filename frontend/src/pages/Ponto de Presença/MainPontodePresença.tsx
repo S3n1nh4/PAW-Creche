@@ -1,12 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import { FiCalendar, FiEye, FiFilter, FiSearch, FiTrash2 } from 'react-icons/fi';
+import { FiCalendar, FiChevronDown, FiEye, FiFilter, FiSearch, FiTrash2 } from 'react-icons/fi';
+import {
+  atualizarPresencaCuidadorSchema,
+  presencaCuidadorSchema,
+} from '@creche/shared/presencaCuidador';
 import type { Turma } from '@creche/shared/turma';
 import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
-import AdicionarPontodePresenca from './AdicionarPontodePresença';
 import ModalVerPontoCuidador from '../../components/modais/ModalVerPontoCuidador.tsx';
 import ModalRemoverPontoCuidador from '../../components/modais/ModalRemoverPontoCuidador';
 import Paginacao from '../../components/Paginacao.tsx';
 import {
+  atualizarPonto,
+  criarPonto,
+  errosPorCampo,
   listarCuidadores,
   listarPontoDoDia,
   listarTurmas,
@@ -14,10 +20,164 @@ import {
   mensagemDeErro,
   type CuidadorResumo,
   type PresencaCuidador,
+  type StatusPresenca,
 } from '../../services/api';
 import { paraISO } from '../../utils/formatadores';
 
 const POR_PAGINA = 8;
+
+//MODIFICAÇÃO: Adicionar ponto de presença agora esta em main!
+
+// Cores e textos do protótipo (verde / amarelo / vermelho)
+const OPCOES_PRESENCA: { valor: StatusPresenca; rotulo: string; classe: string }[] = [
+  { valor: 'presente', rotulo: 'Presente', classe: 'bg-green-700 text-white' },
+  { valor: 'falta_justificada', rotulo: 'Justificado', classe: 'bg-[#DDD617] text-[#123A4B]' },
+  { valor: 'falta', rotulo: 'Ausente', classe: 'bg-red-600 text-white' },
+];
+
+interface SeletorPresencaProps {
+  cuidador: CuidadorResumo;
+  data: string; // AAAA-MM-DD
+  registro: PresencaCuidador | null;
+  onSalvo: () => void;
+  onErro: (mensagem: string) => void;
+}
+
+function SeletorPresenca({
+  cuidador,
+  data,
+  registro,
+  onSalvo,
+  onErro,
+}: SeletorPresencaProps) {
+  const [aberto, setAberto] = useState(false);
+  const [salvando, setSalvando] = useState(false);
+  const [posicao, setPosicao] = useState({ top: 0, left: 0 });
+  const raiz = useRef<HTMLDivElement>(null);
+  const botao = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!aberto) return;
+    const fechar = () => setAberto(false);
+    const aoClicar = (e: MouseEvent) => {
+      if (!raiz.current?.contains(e.target as Node)) setAberto(false);
+    };
+    const aoApertar = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setAberto(false);
+    };
+    document.addEventListener('mousedown', aoClicar);
+    document.addEventListener('keydown', aoApertar);
+    window.addEventListener('scroll', fechar, true);
+    window.addEventListener('resize', fechar);
+    return () => {
+      document.removeEventListener('mousedown', aoClicar);
+      document.removeEventListener('keydown', aoApertar);
+      window.removeEventListener('scroll', fechar, true);
+      window.removeEventListener('resize', fechar);
+    };
+  }, [aberto]);
+
+  function alternar() {
+    if (!aberto && botao.current) {
+      const r = botao.current.getBoundingClientRect();
+      setPosicao({ top: r.bottom + 4, left: r.left + r.width / 2 });
+    }
+    setAberto(!aberto);
+  }
+
+  async function escolher(status: StatusPresenca) {
+    setAberto(false);
+    if (registro?.status === status) return;
+    onErro('');
+    setSalvando(true);
+    try {
+      if (registro) {
+        const dados = atualizarPresencaCuidadorSchema.safeParse({
+          status,
+          entrada: status === 'presente' ? registro.entrada : null,
+          saida: status === 'presente' ? registro.saida : null,
+          observacao: registro.observacao,
+        });
+        if (!dados.success) {
+          onErro(dados.error.issues[0]?.message ?? 'Dados inválidos.');
+          return;
+        }
+        await atualizarPonto(registro.id, dados.data);
+      } else {
+        const dados = presencaCuidadorSchema.safeParse({
+          cuidadorId: cuidador.id,
+          data,
+          status,
+          entrada: null,
+          saida: null,
+        });
+        if (!dados.success) {
+          onErro(dados.error.issues[0]?.message ?? 'Dados inválidos.');
+          return;
+        }
+        await criarPonto(dados.data);
+      }
+      onSalvo();
+    } catch (e) {
+      const detalhes = Object.values(errosPorCampo(e));
+      onErro(
+        detalhes.length > 0
+          ? `${cuidador.nome}: ${detalhes.join(' · ')}`
+          : mensagemDeErro(e, `Não foi possível salvar o status de ${cuidador.nome}.`),
+      );
+    } finally {
+      setSalvando(false);
+    }
+  }
+
+  const atual = OPCOES_PRESENCA.find((o) => o.valor === registro?.status);
+
+  return (
+    <div ref={raiz} className="inline-block">
+      <button
+        ref={botao}
+        type="button"
+        onClick={alternar}
+        disabled={salvando}
+        aria-haspopup="listbox"
+        aria-expanded={aberto}
+        aria-label={`Status de ${cuidador.nome}`}
+        className={`flex items-center justify-between gap-1 w-[112px] h-7 rounded px-2 text-[12px] cursor-pointer disabled:opacity-60 ${
+          atual ? `${atual.classe} font-bold` : 'bg-white text-[#475569]'
+        }`}
+      >
+        <span className="flex-1 text-center">{salvando ? 'Salvando...' : (atual?.rotulo ?? '')}</span>
+        <FiChevronDown size={13} aria-hidden="true" />
+      </button>
+
+      {aberto && (
+        <ul
+          role="listbox"
+          aria-label={`Escolher status de ${cuidador.nome}`}
+          style={{
+            position: 'fixed',
+            top: posicao.top,
+            left: posicao.left,
+            transform: 'translateX(-50%)',
+          }}
+          className="z-50 w-[132px] flex flex-col gap-2 rounded-md bg-white p-2 shadow-lg"
+        >
+          {OPCOES_PRESENCA.map((o) => (
+            <li key={o.valor} role="option" aria-selected={o.valor === registro?.status}>
+              <button
+                type="button"
+                onClick={() => escolher(o.valor)}
+                className={`w-full h-6 rounded text-[12px] font-bold cursor-pointer hover:opacity-85 ${o.classe}`}
+              >
+                {o.rotulo}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 export default function MainPontodePresenca() {
   const [cuidadores, setCuidadores] = useState<CuidadorResumo[]>([]);
@@ -158,7 +318,10 @@ export default function MainPontodePresenca() {
         </div>
 
         <div className="relative">
-          <FiFilter size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-pp-500 pointer-events-none" />
+          <FiFilter
+            size={14}
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-pp-500 pointer-events-none"
+          />
           <select
             aria-label="Filtros: status do ponto"
             value={filtroStatus}
@@ -210,7 +373,7 @@ export default function MainPontodePresenca() {
 
                   {/* ★ ADICIONAR: escolher o status cria (ou atualiza) o ponto do dia */}
                   <td className="p-3">
-                    <AdicionarPontodePresenca
+                    <SeletorPresenca
                       cuidador={c}
                       data={diaISO}
                       registro={registro}
