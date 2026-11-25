@@ -18,7 +18,7 @@ import {
 const STATUS: Record<StatusPresenca, { rotulo: string; classe: string }> = {
   presente: { rotulo: 'Presente', classe: 'bg-green-600 text-white' },
   falta_justificada: { rotulo: 'Justificado', classe: 'bg-pp-amarelo text-pp-700' },
-  falta: { rotulo: 'Falta', classe: 'bg-red-600 text-white' },
+  falta: { rotulo: 'Ausente', classe: 'bg-red-600 text-white' },
 };
 
 // AAAA-MM-DD no fuso local (toISOString usaria UTC e poderia trocar o dia)
