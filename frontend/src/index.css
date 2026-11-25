@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+/* Paleta e fontes do protótipo (Figma "Pequenos Passos") */
+@theme {
+  --color-pp-50: #E0F2F9;
+  --color-pp-100: #C0E3F3;
+  --color-pp-300: #33A5D7;
+  --color-pp-400: #2E95C2;
+  --color-pp-500: #267CA1;
+  --color-pp-600: #1F6381;
+  --color-pp-700: #123A4B;
+  --color-pp-amarelo: #DDD617;
+
+  --font-titulo: 'Utendo', sans-serif;
+  --font-texto: 'Comfortaa', sans-serif;
+  --font-desc: 'Coco Gothic', sans-serif;
+}
+
 body {
   margin: 0;
 }
