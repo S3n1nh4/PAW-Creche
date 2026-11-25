@@ -58,7 +58,7 @@ export default function ModalFormTurma({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
       style={{ fontFamily: "'Coco Gothic', sans-serif" }}
     >
       <div className="w-full max-w-[430px] bg-[#E1F2FE] rounded-[12px] px-8 pt-8 pb-10 shadow-xl">

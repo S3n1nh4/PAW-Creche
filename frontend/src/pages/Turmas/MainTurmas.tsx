@@ -3,10 +3,16 @@ import { FiEdit2, FiPlus, FiSearch, FiTrash2, FiUsers } from 'react-icons/fi';
 import type { Turma } from '@creche/shared/turma';
 import type { Aluno } from '@creche/shared/aluno';
 import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
-import CriarTurmas from './CriarTurmas';
-import AlterarTurmas from './AlterarTurmas';
-import DeletarTurmas from './DeletarTurmas';
-import { listarAlunos, listarTurmas, listarVinculos, mensagemDeErro } from '../../services/api';
+import ModalFormTurma from '../../components/modais/ModalFormTurma';
+import ModalRemoverTurma from '../../components/modais/ModalRemoverTurma';
+import {
+  atualizarTurma,
+  criarTurma,
+  listarAlunos,
+  listarTurmas,
+  listarVinculos,
+  mensagemDeErro,
+} from '../../services/api';
 
 const plural = (n: number, singular: string, pluralizado: string) =>
   `${n} ${n === 1 ? singular : pluralizado}`;
@@ -144,14 +150,41 @@ export default function MainTurmas() {
         <p className="text-[14px] text-pp-500">Nenhuma turma encontrada.</p>
       )}
 
-      {criando && <CriarTurmas onClose={() => setCriando(false)} onCriada={recarregar} />}
-
-      {emEdicao && (
-        <AlterarTurmas turma={emEdicao} onClose={() => setEmEdicao(null)} onAlterada={recarregar} />
+      {(criando || emEdicao) && (
+        <ModalFormTurma
+          key={emEdicao?.id ?? 'nova'}
+          isOpen={criando || emEdicao !== null}
+          turmaInicial={emEdicao}
+          onSubmitTurma={async (dados) => {
+            try {
+              if (emEdicao) {
+                await atualizarTurma(emEdicao.id, dados);
+              } else {
+                await criarTurma(dados);
+              }
+              setErro('');
+              recarregar();
+            } catch (e) {
+              setErro(mensagemDeErro(e, 'Não foi possível salvar a turma.'));
+            }
+          }}
+          onClose={() => {
+            setCriando(false);
+            setEmEdicao(null);
+          }}
+        />
       )}
 
       {removendo && (
-        <DeletarTurmas turma={removendo} onClose={() => setRemovendo(null)} onRemovida={recarregar} />
+        <ModalRemoverTurma
+          isOpen={removendo !== null}
+          turma={removendo}
+          onClose={() => setRemovendo(null)}
+          onRemovida={() => {
+            setErro('');
+            recarregar();
+          }}
+        />
       )}
     </div>
   );
