@@ -3,8 +3,8 @@ import { FiCalendar, FiEye, FiFilter, FiSearch, FiTrash2 } from 'react-icons/fi'
 import type { Turma } from '@creche/shared/turma';
 import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
 import AdicionarPontodePresenca from './AdicionarPontodePresença';
-import DeletarPontodePresenca from './DeletarPontodePresença';
-import ModalPontoCuidador from '../../components/modais/ModalPontoCuidador';
+import ModalVerPontoCuidador from '../../components/modais/ModalVerPontoCuidador.tsx';
+import ModalRemoverPontoCuidador from '../../components/modais/ModalRemoverPontoCuidador';
 import Paginacao from '../../components/Paginacao.tsx';
 import {
   listarCuidadores,
@@ -52,6 +52,7 @@ export default function MainPontodePresenca() {
         setTurmas(t);
         setVinculos(v);
         setRegistros(r);
+        setErro('');
       })
       .catch((e) => {
         if (!cancelado) setErro(mensagemDeErro(e, 'Não foi possível carregar o ponto de presença.'));
@@ -70,7 +71,7 @@ export default function MainPontodePresenca() {
     vinculos
       .filter((v) => v.cuidadorId === cuidadorId)
       .map((v) => turmas.find((t) => t.id === v.turmaId)?.nome)
-      .filter(Boolean)
+      .filter((nome): nome is string => Boolean(nome))
       .join(', ') || '—';
 
   function abrirCalendario() {
@@ -106,6 +107,8 @@ export default function MainPontodePresenca() {
     month: 'short',
     year: 'numeric',
   });
+
+  const registroRemovendo = removendo ? registroDe(removendo.id) : null;
 
   return (
     <div className="font-texto">
@@ -260,26 +263,39 @@ export default function MainPontodePresenca() {
         </table>
       </div>
 
-      {vendo && (
-        <ModalPontoCuidador
-          key={`${vendo.id}-${diaISO}`}
-          cuidador={vendo}
-          data={diaISO}
-          registro={registroDe(vendo.id)}
-          onClose={() => setVendo(null)}
-          onSalvo={recarregar}
-        />
-      )}
+      <ModalVerPontoCuidador
+        key={`${vendo?.id ?? 'nenhum'}-${diaISO}`}
+        isOpen={vendo !== null}
+        cuidador={vendo}
+        turmas={
+          vendo
+            ? vinculos
+                .filter((v) => v.cuidadorId === vendo.id)
+                .map((v) => turmas.find((t) => t.id === v.turmaId)?.nome)
+                .filter((nome): nome is string => Boolean(nome))
+            : []
+        }
+        data={diaISO}
+        registro={vendo ? registroDe(vendo.id) : null}
+        onClose={() => setVendo(null)}
+        onSalvo={() => {
+          setErro('');
+          recarregar();
+        }}
+      />
 
-      {removendo && registroDe(removendo.id) && (
-        <DeletarPontodePresenca
-          cuidador={removendo}
-          registro={registroDe(removendo.id)!}
-          data={diaISO}
-          onClose={() => setRemovendo(null)}
-          onRemovida={recarregar}
-        />
-      )}
+      <ModalRemoverPontoCuidador
+        isOpen={removendo !== null && registroRemovendo !== null}
+        cuidador={removendo}
+        registro={registroRemovendo}
+        data={diaISO}
+        onClose={() => setRemovendo(null)}
+        onRemovida={() => {
+          setErro('');
+          recarregar();
+        }}
+        onErro={setErro}
+      />
     </div>
   );
 }
