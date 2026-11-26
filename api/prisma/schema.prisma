@@ -19,6 +19,7 @@ model Admin {
   criadoEm  DateTime @default(now()) @map("criado_em") @db.Timestamptz
 
   presencasCuidador PresencaCuidador[]
+  turmasCriadas Turma[] @relation("CriadorTurma")
 
   @@map("admin")
 }
@@ -38,6 +39,7 @@ model Cuidador {
   criadoEm     DateTime @default(now()) @map("criado_em") @db.Timestamptz
 
   turmas            TurmaCuidador[]
+  atividades        Atividade[]
   presencas         Presenca[]
   presencasCuidador PresencaCuidador[]
   comportamentos    Comportamento[]
@@ -59,9 +61,14 @@ model Conta {
 }
 
 model Turma {
+  atividades Atividade[]
+  sala String?
+  criadoPorId Int? @map("criado_por_id")
+  criadoPor Admin? @relation("CriadorTurma", fields: [criadoPorId], references: [id], onDelete: SetNull)
   id        Int      @id @default(autoincrement())
   nome      String
   anoLetivo Int      @map("ano_letivo")
+  faixaEtaria String? @map("faixa_etaria")
   turno     String
   ativo     Boolean  @default(true)
   criadoEm  DateTime @default(now()) @map("criado_em") @db.Timestamptz
@@ -72,6 +79,21 @@ model Turma {
 
   @@unique([nome, anoLetivo, turno])
   @@map("turma")
+}
+
+model Atividade {
+  id Int @id @default(autoincrement())
+  turmaId Int @map("turma_id")
+  cuidadorId Int @map("cuidador_id")
+  diaSemana Int @map("dia_semana")
+  inicio String @db.VarChar(5)
+  fim String @db.VarChar(5)
+  descricao String @db.VarChar(200)
+  criadoEm DateTime @default(now()) @map("criado_em") @db.Timestamptz
+  turma Turma @relation(fields: [turmaId], references: [id])
+  cuidador Cuidador @relation(fields: [cuidadorId], references: [id])
+  @@index([turmaId, diaSemana, inicio])
+  @@map("atividade")
 }
 
 model TurmaCuidador {
@@ -94,6 +116,10 @@ model Aluno {
   responsavelNome     String   @map("responsavel_nome")
   responsavelTelefone String   @map("responsavel_telefone")
   responsavelEmail    String?  @map("responsavel_email")
+  responsavelParentesco String? @map("responsavel_parentesco")
+  responsavelSecundarioNome String? @map("responsavel_secundario_nome")
+  responsavelSecundarioParentesco String? @map("responsavel_secundario_parentesco")
+  responsavelSecundarioTelefone String? @map("responsavel_secundario_telefone")
   observacoes         String?
   ativo               Boolean  @default(true)
   criadoEm            DateTime @default(now()) @map("criado_em") @db.Timestamptz

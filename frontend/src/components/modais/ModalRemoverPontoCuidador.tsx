@@ -63,7 +63,7 @@ export default function ModalRemoverPontoCuidador({
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-      style={{ fontFamily: "'Coco Gothic', sans-serif" }}
+      style={{ fontFamily: "'Comfortaa', sans-serif" }}
       onClick={() => {
         if (!removendo) onClose();
       }}

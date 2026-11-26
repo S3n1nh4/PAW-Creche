@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { FiEdit2, FiPlus, FiSearch, FiTrash2, FiUsers } from 'react-icons/fi';
-import type { Turma } from '@creche/shared/turma';
+import { faixasEtarias, type Turma } from '@creche/shared/turma';
 import type { Aluno } from '@creche/shared/aluno';
 import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
+import DetalhesTurma from './DetalhesTurma';
 import ModalFormTurma from '../components/modais/ModalFormTurma';
 import ModalRemoverTurma from '../components/modais/ModalRemoverTurma';
 import {
+  listarCuidadores,
+  type CuidadorResumo,
   atualizarTurma,
   criarTurma,
+  removerTurma,
   listarAlunos,
   listarTurmas,
   listarVinculos,
@@ -18,7 +22,9 @@ const plural = (n: number, singular: string, pluralizado: string) =>
   `${n} ${n === 1 ? singular : pluralizado}`;
 
 export default function MainTurmas() {
+  const [turmaAbertaId, setTurmaAbertaId] = useState<number | null>(null);
   const [turmas, setTurmas] = useState<Turma[]>([]);
+  const [cuidadores, setCuidadores] = useState<CuidadorResumo[]>([]);
   const [alunos, setAlunos] = useState<Aluno[]>([]);
   const [vinculos, setVinculos] = useState<TurmaCuidador[]>([]);
   const [busca, setBusca] = useState('');
@@ -37,9 +43,10 @@ export default function MainTurmas() {
   // Lista os registros vindos da API
   useEffect(() => {
     let cancelado = false;
-    Promise.all([listarTurmas(), listarAlunos(), listarVinculos()])
-      .then(([t, a, v]) => {
+    Promise.all([listarTurmas(), listarAlunos(), listarVinculos(), listarCuidadores()])
+      .then(([t, a, v, c]) => {
         if (cancelado) return;
+        setCuidadores(c);
         setTurmas(t);
         setAlunos(a);
         setVinculos(v);
@@ -61,6 +68,9 @@ export default function MainTurmas() {
   const visiveis = turmas.filter(
     (t) => t.nome.toLowerCase().includes(termo) || t.turno.toLowerCase().includes(termo),
   );
+
+  const turmaAberta = turmas.find(t => t.id === turmaAbertaId);
+  if (turmaAberta) return <DetalhesTurma turma={turmaAberta} turmas={turmas} alunos={alunos} cuidadores={cuidadores} vinculos={vinculos} onVoltar={() => setTurmaAbertaId(null)} onAtualizar={recarregar} />;
 
   return (
     <div className="font-texto">
@@ -96,20 +106,29 @@ export default function MainTurmas() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         {visiveis.map((turma) => {
-          const totalAlunos = alunos.filter((a) => a.turmaId === turma.id).length;
+          const totalAlunos = alunos.filter((a) => a.ativo && a.turmaId === turma.id).length;
           const totalCuidadores = vinculos.filter((v) => v.turmaId === turma.id).length;
           return (
             <article key={turma.id} className="rounded-xl bg-pp-500 text-white shadow-md p-5">
-              <div className="flex items-start justify-between">
+              <button type="button" onClick={() => setTurmaAbertaId(turma.id)} aria-label={`Visualizar turma ${turma.nome}`} className="block w-full text-left rounded-lg p-2 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-white">
                 <h2 className="font-titulo text-[17px]">{turma.nome}</h2>
+              <ul className="mt-4 flex flex-col gap-1.5 font-desc text-[13px]">
+                <li>Sala: {turma.sala ?? 'Não informada'}</li>
+                <li>Turno {turma.turno === 'manha' ? 'Manhã' : turma.turno === 'tarde' ? 'Tarde' : turma.turno}</li>
+                <li>{faixasEtarias.find(faixa => faixa.valor === turma.faixaEtaria)?.rotulo ?? 'Faixa etária não informada'}</li>
+                <li>{plural(totalAlunos, 'Aluno', 'Alunos')}</li>
+                <li>{plural(totalCuidadores, 'Cuidador', 'Cuidadores')}</li>
+                <li>{cuidadores.filter(c => vinculos.some(v => v.turmaId === turma.id && v.cuidadorId === c.id)).map(c => c.nome).join(', ') || 'Nenhum cuidador associado'}</li>
+              </ul>
+              </button>
+              <div className="mt-4 flex justify-end">
                 <div className="flex items-center gap-3">
-                  {/* Associar cuidadores: ligar aqui quando o ModalCuidadoresTurma existir */}
                   <button
                     type="button"
-                    disabled
-                    aria-label={`Cuidadores da ${turma.nome} (em breve)`}
-                    title="Em breve"
-                    className="opacity-50 cursor-not-allowed"
+                    onClick={() => setEmEdicao(turma)}
+                    aria-label={`Cuidadores da ${turma.nome}`}
+                    title="Alterar cuidadores"
+                    className="hover:opacity-70 cursor-pointer"
                   >
                     <FiUsers size={17} />
                   </button>
@@ -133,13 +152,6 @@ export default function MainTurmas() {
                   </button>
                 </div>
               </div>
-
-              <ul className="mt-4 flex flex-col gap-1.5 font-desc text-[13px]">
-                <li>Tempo {turma.turno}</li>
-                <li>Ano Letivo {turma.anoLetivo}</li>
-                <li>{plural(totalAlunos, 'Aluno', 'Alunos')}</li>
-                <li>{plural(totalCuidadores, 'Cuidador', 'Cuidadores')}</li>
-              </ul>
             </article>
           );
         })}
@@ -155,18 +167,13 @@ export default function MainTurmas() {
           key={emEdicao?.id ?? 'nova'}
           isOpen={criando || emEdicao !== null}
           turmaInicial={emEdicao}
+          cuidadores={cuidadores}
+          cuidadorIdsIniciais={vinculos.filter(v => v.turmaId === emEdicao?.id).map(v => v.cuidadorId)}
           onSubmitTurma={async (dados) => {
-            try {
-              if (emEdicao) {
-                await atualizarTurma(emEdicao.id, dados);
-              } else {
-                await criarTurma(dados);
-              }
-              setErro('');
-              recarregar();
-            } catch (e) {
-              setErro(mensagemDeErro(e, 'Não foi possível salvar a turma.'));
-            }
+            if (emEdicao) await atualizarTurma(emEdicao.id, dados);
+            else await criarTurma(dados);
+            setErro('');
+            recarregar();
           }}
           onClose={() => {
             setCriando(false);
@@ -178,9 +185,9 @@ export default function MainTurmas() {
       {removendo && (
         <ModalRemoverTurma
           isOpen={removendo !== null}
-          turma={removendo}
           onClose={() => setRemovendo(null)}
-          onRemovida={() => {
+          onConfirmar={async () => {
+            await removerTurma(removendo.id);
             setErro('');
             recarregar();
           }}

@@ -266,6 +266,7 @@ export type CuidadorWhereInput = {
   criadoEm?: Prisma.DateTimeFilter<"Cuidador"> | Date | string
   conta?: Prisma.XOR<Prisma.ContaNullableScalarRelationFilter, Prisma.ContaWhereInput> | null
   turmas?: Prisma.TurmaCuidadorListRelationFilter
+  atividades?: Prisma.AtividadeListRelationFilter
   presencas?: Prisma.PresencaListRelationFilter
   presencasCuidador?: Prisma.PresencaCuidadorListRelationFilter
   comportamentos?: Prisma.ComportamentoListRelationFilter
@@ -284,6 +285,7 @@ export type CuidadorOrderByWithRelationInput = {
   criadoEm?: Prisma.SortOrder
   conta?: Prisma.ContaOrderByWithRelationInput
   turmas?: Prisma.TurmaCuidadorOrderByRelationAggregateInput
+  atividades?: Prisma.AtividadeOrderByRelationAggregateInput
   presencas?: Prisma.PresencaOrderByRelationAggregateInput
   presencasCuidador?: Prisma.PresencaCuidadorOrderByRelationAggregateInput
   comportamentos?: Prisma.ComportamentoOrderByRelationAggregateInput
@@ -305,6 +307,7 @@ export type CuidadorWhereUniqueInput = Prisma.AtLeast<{
   criadoEm?: Prisma.DateTimeFilter<"Cuidador"> | Date | string
   conta?: Prisma.XOR<Prisma.ContaNullableScalarRelationFilter, Prisma.ContaWhereInput> | null
   turmas?: Prisma.TurmaCuidadorListRelationFilter
+  atividades?: Prisma.AtividadeListRelationFilter
   presencas?: Prisma.PresencaListRelationFilter
   presencasCuidador?: Prisma.PresencaCuidadorListRelationFilter
   comportamentos?: Prisma.ComportamentoListRelationFilter
@@ -355,6 +358,7 @@ export type CuidadorCreateInput = {
   criadoEm?: Date | string
   conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
   turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoCreateNestedManyWithoutCuidadorInput
@@ -372,6 +376,7 @@ export type CuidadorUncheckedCreateInput = {
   ativo?: boolean
   criadoEm?: Date | string
   turmas?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoUncheckedCreateNestedManyWithoutCuidadorInput
@@ -388,6 +393,7 @@ export type CuidadorUpdateInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
   turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUpdateManyWithoutCuidadorNestedInput
@@ -405,6 +411,7 @@ export type CuidadorUncheckedUpdateInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   turmas?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUncheckedUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUncheckedUpdateManyWithoutCuidadorNestedInput
@@ -552,6 +559,20 @@ export type CuidadorUncheckedUpdateOneWithoutContaNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CuidadorUpdateToOneWithWhereWithoutContaInput, Prisma.CuidadorUpdateWithoutContaInput>, Prisma.CuidadorUncheckedUpdateWithoutContaInput>
 }
 
+export type CuidadorCreateNestedOneWithoutAtividadesInput = {
+  create?: Prisma.XOR<Prisma.CuidadorCreateWithoutAtividadesInput, Prisma.CuidadorUncheckedCreateWithoutAtividadesInput>
+  connectOrCreate?: Prisma.CuidadorCreateOrConnectWithoutAtividadesInput
+  connect?: Prisma.CuidadorWhereUniqueInput
+}
+
+export type CuidadorUpdateOneRequiredWithoutAtividadesNestedInput = {
+  create?: Prisma.XOR<Prisma.CuidadorCreateWithoutAtividadesInput, Prisma.CuidadorUncheckedCreateWithoutAtividadesInput>
+  connectOrCreate?: Prisma.CuidadorCreateOrConnectWithoutAtividadesInput
+  upsert?: Prisma.CuidadorUpsertWithoutAtividadesInput
+  connect?: Prisma.CuidadorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CuidadorUpdateToOneWithWhereWithoutAtividadesInput, Prisma.CuidadorUpdateWithoutAtividadesInput>, Prisma.CuidadorUncheckedUpdateWithoutAtividadesInput>
+}
+
 export type CuidadorCreateNestedOneWithoutTurmasInput = {
   create?: Prisma.XOR<Prisma.CuidadorCreateWithoutTurmasInput, Prisma.CuidadorUncheckedCreateWithoutTurmasInput>
   connectOrCreate?: Prisma.CuidadorCreateOrConnectWithoutTurmasInput
@@ -618,6 +639,7 @@ export type CuidadorCreateWithoutContaInput = {
   ativo?: boolean
   criadoEm?: Date | string
   turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoCreateNestedManyWithoutCuidadorInput
@@ -634,6 +656,7 @@ export type CuidadorUncheckedCreateWithoutContaInput = {
   ativo?: boolean
   criadoEm?: Date | string
   turmas?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoUncheckedCreateNestedManyWithoutCuidadorInput
@@ -665,12 +688,96 @@ export type CuidadorUpdateWithoutContaInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUpdateManyWithoutCuidadorNestedInput
 }
 
 export type CuidadorUncheckedUpdateWithoutContaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dataAdmissao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salarioBase?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  turmas?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutCuidadorNestedInput
+  presencas?: Prisma.PresencaUncheckedUpdateManyWithoutCuidadorNestedInput
+  presencasCuidador?: Prisma.PresencaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
+  comportamentos?: Prisma.ComportamentoUncheckedUpdateManyWithoutCuidadorNestedInput
+}
+
+export type CuidadorCreateWithoutAtividadesInput = {
+  nome: string
+  email: string
+  senhaHash: string
+  telefone?: string | null
+  dataAdmissao?: Date | string
+  salarioBase?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ativo?: boolean
+  criadoEm?: Date | string
+  conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
+  turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
+  presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
+  presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
+  comportamentos?: Prisma.ComportamentoCreateNestedManyWithoutCuidadorInput
+}
+
+export type CuidadorUncheckedCreateWithoutAtividadesInput = {
+  contaId?: number | null
+  id?: number
+  nome: string
+  email: string
+  senhaHash: string
+  telefone?: string | null
+  dataAdmissao?: Date | string
+  salarioBase?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ativo?: boolean
+  criadoEm?: Date | string
+  turmas?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
+  presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutCuidadorInput
+  presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
+  comportamentos?: Prisma.ComportamentoUncheckedCreateNestedManyWithoutCuidadorInput
+}
+
+export type CuidadorCreateOrConnectWithoutAtividadesInput = {
+  where: Prisma.CuidadorWhereUniqueInput
+  create: Prisma.XOR<Prisma.CuidadorCreateWithoutAtividadesInput, Prisma.CuidadorUncheckedCreateWithoutAtividadesInput>
+}
+
+export type CuidadorUpsertWithoutAtividadesInput = {
+  update: Prisma.XOR<Prisma.CuidadorUpdateWithoutAtividadesInput, Prisma.CuidadorUncheckedUpdateWithoutAtividadesInput>
+  create: Prisma.XOR<Prisma.CuidadorCreateWithoutAtividadesInput, Prisma.CuidadorUncheckedCreateWithoutAtividadesInput>
+  where?: Prisma.CuidadorWhereInput
+}
+
+export type CuidadorUpdateToOneWithWhereWithoutAtividadesInput = {
+  where?: Prisma.CuidadorWhereInput
+  data: Prisma.XOR<Prisma.CuidadorUpdateWithoutAtividadesInput, Prisma.CuidadorUncheckedUpdateWithoutAtividadesInput>
+}
+
+export type CuidadorUpdateWithoutAtividadesInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dataAdmissao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salarioBase?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
+  turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
+  presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
+  presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
+  comportamentos?: Prisma.ComportamentoUpdateManyWithoutCuidadorNestedInput
+}
+
+export type CuidadorUncheckedUpdateWithoutAtividadesInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -696,6 +803,7 @@ export type CuidadorCreateWithoutTurmasInput = {
   ativo?: boolean
   criadoEm?: Date | string
   conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoCreateNestedManyWithoutCuidadorInput
@@ -712,6 +820,7 @@ export type CuidadorUncheckedCreateWithoutTurmasInput = {
   salarioBase?: runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: boolean
   criadoEm?: Date | string
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoUncheckedCreateNestedManyWithoutCuidadorInput
@@ -743,6 +852,7 @@ export type CuidadorUpdateWithoutTurmasInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUpdateManyWithoutCuidadorNestedInput
@@ -759,6 +869,7 @@ export type CuidadorUncheckedUpdateWithoutTurmasInput = {
   salarioBase?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUncheckedUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUncheckedUpdateManyWithoutCuidadorNestedInput
@@ -775,6 +886,7 @@ export type CuidadorCreateWithoutPresencasInput = {
   criadoEm?: Date | string
   conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
   turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoCreateNestedManyWithoutCuidadorInput
 }
@@ -791,6 +903,7 @@ export type CuidadorUncheckedCreateWithoutPresencasInput = {
   ativo?: boolean
   criadoEm?: Date | string
   turmas?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoUncheckedCreateNestedManyWithoutCuidadorInput
 }
@@ -822,6 +935,7 @@ export type CuidadorUpdateWithoutPresencasInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
   turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUpdateManyWithoutCuidadorNestedInput
 }
@@ -838,6 +952,7 @@ export type CuidadorUncheckedUpdateWithoutPresencasInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   turmas?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUncheckedUpdateManyWithoutCuidadorNestedInput
 }
@@ -853,6 +968,7 @@ export type CuidadorCreateWithoutPresencasCuidadorInput = {
   criadoEm?: Date | string
   conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
   turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoCreateNestedManyWithoutCuidadorInput
 }
@@ -869,6 +985,7 @@ export type CuidadorUncheckedCreateWithoutPresencasCuidadorInput = {
   ativo?: boolean
   criadoEm?: Date | string
   turmas?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoUncheckedCreateNestedManyWithoutCuidadorInput
 }
@@ -900,6 +1017,7 @@ export type CuidadorUpdateWithoutPresencasCuidadorInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
   turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUpdateManyWithoutCuidadorNestedInput
 }
@@ -916,6 +1034,7 @@ export type CuidadorUncheckedUpdateWithoutPresencasCuidadorInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   turmas?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUncheckedUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUncheckedUpdateManyWithoutCuidadorNestedInput
 }
@@ -931,6 +1050,7 @@ export type CuidadorCreateWithoutComportamentosInput = {
   criadoEm?: Date | string
   conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
   turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
 }
@@ -947,6 +1067,7 @@ export type CuidadorUncheckedCreateWithoutComportamentosInput = {
   ativo?: boolean
   criadoEm?: Date | string
   turmas?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
 }
@@ -978,6 +1099,7 @@ export type CuidadorUpdateWithoutComportamentosInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
   turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
 }
@@ -994,6 +1116,7 @@ export type CuidadorUncheckedUpdateWithoutComportamentosInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   turmas?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUncheckedUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
 }
@@ -1005,6 +1128,7 @@ export type CuidadorUncheckedUpdateWithoutComportamentosInput = {
 
 export type CuidadorCountOutputType = {
   turmas: number
+  atividades: number
   presencas: number
   presencasCuidador: number
   comportamentos: number
@@ -1012,6 +1136,7 @@ export type CuidadorCountOutputType = {
 
 export type CuidadorCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   turmas?: boolean | CuidadorCountOutputTypeCountTurmasArgs
+  atividades?: boolean | CuidadorCountOutputTypeCountAtividadesArgs
   presencas?: boolean | CuidadorCountOutputTypeCountPresencasArgs
   presencasCuidador?: boolean | CuidadorCountOutputTypeCountPresencasCuidadorArgs
   comportamentos?: boolean | CuidadorCountOutputTypeCountComportamentosArgs
@@ -1032,6 +1157,13 @@ export type CuidadorCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
  */
 export type CuidadorCountOutputTypeCountTurmasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TurmaCuidadorWhereInput
+}
+
+/**
+ * CuidadorCountOutputType without action
+ */
+export type CuidadorCountOutputTypeCountAtividadesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AtividadeWhereInput
 }
 
 /**
@@ -1069,6 +1201,7 @@ export type CuidadorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   criadoEm?: boolean
   conta?: boolean | Prisma.Cuidador$contaArgs<ExtArgs>
   turmas?: boolean | Prisma.Cuidador$turmasArgs<ExtArgs>
+  atividades?: boolean | Prisma.Cuidador$atividadesArgs<ExtArgs>
   presencas?: boolean | Prisma.Cuidador$presencasArgs<ExtArgs>
   presencasCuidador?: boolean | Prisma.Cuidador$presencasCuidadorArgs<ExtArgs>
   comportamentos?: boolean | Prisma.Cuidador$comportamentosArgs<ExtArgs>
@@ -1120,6 +1253,7 @@ export type CuidadorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type CuidadorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   conta?: boolean | Prisma.Cuidador$contaArgs<ExtArgs>
   turmas?: boolean | Prisma.Cuidador$turmasArgs<ExtArgs>
+  atividades?: boolean | Prisma.Cuidador$atividadesArgs<ExtArgs>
   presencas?: boolean | Prisma.Cuidador$presencasArgs<ExtArgs>
   presencasCuidador?: boolean | Prisma.Cuidador$presencasCuidadorArgs<ExtArgs>
   comportamentos?: boolean | Prisma.Cuidador$comportamentosArgs<ExtArgs>
@@ -1137,6 +1271,7 @@ export type $CuidadorPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     conta: Prisma.$ContaPayload<ExtArgs> | null
     turmas: Prisma.$TurmaCuidadorPayload<ExtArgs>[]
+    atividades: Prisma.$AtividadePayload<ExtArgs>[]
     presencas: Prisma.$PresencaPayload<ExtArgs>[]
     presencasCuidador: Prisma.$PresencaCuidadorPayload<ExtArgs>[]
     comportamentos: Prisma.$ComportamentoPayload<ExtArgs>[]
@@ -1551,6 +1686,7 @@ export interface Prisma__CuidadorClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   conta<T extends Prisma.Cuidador$contaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cuidador$contaArgs<ExtArgs>>): Prisma.Prisma__ContaClient<runtime.Types.Result.GetResult<Prisma.$ContaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   turmas<T extends Prisma.Cuidador$turmasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cuidador$turmasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TurmaCuidadorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  atividades<T extends Prisma.Cuidador$atividadesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cuidador$atividadesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   presencas<T extends Prisma.Cuidador$presencasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cuidador$presencasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PresencaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   presencasCuidador<T extends Prisma.Cuidador$presencasCuidadorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cuidador$presencasCuidadorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PresencaCuidadorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comportamentos<T extends Prisma.Cuidador$comportamentosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cuidador$comportamentosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ComportamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2034,6 +2170,30 @@ export type Cuidador$turmasArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.TurmaCuidadorScalarFieldEnum | Prisma.TurmaCuidadorScalarFieldEnum[]
+}
+
+/**
+ * Cuidador.atividades
+ */
+export type Cuidador$atividadesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Atividade
+   */
+  select?: Prisma.AtividadeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Atividade
+   */
+  omit?: Prisma.AtividadeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AtividadeInclude<ExtArgs> | null
+  where?: Prisma.AtividadeWhereInput
+  orderBy?: Prisma.AtividadeOrderByWithRelationInput | Prisma.AtividadeOrderByWithRelationInput[]
+  cursor?: Prisma.AtividadeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AtividadeScalarFieldEnum | Prisma.AtividadeScalarFieldEnum[]
 }
 
 /**

@@ -12,6 +12,9 @@ router.get("/turmas/nome/:nome", controller.buscarPorNome);
 router.get("/turmas/:id", controller.buscarPorId);
 router.post("/turmas",validarBody(turmaSchema), controller.criar);
 router.put("/turmas/:id",validarBody(turmaSchema), controller.atualizar);
+router.put("/turmas/:id/alunos/:alunoId", controller.adicionarAluno);
+router.post("/turmas/:id/alunos/:alunoId/transferir", controller.transferirAluno);
+router.delete("/turmas/:id/alunos/:alunoId", controller.removerAluno);
 router.delete("/turmas/:id", controller.deletar);
 
 

@@ -238,6 +238,7 @@ export type AdminWhereInput = {
   criadoEm?: Prisma.DateTimeFilter<"Admin"> | Date | string
   conta?: Prisma.XOR<Prisma.ContaNullableScalarRelationFilter, Prisma.ContaWhereInput> | null
   presencasCuidador?: Prisma.PresencaCuidadorListRelationFilter
+  turmasCriadas?: Prisma.TurmaListRelationFilter
 }
 
 export type AdminOrderByWithRelationInput = {
@@ -250,6 +251,7 @@ export type AdminOrderByWithRelationInput = {
   criadoEm?: Prisma.SortOrder
   conta?: Prisma.ContaOrderByWithRelationInput
   presencasCuidador?: Prisma.PresencaCuidadorOrderByRelationAggregateInput
+  turmasCriadas?: Prisma.TurmaOrderByRelationAggregateInput
 }
 
 export type AdminWhereUniqueInput = Prisma.AtLeast<{
@@ -265,6 +267,7 @@ export type AdminWhereUniqueInput = Prisma.AtLeast<{
   criadoEm?: Prisma.DateTimeFilter<"Admin"> | Date | string
   conta?: Prisma.XOR<Prisma.ContaNullableScalarRelationFilter, Prisma.ContaWhereInput> | null
   presencasCuidador?: Prisma.PresencaCuidadorListRelationFilter
+  turmasCriadas?: Prisma.TurmaListRelationFilter
 }, "id" | "contaId">
 
 export type AdminOrderByWithAggregationInput = {
@@ -303,6 +306,7 @@ export type AdminCreateInput = {
   criadoEm?: Date | string
   conta?: Prisma.ContaCreateNestedOneWithoutAdminInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutAdminInput
+  turmasCriadas?: Prisma.TurmaCreateNestedManyWithoutCriadoPorInput
 }
 
 export type AdminUncheckedCreateInput = {
@@ -314,6 +318,7 @@ export type AdminUncheckedCreateInput = {
   ativo?: boolean
   criadoEm?: Date | string
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutAdminInput
+  turmasCriadas?: Prisma.TurmaUncheckedCreateNestedManyWithoutCriadoPorInput
 }
 
 export type AdminUpdateInput = {
@@ -324,6 +329,7 @@ export type AdminUpdateInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conta?: Prisma.ContaUpdateOneWithoutAdminNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutAdminNestedInput
+  turmasCriadas?: Prisma.TurmaUpdateManyWithoutCriadoPorNestedInput
 }
 
 export type AdminUncheckedUpdateInput = {
@@ -335,6 +341,7 @@ export type AdminUncheckedUpdateInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedUpdateManyWithoutAdminNestedInput
+  turmasCriadas?: Prisma.TurmaUncheckedUpdateManyWithoutCriadoPorNestedInput
 }
 
 export type AdminCreateManyInput = {
@@ -475,6 +482,22 @@ export type AdminUncheckedUpdateOneWithoutContaNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUpdateToOneWithWhereWithoutContaInput, Prisma.AdminUpdateWithoutContaInput>, Prisma.AdminUncheckedUpdateWithoutContaInput>
 }
 
+export type AdminCreateNestedOneWithoutTurmasCriadasInput = {
+  create?: Prisma.XOR<Prisma.AdminCreateWithoutTurmasCriadasInput, Prisma.AdminUncheckedCreateWithoutTurmasCriadasInput>
+  connectOrCreate?: Prisma.AdminCreateOrConnectWithoutTurmasCriadasInput
+  connect?: Prisma.AdminWhereUniqueInput
+}
+
+export type AdminUpdateOneWithoutTurmasCriadasNestedInput = {
+  create?: Prisma.XOR<Prisma.AdminCreateWithoutTurmasCriadasInput, Prisma.AdminUncheckedCreateWithoutTurmasCriadasInput>
+  connectOrCreate?: Prisma.AdminCreateOrConnectWithoutTurmasCriadasInput
+  upsert?: Prisma.AdminUpsertWithoutTurmasCriadasInput
+  disconnect?: Prisma.AdminWhereInput | boolean
+  delete?: Prisma.AdminWhereInput | boolean
+  connect?: Prisma.AdminWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUpdateToOneWithWhereWithoutTurmasCriadasInput, Prisma.AdminUpdateWithoutTurmasCriadasInput>, Prisma.AdminUncheckedUpdateWithoutTurmasCriadasInput>
+}
+
 export type AdminCreateNestedOneWithoutPresencasCuidadorInput = {
   create?: Prisma.XOR<Prisma.AdminCreateWithoutPresencasCuidadorInput, Prisma.AdminUncheckedCreateWithoutPresencasCuidadorInput>
   connectOrCreate?: Prisma.AdminCreateOrConnectWithoutPresencasCuidadorInput
@@ -496,6 +519,7 @@ export type AdminCreateWithoutContaInput = {
   ativo?: boolean
   criadoEm?: Date | string
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutAdminInput
+  turmasCriadas?: Prisma.TurmaCreateNestedManyWithoutCriadoPorInput
 }
 
 export type AdminUncheckedCreateWithoutContaInput = {
@@ -506,6 +530,7 @@ export type AdminUncheckedCreateWithoutContaInput = {
   ativo?: boolean
   criadoEm?: Date | string
   presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutAdminInput
+  turmasCriadas?: Prisma.TurmaUncheckedCreateNestedManyWithoutCriadoPorInput
 }
 
 export type AdminCreateOrConnectWithoutContaInput = {
@@ -531,9 +556,69 @@ export type AdminUpdateWithoutContaInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutAdminNestedInput
+  turmasCriadas?: Prisma.TurmaUpdateManyWithoutCriadoPorNestedInput
 }
 
 export type AdminUncheckedUpdateWithoutContaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  presencasCuidador?: Prisma.PresencaCuidadorUncheckedUpdateManyWithoutAdminNestedInput
+  turmasCriadas?: Prisma.TurmaUncheckedUpdateManyWithoutCriadoPorNestedInput
+}
+
+export type AdminCreateWithoutTurmasCriadasInput = {
+  nome: string
+  email: string
+  senhaHash: string
+  ativo?: boolean
+  criadoEm?: Date | string
+  conta?: Prisma.ContaCreateNestedOneWithoutAdminInput
+  presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutAdminInput
+}
+
+export type AdminUncheckedCreateWithoutTurmasCriadasInput = {
+  contaId?: number | null
+  id?: number
+  nome: string
+  email: string
+  senhaHash: string
+  ativo?: boolean
+  criadoEm?: Date | string
+  presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutAdminInput
+}
+
+export type AdminCreateOrConnectWithoutTurmasCriadasInput = {
+  where: Prisma.AdminWhereUniqueInput
+  create: Prisma.XOR<Prisma.AdminCreateWithoutTurmasCriadasInput, Prisma.AdminUncheckedCreateWithoutTurmasCriadasInput>
+}
+
+export type AdminUpsertWithoutTurmasCriadasInput = {
+  update: Prisma.XOR<Prisma.AdminUpdateWithoutTurmasCriadasInput, Prisma.AdminUncheckedUpdateWithoutTurmasCriadasInput>
+  create: Prisma.XOR<Prisma.AdminCreateWithoutTurmasCriadasInput, Prisma.AdminUncheckedCreateWithoutTurmasCriadasInput>
+  where?: Prisma.AdminWhereInput
+}
+
+export type AdminUpdateToOneWithWhereWithoutTurmasCriadasInput = {
+  where?: Prisma.AdminWhereInput
+  data: Prisma.XOR<Prisma.AdminUpdateWithoutTurmasCriadasInput, Prisma.AdminUncheckedUpdateWithoutTurmasCriadasInput>
+}
+
+export type AdminUpdateWithoutTurmasCriadasInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conta?: Prisma.ContaUpdateOneWithoutAdminNestedInput
+  presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutAdminNestedInput
+}
+
+export type AdminUncheckedUpdateWithoutTurmasCriadasInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -550,6 +635,7 @@ export type AdminCreateWithoutPresencasCuidadorInput = {
   ativo?: boolean
   criadoEm?: Date | string
   conta?: Prisma.ContaCreateNestedOneWithoutAdminInput
+  turmasCriadas?: Prisma.TurmaCreateNestedManyWithoutCriadoPorInput
 }
 
 export type AdminUncheckedCreateWithoutPresencasCuidadorInput = {
@@ -560,6 +646,7 @@ export type AdminUncheckedCreateWithoutPresencasCuidadorInput = {
   senhaHash: string
   ativo?: boolean
   criadoEm?: Date | string
+  turmasCriadas?: Prisma.TurmaUncheckedCreateNestedManyWithoutCriadoPorInput
 }
 
 export type AdminCreateOrConnectWithoutPresencasCuidadorInput = {
@@ -585,6 +672,7 @@ export type AdminUpdateWithoutPresencasCuidadorInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   conta?: Prisma.ContaUpdateOneWithoutAdminNestedInput
+  turmasCriadas?: Prisma.TurmaUpdateManyWithoutCriadoPorNestedInput
 }
 
 export type AdminUncheckedUpdateWithoutPresencasCuidadorInput = {
@@ -595,6 +683,7 @@ export type AdminUncheckedUpdateWithoutPresencasCuidadorInput = {
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  turmasCriadas?: Prisma.TurmaUncheckedUpdateManyWithoutCriadoPorNestedInput
 }
 
 
@@ -604,10 +693,12 @@ export type AdminUncheckedUpdateWithoutPresencasCuidadorInput = {
 
 export type AdminCountOutputType = {
   presencasCuidador: number
+  turmasCriadas: number
 }
 
 export type AdminCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   presencasCuidador?: boolean | AdminCountOutputTypeCountPresencasCuidadorArgs
+  turmasCriadas?: boolean | AdminCountOutputTypeCountTurmasCriadasArgs
 }
 
 /**
@@ -627,6 +718,13 @@ export type AdminCountOutputTypeCountPresencasCuidadorArgs<ExtArgs extends runti
   where?: Prisma.PresencaCuidadorWhereInput
 }
 
+/**
+ * AdminCountOutputType without action
+ */
+export type AdminCountOutputTypeCountTurmasCriadasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TurmaWhereInput
+}
+
 
 export type AdminSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   contaId?: boolean
@@ -638,6 +736,7 @@ export type AdminSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   criadoEm?: boolean
   conta?: boolean | Prisma.Admin$contaArgs<ExtArgs>
   presencasCuidador?: boolean | Prisma.Admin$presencasCuidadorArgs<ExtArgs>
+  turmasCriadas?: boolean | Prisma.Admin$turmasCriadasArgs<ExtArgs>
   _count?: boolean | Prisma.AdminCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["admin"]>
 
@@ -677,6 +776,7 @@ export type AdminOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type AdminInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   conta?: boolean | Prisma.Admin$contaArgs<ExtArgs>
   presencasCuidador?: boolean | Prisma.Admin$presencasCuidadorArgs<ExtArgs>
+  turmasCriadas?: boolean | Prisma.Admin$turmasCriadasArgs<ExtArgs>
   _count?: boolean | Prisma.AdminCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AdminIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -691,6 +791,7 @@ export type $AdminPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     conta: Prisma.$ContaPayload<ExtArgs> | null
     presencasCuidador: Prisma.$PresencaCuidadorPayload<ExtArgs>[]
+    turmasCriadas: Prisma.$TurmaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     contaId: number | null
@@ -1099,6 +1200,7 @@ export interface Prisma__AdminClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   conta<T extends Prisma.Admin$contaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Admin$contaArgs<ExtArgs>>): Prisma.Prisma__ContaClient<runtime.Types.Result.GetResult<Prisma.$ContaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   presencasCuidador<T extends Prisma.Admin$presencasCuidadorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Admin$presencasCuidadorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PresencaCuidadorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  turmasCriadas<T extends Prisma.Admin$turmasCriadasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Admin$turmasCriadasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1576,6 +1678,30 @@ export type Admin$presencasCuidadorArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.PresencaCuidadorScalarFieldEnum | Prisma.PresencaCuidadorScalarFieldEnum[]
+}
+
+/**
+ * Admin.turmasCriadas
+ */
+export type Admin$turmasCriadasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Turma
+   */
+  select?: Prisma.TurmaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Turma
+   */
+  omit?: Prisma.TurmaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TurmaInclude<ExtArgs> | null
+  where?: Prisma.TurmaWhereInput
+  orderBy?: Prisma.TurmaOrderByWithRelationInput | Prisma.TurmaOrderByWithRelationInput[]
+  cursor?: Prisma.TurmaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TurmaScalarFieldEnum | Prisma.TurmaScalarFieldEnum[]
 }
 
 /**

@@ -401,6 +401,7 @@ export const ModelName = {
   Cuidador: 'Cuidador',
   Conta: 'Conta',
   Turma: 'Turma',
+  Atividade: 'Atividade',
   TurmaCuidador: 'TurmaCuidador',
   Aluno: 'Aluno',
   Presenca: 'Presenca',
@@ -421,7 +422,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "admin" | "cuidador" | "conta" | "turma" | "turmaCuidador" | "aluno" | "presenca" | "presencaCuidador" | "comportamento"
+    modelProps: "admin" | "cuidador" | "conta" | "turma" | "atividade" | "turmaCuidador" | "aluno" | "presenca" | "presencaCuidador" | "comportamento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -718,6 +719,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.TurmaCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.TurmaCountAggregateOutputType> | number
+        }
+      }
+    }
+    Atividade: {
+      payload: Prisma.$AtividadePayload<ExtArgs>
+      fields: Prisma.AtividadeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AtividadeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AtividadeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload>
+        }
+        findFirst: {
+          args: Prisma.AtividadeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AtividadeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload>
+        }
+        findMany: {
+          args: Prisma.AtividadeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload>[]
+        }
+        create: {
+          args: Prisma.AtividadeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload>
+        }
+        createMany: {
+          args: Prisma.AtividadeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AtividadeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload>[]
+        }
+        delete: {
+          args: Prisma.AtividadeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload>
+        }
+        update: {
+          args: Prisma.AtividadeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload>
+        }
+        deleteMany: {
+          args: Prisma.AtividadeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AtividadeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AtividadeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload>[]
+        }
+        upsert: {
+          args: Prisma.AtividadeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AtividadePayload>
+        }
+        aggregate: {
+          args: Prisma.AtividadeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAtividade>
+        }
+        groupBy: {
+          args: Prisma.AtividadeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AtividadeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AtividadeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AtividadeCountAggregateOutputType> | number
         }
       }
     }
@@ -1173,15 +1248,32 @@ export type ContaScalarFieldEnum = (typeof ContaScalarFieldEnum)[keyof typeof Co
 
 
 export const TurmaScalarFieldEnum = {
+  sala: 'sala',
+  criadoPorId: 'criadoPorId',
   id: 'id',
   nome: 'nome',
   anoLetivo: 'anoLetivo',
+  faixaEtaria: 'faixaEtaria',
   turno: 'turno',
   ativo: 'ativo',
   criadoEm: 'criadoEm'
 } as const
 
 export type TurmaScalarFieldEnum = (typeof TurmaScalarFieldEnum)[keyof typeof TurmaScalarFieldEnum]
+
+
+export const AtividadeScalarFieldEnum = {
+  id: 'id',
+  turmaId: 'turmaId',
+  cuidadorId: 'cuidadorId',
+  diaSemana: 'diaSemana',
+  inicio: 'inicio',
+  fim: 'fim',
+  descricao: 'descricao',
+  criadoEm: 'criadoEm'
+} as const
+
+export type AtividadeScalarFieldEnum = (typeof AtividadeScalarFieldEnum)[keyof typeof AtividadeScalarFieldEnum]
 
 
 export const TurmaCuidadorScalarFieldEnum = {
@@ -1200,6 +1292,10 @@ export const AlunoScalarFieldEnum = {
   responsavelNome: 'responsavelNome',
   responsavelTelefone: 'responsavelTelefone',
   responsavelEmail: 'responsavelEmail',
+  responsavelParentesco: 'responsavelParentesco',
+  responsavelSecundarioNome: 'responsavelSecundarioNome',
+  responsavelSecundarioParentesco: 'responsavelSecundarioParentesco',
+  responsavelSecundarioTelefone: 'responsavelSecundarioTelefone',
   observacoes: 'observacoes',
   ativo: 'ativo',
   criadoEm: 'criadoEm'
@@ -1510,6 +1606,7 @@ export type GlobalOmitConfig = {
   cuidador?: Prisma.CuidadorOmit
   conta?: Prisma.ContaOmit
   turma?: Prisma.TurmaOmit
+  atividade?: Prisma.AtividadeOmit
   turmaCuidador?: Prisma.TurmaCuidadorOmit
   aluno?: Prisma.AlunoOmit
   presenca?: Prisma.PresencaOmit

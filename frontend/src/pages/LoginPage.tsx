@@ -1,8 +1,8 @@
 import { useState, type SyntheticEvent } from 'react';
 import { loginSchema } from '@creche/shared/auth';
-import logo from '../assets/imagens/Pequenos_Passos_Logo_1-removebg-preview.png';
+import logo from '../assets/imagens/Pequenos_Passos_Logo__1_-removebg-preview.png';
 import fundologin from '../assets/imagens/fundo login.jpg';
-import { login, logout, mensagemDeErro, type Usuario } from '../services/api';
+import { login, mensagemDeErro, type Usuario } from '../services/api';
 
 interface LoginProps {
   onEntrar: (usuario: Usuario) => void; // avisa o App que o login deu certo
@@ -39,12 +39,7 @@ export default function Login({ onEntrar, onCadastrar }: LoginProps) {
     setCarregando(true);
     try {
       const usuario = await login(validacao.data);
-      if (usuario.tipoUsuario !== 'ADMIN') {
-        await logout();
-        setErro('A área do cuidador ainda não está disponível. Entre com uma conta de administrador.');
-      } else {
-        onEntrar(usuario);
-      }
+      onEntrar(usuario);
     } catch (e) {
       setErro(mensagemDeErro(e, 'Não foi possível entrar.'));
     }
@@ -56,7 +51,7 @@ export default function Login({ onEntrar, onCadastrar }: LoginProps) {
       className="min-h-screen w-full flex justify-center bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `url(${fundologin})`,
-        fontFamily: "'Coco Gothic', sans-serif",
+        fontFamily: "'Comfortaa', sans-serif",
       }}
     >
       {/* Coluna central azul-bebê fiel ao protótipo */}

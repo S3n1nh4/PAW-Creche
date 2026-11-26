@@ -10,7 +10,20 @@ export async function buscarPorId(req: Request, res: Response) {
 export async function buscarPorNome(req: Request, res: Response) {
   return res.json(await service.buscarTurmaPorNome(z.string().trim().min(1).parse(req.params.nome)));
 }
-export async function criar(req: Request, res: Response) { return res.status(201).json(await service.criarTurma(req.body)); }
+export async function criar(req: Request, res: Response) { return res.status(201).json(await service.criarTurma(req.body, req.usuario!)); }
+export async function adicionarAluno(req: Request, res: Response) {
+  await service.adicionarAluno(idPresencaSchema.parse(req.params.id), idPresencaSchema.parse(req.params.alunoId));
+  return res.status(204).send();
+}
+export async function transferirAluno(req: Request, res: Response) {
+  const { destinoId } = z.object({ destinoId: z.number().int().positive() }).strict().parse(req.body);
+  await service.moverAluno(idPresencaSchema.parse(req.params.id), idPresencaSchema.parse(req.params.alunoId), destinoId);
+  return res.status(204).send();
+}
+export async function removerAluno(req: Request, res: Response) {
+  await service.moverAluno(idPresencaSchema.parse(req.params.id), idPresencaSchema.parse(req.params.alunoId), null);
+  return res.status(204).send();
+}
 export async function atualizar(req: Request, res: Response) {
   return res.json(await service.atualizarTurma(idPresencaSchema.parse(req.params.id), req.body));
 }

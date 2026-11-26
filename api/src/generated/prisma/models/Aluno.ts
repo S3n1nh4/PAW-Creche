@@ -44,6 +44,10 @@ export type AlunoMinAggregateOutputType = {
   responsavelNome: string | null
   responsavelTelefone: string | null
   responsavelEmail: string | null
+  responsavelParentesco: string | null
+  responsavelSecundarioNome: string | null
+  responsavelSecundarioParentesco: string | null
+  responsavelSecundarioTelefone: string | null
   observacoes: string | null
   ativo: boolean | null
   criadoEm: Date | null
@@ -57,6 +61,10 @@ export type AlunoMaxAggregateOutputType = {
   responsavelNome: string | null
   responsavelTelefone: string | null
   responsavelEmail: string | null
+  responsavelParentesco: string | null
+  responsavelSecundarioNome: string | null
+  responsavelSecundarioParentesco: string | null
+  responsavelSecundarioTelefone: string | null
   observacoes: string | null
   ativo: boolean | null
   criadoEm: Date | null
@@ -70,6 +78,10 @@ export type AlunoCountAggregateOutputType = {
   responsavelNome: number
   responsavelTelefone: number
   responsavelEmail: number
+  responsavelParentesco: number
+  responsavelSecundarioNome: number
+  responsavelSecundarioParentesco: number
+  responsavelSecundarioTelefone: number
   observacoes: number
   ativo: number
   criadoEm: number
@@ -95,6 +107,10 @@ export type AlunoMinAggregateInputType = {
   responsavelNome?: true
   responsavelTelefone?: true
   responsavelEmail?: true
+  responsavelParentesco?: true
+  responsavelSecundarioNome?: true
+  responsavelSecundarioParentesco?: true
+  responsavelSecundarioTelefone?: true
   observacoes?: true
   ativo?: true
   criadoEm?: true
@@ -108,6 +124,10 @@ export type AlunoMaxAggregateInputType = {
   responsavelNome?: true
   responsavelTelefone?: true
   responsavelEmail?: true
+  responsavelParentesco?: true
+  responsavelSecundarioNome?: true
+  responsavelSecundarioParentesco?: true
+  responsavelSecundarioTelefone?: true
   observacoes?: true
   ativo?: true
   criadoEm?: true
@@ -121,6 +141,10 @@ export type AlunoCountAggregateInputType = {
   responsavelNome?: true
   responsavelTelefone?: true
   responsavelEmail?: true
+  responsavelParentesco?: true
+  responsavelSecundarioNome?: true
+  responsavelSecundarioParentesco?: true
+  responsavelSecundarioTelefone?: true
   observacoes?: true
   ativo?: true
   criadoEm?: true
@@ -221,6 +245,10 @@ export type AlunoGroupByOutputType = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail: string | null
+  responsavelParentesco: string | null
+  responsavelSecundarioNome: string | null
+  responsavelSecundarioParentesco: string | null
+  responsavelSecundarioTelefone: string | null
   observacoes: string | null
   ativo: boolean
   criadoEm: Date
@@ -257,6 +285,10 @@ export type AlunoWhereInput = {
   responsavelNome?: Prisma.StringFilter<"Aluno"> | string
   responsavelTelefone?: Prisma.StringFilter<"Aluno"> | string
   responsavelEmail?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelParentesco?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelSecundarioNome?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelSecundarioParentesco?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelSecundarioTelefone?: Prisma.StringNullableFilter<"Aluno"> | string | null
   observacoes?: Prisma.StringNullableFilter<"Aluno"> | string | null
   ativo?: Prisma.BoolFilter<"Aluno"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Aluno"> | Date | string
@@ -273,6 +305,10 @@ export type AlunoOrderByWithRelationInput = {
   responsavelNome?: Prisma.SortOrder
   responsavelTelefone?: Prisma.SortOrder
   responsavelEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsavelParentesco?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsavelSecundarioNome?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsavelSecundarioParentesco?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsavelSecundarioTelefone?: Prisma.SortOrderInput | Prisma.SortOrder
   observacoes?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -292,6 +328,10 @@ export type AlunoWhereUniqueInput = Prisma.AtLeast<{
   responsavelNome?: Prisma.StringFilter<"Aluno"> | string
   responsavelTelefone?: Prisma.StringFilter<"Aluno"> | string
   responsavelEmail?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelParentesco?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelSecundarioNome?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelSecundarioParentesco?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelSecundarioTelefone?: Prisma.StringNullableFilter<"Aluno"> | string | null
   observacoes?: Prisma.StringNullableFilter<"Aluno"> | string | null
   ativo?: Prisma.BoolFilter<"Aluno"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Aluno"> | Date | string
@@ -308,6 +348,10 @@ export type AlunoOrderByWithAggregationInput = {
   responsavelNome?: Prisma.SortOrder
   responsavelTelefone?: Prisma.SortOrder
   responsavelEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsavelParentesco?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsavelSecundarioNome?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsavelSecundarioParentesco?: Prisma.SortOrderInput | Prisma.SortOrder
+  responsavelSecundarioTelefone?: Prisma.SortOrderInput | Prisma.SortOrder
   observacoes?: Prisma.SortOrderInput | Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -329,6 +373,10 @@ export type AlunoScalarWhereWithAggregatesInput = {
   responsavelNome?: Prisma.StringWithAggregatesFilter<"Aluno"> | string
   responsavelTelefone?: Prisma.StringWithAggregatesFilter<"Aluno"> | string
   responsavelEmail?: Prisma.StringNullableWithAggregatesFilter<"Aluno"> | string | null
+  responsavelParentesco?: Prisma.StringNullableWithAggregatesFilter<"Aluno"> | string | null
+  responsavelSecundarioNome?: Prisma.StringNullableWithAggregatesFilter<"Aluno"> | string | null
+  responsavelSecundarioParentesco?: Prisma.StringNullableWithAggregatesFilter<"Aluno"> | string | null
+  responsavelSecundarioTelefone?: Prisma.StringNullableWithAggregatesFilter<"Aluno"> | string | null
   observacoes?: Prisma.StringNullableWithAggregatesFilter<"Aluno"> | string | null
   ativo?: Prisma.BoolWithAggregatesFilter<"Aluno"> | boolean
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Aluno"> | Date | string
@@ -340,6 +388,10 @@ export type AlunoCreateInput = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail?: string | null
+  responsavelParentesco?: string | null
+  responsavelSecundarioNome?: string | null
+  responsavelSecundarioParentesco?: string | null
+  responsavelSecundarioTelefone?: string | null
   observacoes?: string | null
   ativo?: boolean
   criadoEm?: Date | string
@@ -356,6 +408,10 @@ export type AlunoUncheckedCreateInput = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail?: string | null
+  responsavelParentesco?: string | null
+  responsavelSecundarioNome?: string | null
+  responsavelSecundarioParentesco?: string | null
+  responsavelSecundarioTelefone?: string | null
   observacoes?: string | null
   ativo?: boolean
   criadoEm?: Date | string
@@ -369,6 +425,10 @@ export type AlunoUpdateInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -385,6 +445,10 @@ export type AlunoUncheckedUpdateInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -400,6 +464,10 @@ export type AlunoCreateManyInput = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail?: string | null
+  responsavelParentesco?: string | null
+  responsavelSecundarioNome?: string | null
+  responsavelSecundarioParentesco?: string | null
+  responsavelSecundarioTelefone?: string | null
   observacoes?: string | null
   ativo?: boolean
   criadoEm?: Date | string
@@ -411,6 +479,10 @@ export type AlunoUpdateManyMutationInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -424,6 +496,10 @@ export type AlunoUncheckedUpdateManyInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -447,6 +523,10 @@ export type AlunoCountOrderByAggregateInput = {
   responsavelNome?: Prisma.SortOrder
   responsavelTelefone?: Prisma.SortOrder
   responsavelEmail?: Prisma.SortOrder
+  responsavelParentesco?: Prisma.SortOrder
+  responsavelSecundarioNome?: Prisma.SortOrder
+  responsavelSecundarioParentesco?: Prisma.SortOrder
+  responsavelSecundarioTelefone?: Prisma.SortOrder
   observacoes?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -465,6 +545,10 @@ export type AlunoMaxOrderByAggregateInput = {
   responsavelNome?: Prisma.SortOrder
   responsavelTelefone?: Prisma.SortOrder
   responsavelEmail?: Prisma.SortOrder
+  responsavelParentesco?: Prisma.SortOrder
+  responsavelSecundarioNome?: Prisma.SortOrder
+  responsavelSecundarioParentesco?: Prisma.SortOrder
+  responsavelSecundarioTelefone?: Prisma.SortOrder
   observacoes?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -478,6 +562,10 @@ export type AlunoMinOrderByAggregateInput = {
   responsavelNome?: Prisma.SortOrder
   responsavelTelefone?: Prisma.SortOrder
   responsavelEmail?: Prisma.SortOrder
+  responsavelParentesco?: Prisma.SortOrder
+  responsavelSecundarioNome?: Prisma.SortOrder
+  responsavelSecundarioParentesco?: Prisma.SortOrder
+  responsavelSecundarioTelefone?: Prisma.SortOrder
   observacoes?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -569,6 +657,10 @@ export type AlunoCreateWithoutTurmaInput = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail?: string | null
+  responsavelParentesco?: string | null
+  responsavelSecundarioNome?: string | null
+  responsavelSecundarioParentesco?: string | null
+  responsavelSecundarioTelefone?: string | null
   observacoes?: string | null
   ativo?: boolean
   criadoEm?: Date | string
@@ -583,6 +675,10 @@ export type AlunoUncheckedCreateWithoutTurmaInput = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail?: string | null
+  responsavelParentesco?: string | null
+  responsavelSecundarioNome?: string | null
+  responsavelSecundarioParentesco?: string | null
+  responsavelSecundarioTelefone?: string | null
   observacoes?: string | null
   ativo?: boolean
   criadoEm?: Date | string
@@ -627,6 +723,10 @@ export type AlunoScalarWhereInput = {
   responsavelNome?: Prisma.StringFilter<"Aluno"> | string
   responsavelTelefone?: Prisma.StringFilter<"Aluno"> | string
   responsavelEmail?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelParentesco?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelSecundarioNome?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelSecundarioParentesco?: Prisma.StringNullableFilter<"Aluno"> | string | null
+  responsavelSecundarioTelefone?: Prisma.StringNullableFilter<"Aluno"> | string | null
   observacoes?: Prisma.StringNullableFilter<"Aluno"> | string | null
   ativo?: Prisma.BoolFilter<"Aluno"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Aluno"> | Date | string
@@ -638,6 +738,10 @@ export type AlunoCreateWithoutPresencasInput = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail?: string | null
+  responsavelParentesco?: string | null
+  responsavelSecundarioNome?: string | null
+  responsavelSecundarioParentesco?: string | null
+  responsavelSecundarioTelefone?: string | null
   observacoes?: string | null
   ativo?: boolean
   criadoEm?: Date | string
@@ -653,6 +757,10 @@ export type AlunoUncheckedCreateWithoutPresencasInput = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail?: string | null
+  responsavelParentesco?: string | null
+  responsavelSecundarioNome?: string | null
+  responsavelSecundarioParentesco?: string | null
+  responsavelSecundarioTelefone?: string | null
   observacoes?: string | null
   ativo?: boolean
   criadoEm?: Date | string
@@ -681,6 +789,10 @@ export type AlunoUpdateWithoutPresencasInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -696,6 +808,10 @@ export type AlunoUncheckedUpdateWithoutPresencasInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -708,6 +824,10 @@ export type AlunoCreateWithoutComportamentosInput = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail?: string | null
+  responsavelParentesco?: string | null
+  responsavelSecundarioNome?: string | null
+  responsavelSecundarioParentesco?: string | null
+  responsavelSecundarioTelefone?: string | null
   observacoes?: string | null
   ativo?: boolean
   criadoEm?: Date | string
@@ -723,6 +843,10 @@ export type AlunoUncheckedCreateWithoutComportamentosInput = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail?: string | null
+  responsavelParentesco?: string | null
+  responsavelSecundarioNome?: string | null
+  responsavelSecundarioParentesco?: string | null
+  responsavelSecundarioTelefone?: string | null
   observacoes?: string | null
   ativo?: boolean
   criadoEm?: Date | string
@@ -751,6 +875,10 @@ export type AlunoUpdateWithoutComportamentosInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -766,6 +894,10 @@ export type AlunoUncheckedUpdateWithoutComportamentosInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -779,6 +911,10 @@ export type AlunoCreateManyTurmaInput = {
   responsavelNome: string
   responsavelTelefone: string
   responsavelEmail?: string | null
+  responsavelParentesco?: string | null
+  responsavelSecundarioNome?: string | null
+  responsavelSecundarioParentesco?: string | null
+  responsavelSecundarioTelefone?: string | null
   observacoes?: string | null
   ativo?: boolean
   criadoEm?: Date | string
@@ -790,6 +926,10 @@ export type AlunoUpdateWithoutTurmaInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -804,6 +944,10 @@ export type AlunoUncheckedUpdateWithoutTurmaInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -818,6 +962,10 @@ export type AlunoUncheckedUpdateManyWithoutTurmaInput = {
   responsavelNome?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelTelefone?: Prisma.StringFieldUpdateOperationsInput | string
   responsavelEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioNome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioParentesco?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  responsavelSecundarioTelefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   observacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -871,6 +1019,10 @@ export type AlunoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   responsavelNome?: boolean
   responsavelTelefone?: boolean
   responsavelEmail?: boolean
+  responsavelParentesco?: boolean
+  responsavelSecundarioNome?: boolean
+  responsavelSecundarioParentesco?: boolean
+  responsavelSecundarioTelefone?: boolean
   observacoes?: boolean
   ativo?: boolean
   criadoEm?: boolean
@@ -888,6 +1040,10 @@ export type AlunoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   responsavelNome?: boolean
   responsavelTelefone?: boolean
   responsavelEmail?: boolean
+  responsavelParentesco?: boolean
+  responsavelSecundarioNome?: boolean
+  responsavelSecundarioParentesco?: boolean
+  responsavelSecundarioTelefone?: boolean
   observacoes?: boolean
   ativo?: boolean
   criadoEm?: boolean
@@ -902,6 +1058,10 @@ export type AlunoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   responsavelNome?: boolean
   responsavelTelefone?: boolean
   responsavelEmail?: boolean
+  responsavelParentesco?: boolean
+  responsavelSecundarioNome?: boolean
+  responsavelSecundarioParentesco?: boolean
+  responsavelSecundarioTelefone?: boolean
   observacoes?: boolean
   ativo?: boolean
   criadoEm?: boolean
@@ -916,12 +1076,16 @@ export type AlunoSelectScalar = {
   responsavelNome?: boolean
   responsavelTelefone?: boolean
   responsavelEmail?: boolean
+  responsavelParentesco?: boolean
+  responsavelSecundarioNome?: boolean
+  responsavelSecundarioParentesco?: boolean
+  responsavelSecundarioTelefone?: boolean
   observacoes?: boolean
   ativo?: boolean
   criadoEm?: boolean
 }
 
-export type AlunoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "dataNascimento" | "turmaId" | "responsavelNome" | "responsavelTelefone" | "responsavelEmail" | "observacoes" | "ativo" | "criadoEm", ExtArgs["result"]["aluno"]>
+export type AlunoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "dataNascimento" | "turmaId" | "responsavelNome" | "responsavelTelefone" | "responsavelEmail" | "responsavelParentesco" | "responsavelSecundarioNome" | "responsavelSecundarioParentesco" | "responsavelSecundarioTelefone" | "observacoes" | "ativo" | "criadoEm", ExtArgs["result"]["aluno"]>
 export type AlunoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   turma?: boolean | Prisma.Aluno$turmaArgs<ExtArgs>
   presencas?: boolean | Prisma.Aluno$presencasArgs<ExtArgs>
@@ -950,6 +1114,10 @@ export type $AlunoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     responsavelNome: string
     responsavelTelefone: string
     responsavelEmail: string | null
+    responsavelParentesco: string | null
+    responsavelSecundarioNome: string | null
+    responsavelSecundarioParentesco: string | null
+    responsavelSecundarioTelefone: string | null
     observacoes: string | null
     ativo: boolean
     criadoEm: Date
@@ -1386,6 +1554,10 @@ export interface AlunoFieldRefs {
   readonly responsavelNome: Prisma.FieldRef<"Aluno", 'String'>
   readonly responsavelTelefone: Prisma.FieldRef<"Aluno", 'String'>
   readonly responsavelEmail: Prisma.FieldRef<"Aluno", 'String'>
+  readonly responsavelParentesco: Prisma.FieldRef<"Aluno", 'String'>
+  readonly responsavelSecundarioNome: Prisma.FieldRef<"Aluno", 'String'>
+  readonly responsavelSecundarioParentesco: Prisma.FieldRef<"Aluno", 'String'>
+  readonly responsavelSecundarioTelefone: Prisma.FieldRef<"Aluno", 'String'>
   readonly observacoes: Prisma.FieldRef<"Aluno", 'String'>
   readonly ativo: Prisma.FieldRef<"Aluno", 'Boolean'>
   readonly criadoEm: Prisma.FieldRef<"Aluno", 'DateTime'>

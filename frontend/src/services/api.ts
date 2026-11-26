@@ -1,6 +1,7 @@
 import axios from 'axios';
+import type { Atividade, AtividadeInput } from '@creche/shared/atividade';
 import type { LoginInput } from '@creche/shared/auth';
-import type { Aluno } from '@creche/shared/aluno';
+import type { AlunoInput } from '@creche/shared/aluno';
 import type { AtualizarCuidadorInput, CadastroCuidadorInput, Cuidador } from '@creche/shared/cuidador';
 import type { AtualizarPresencaCuidadorInput, PresencaCuidadorInput } from '@creche/shared/presencaCuidador';
 import type { Turma, TurmaInput } from '@creche/shared/turma';
@@ -10,6 +11,11 @@ import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL ?? 'http://localhost:3000',
 });
+
+export async function listarTurmasPlanner(): Promise<Turma[]> { return (await api.get('/planner/turmas')).data; }
+export async function listarAtividades(turmaId: number): Promise<Atividade[]> { return (await api.get(`/planner/turmas/${turmaId}/atividades`)).data; }
+export async function criarAtividade(turmaId: number, dados: AtividadeInput): Promise<Atividade> { return (await api.post(`/planner/turmas/${turmaId}/atividades`, dados)).data; }
+export async function excluirAtividade(turmaId: number, id: number) { await api.delete(`/planner/turmas/${turmaId}/atividades/${id}`); }
 
 // Rotas de admin (/cuidadores, /presencas-cuidadores) exigem "Authorization: Bearer <token>"
 api.interceptors.request.use((config) => {
@@ -134,17 +140,22 @@ export async function removerTurma(id: number) {
   await api.delete(`/turmas/${id}`);
 }
 
-// Alunos (só leitura: contagens da Dashboard e das Turmas) 
-
-// Se a API ainda não tiver GET /alunos (404), devolve lista vazia para a tela abrir mesmo assim
-export async function listarAlunos(): Promise<Aluno[]> {
-  try {
-    const resposta = await api.get('/alunos');
-    return resposta.data;
-  } catch (e) {
-    if (axios.isAxiosError(e) && e.response?.status === 404) return [];
-    throw e;
-  }
+// Alunos: a API retorna a data de nascimento em ISO.
+export type AlunoResumo = AlunoInput & { id: number };
+export async function listarAlunos(): Promise<AlunoResumo[]> {
+  return (await api.get('/alunos')).data;
+}
+export async function buscarAluno(id: number): Promise<AlunoResumo> {
+  return (await api.get(`/alunos/${id}`)).data;
+}
+export async function criarAluno(dados: AlunoInput): Promise<AlunoResumo> {
+  return (await api.post('/alunos', dados)).data;
+}
+export async function atualizarAluno(id: number, dados: AlunoInput): Promise<AlunoResumo> {
+  return (await api.put(`/alunos/${id}`, dados)).data;
+}
+export async function removerAluno(id: number) {
+  await api.delete(`/alunos/${id}`);
 }
 
 // Cuidadores 
@@ -182,6 +193,16 @@ export async function vincularCuidador(turmaId: number, cuidadorId: number) {
 
 export async function desvincularCuidador(turmaId: number, cuidadorId: number) {
   await api.delete(`/turmaCuidador/${turmaId}/${cuidadorId}`);
+}
+
+export async function adicionarAlunoNaTurma(turmaId: number, alunoId: number) {
+  await api.put(`/turmas/${turmaId}/alunos/${alunoId}`);
+}
+export async function transferirAlunoDaTurma(turmaId: number, alunoId: number, destinoId: number) {
+  await api.post(`/turmas/${turmaId}/alunos/${alunoId}/transferir`, { destinoId });
+}
+export async function excluirAlunoDaTurma(turmaId: number, alunoId: number) {
+  await api.delete(`/turmas/${turmaId}/alunos/${alunoId}`);
 }
 
 // Ponto de presença dos cuidadores 

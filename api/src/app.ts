@@ -6,6 +6,7 @@ import { swaggerSpec } from "./config/swagger.js";
 
 import cuidadorRoutes from "./routes/cuidadorRoutes.js";
 import turmaRoutes from "./routes/turmaRoutes.js";
+import atividadeRoutes from "./routes/atividadeRoutes.js";
 import turmaCuidadorRoutes from "./routes/turmaCuidadorRoutes.js";
 import alunoRoutes from "./routes/alunoRoutes.js";
 import comportamentoRoutes from "./routes/comportamentoRoutes.js";
@@ -33,6 +34,7 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Rotas da aplicação
 app.use(cuidadorRoutes);
 app.use(turmaRoutes);
+app.use(atividadeRoutes);
 app.use(turmaCuidadorRoutes);
 app.use(adminRoutes);
 app.use(comportamentoRoutes);

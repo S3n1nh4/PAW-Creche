@@ -8,9 +8,10 @@ import {
 import { z, type ZodType } from "zod";
 
 import { adminSchema, cadastroAdminSchema, atualizarAdminSchema } from "@creche/shared/admin";
-import { alunoSchema } from "@creche/shared/aluno";
+import { alunoSchema, cadastroAlunoSchema, atualizarAlunoSchema } from "@creche/shared/aluno";
 import { cuidadorSchema, cadastroCuidadorSchema, atualizarCuidadorSchema } from "@creche/shared/cuidador";
 import { turmaSchema } from "@creche/shared/turma";
+import { atividadeSchema } from '@creche/shared/atividade';
 import { comportamentoSchema } from "@creche/shared/comportamento";
 import { turmaCuidadorSchema } from "@creche/shared/turmaCuidador";
 import { loginSchema } from "@creche/shared/auth";
@@ -165,6 +166,8 @@ const alunoModel = registrarCrud({
   path: "/alunos",
   nomeModelo: "Aluno",
   schema: alunoSchema,
+  schemaCadastro: cadastroAlunoSchema,
+  schemaAtualizacao: atualizarAlunoSchema,
 });
 
 const cuidadorModel = registrarCrud({
@@ -453,6 +456,34 @@ registry.registerPath({
 // -------------------------------------------------------------
 
 registrarPresencas(registry);
+registry.registerPath({ method: 'get', path: '/planner/turmas', tags: ['Planner'], security: [{ bearerAuth: [] }],
+  summary: 'Lista turmas ativas; cuidador consulta apenas suas turmas', responses: { 200: jsonResponse('Turmas disponíveis') } });
+registry.registerPath({ method: 'get', path: '/planner/turmas/{id}/atividades', tags: ['Planner'], security: [{ bearerAuth: [] }],
+  summary: 'Consulta a programação semanal da turma', request: { params: idParam },
+  responses: { 200: jsonResponse('Atividades com dia útil, início, término e autor'), 403: jsonResponse('Sem vínculo com a turma'), 404: jsonResponse('Turma não encontrada') } });
+registry.registerPath({ method: 'post', path: '/planner/turmas/{id}/atividades', tags: ['Planner'], security: [{ bearerAuth: [] }],
+  summary: 'Cuidador vinculado registra atividade semanal; autor vem do login', request: { params: idParam, body: jsonBody(atividadeSchema) },
+  responses: { 201: jsonResponse('Atividade registrada'), 400: jsonResponse('Dia ou horário inválido para o turno'), 403: jsonResponse('Exige cuidador vinculado'), 409: jsonResponse('Conflito de horário') } });
+registry.registerPath({ method: 'delete', path: '/planner/turmas/{id}/atividades/{atividadeId}', tags: ['Planner'], security: [{ bearerAuth: [] }],
+  summary: 'Cuidador vinculado exclui uma atividade de sua autoria',
+  request: { params: z.object({ id: z.coerce.number().int().positive(), atividadeId: z.coerce.number().int().positive() }) },
+  responses: { 204: { description: 'Atividade excluída' }, 403: jsonResponse('Exige cuidador vinculado'), 404: jsonResponse('Atividade não encontrada ou de outro autor') } });
+registry.registerPath({ method: "post", path: "/turmas/{id}/alunos/{alunoId}/transferir", tags: ["Turmas"], security: [{ bearerAuth: [] }],
+  summary: "Transfere um aluno para outra turma ativa, preservando seu histórico (ADMIN)",
+  request: { params: z.object({ id: z.coerce.number().int().positive(), alunoId: z.coerce.number().int().positive() }),
+    body: jsonBody(z.object({ destinoId: z.number().int().positive() }).strict()) },
+  responses: { 204: { description: "Aluno transferido" }, 400: jsonResponse("Destino inválido"), 403: jsonResponse("Exige administrador"),
+    404: jsonResponse("Cadastro não encontrado"), 409: jsonResponse("Aluno fora da turma ou destino inativo") } });
+registry.registerPath({ method: "delete", path: "/turmas/{id}/alunos/{alunoId}", tags: ["Turmas"], security: [{ bearerAuth: [] }],
+  summary: "Remove apenas o vínculo do aluno com a turma, preservando cadastro e histórico (ADMIN)",
+  request: { params: z.object({ id: z.coerce.number().int().positive(), alunoId: z.coerce.number().int().positive() }) },
+  responses: { 204: { description: "Aluno sem turma" }, 403: jsonResponse("Exige administrador"),
+    404: jsonResponse("Cadastro não encontrado"), 409: jsonResponse("Aluno não está ativo nesta turma") } });
+registry.registerPath({ method: "put", path: "/turmas/{id}/alunos/{alunoId}", tags: ["Turmas"], security: [{ bearerAuth: [] }],
+  summary: "Adiciona um aluno ativo sem turma a uma turma ativa (ADMIN)",
+  request: { params: z.object({ id: z.coerce.number().int().positive(), alunoId: z.coerce.number().int().positive() }) },
+  responses: { 204: { description: "Aluno adicionado" }, 400: jsonResponse("IDs inválidos"), 401: jsonResponse("Faça login"),
+    403: jsonResponse("Exige administrador"), 404: jsonResponse("Turma ou aluno não encontrado"), 409: jsonResponse("Cadastro inativo ou aluno já associado a outra turma") } });
 registry.registerPath({ method: "get", path: "/contas/{id}", tags: ["Contas"], security: [{ bearerAuth: [] }],
   summary: "Consulta a identidade central (ADMIN)", request: { params: idParam },
   responses: { 200: jsonResponse("Conta sem credenciais"), 404: jsonResponse("Conta não encontrada") } });

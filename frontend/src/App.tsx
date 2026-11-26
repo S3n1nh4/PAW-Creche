@@ -4,6 +4,8 @@ import Login from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import MainTurmas from './pages/MainTurmas';
 import MainCuidadores from './pages/MainCuidadores';
+import MainAlunos from './pages/MainAlunos';
+import AreaCuidador from './pages/AreaCuidador';
 import MainPontodePresenca from './pages/MainPontodePresença';
 import Layout, { type Pagina } from './components/Layout';
 import { logout, usuarioSalvo, type Usuario } from './services/api';
@@ -19,7 +21,7 @@ function App() {
         <Login
           onEntrar={(usuarioLogado) => {
             setUsuario(usuarioLogado);
-            setPagina('dashboard');
+            setPagina(usuarioLogado.tipoUsuario === 'ADMIN' ? 'dashboard' : 'cuidador');
           }}
         />)
 
@@ -31,12 +33,17 @@ function App() {
     setPagina('dashboard');
   }
 
+  const paginaAtiva: Pagina = usuario.tipoUsuario === 'CUIDADOR' ? 'cuidador' : pagina === 'cuidador' ? 'dashboard' : pagina;
   return (
-    <Layout nome={usuario.nome} pagina={pagina} onNavegar={setPagina} onSair={sair}>
-      {pagina === 'dashboard' && <Dashboard />}
-      {pagina === 'turmas' && <MainTurmas />}
-      {pagina === 'cuidadores' && <MainCuidadores />}
-      {pagina === 'presenca' && <MainPontodePresenca />}
+    <Layout nome={usuario.nome} perfil={usuario.tipoUsuario} pagina={paginaAtiva}
+      onNavegar={destino => setPagina(usuario.tipoUsuario === 'ADMIN' ? destino : 'cuidador')} onSair={sair}>
+      {usuario.tipoUsuario === 'ADMIN' ? <>
+        {paginaAtiva === 'dashboard' && <Dashboard />}
+        {paginaAtiva === 'turmas' && <MainTurmas />}
+        {paginaAtiva === 'cuidadores' && <MainCuidadores />}
+        {paginaAtiva === 'alunos' && <MainAlunos />}
+        {paginaAtiva === 'presenca' && <MainPontodePresenca />}
+      </> : <AreaCuidador usuario={usuario} />}
     </Layout>
   );
 }

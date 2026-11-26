@@ -38,6 +38,11 @@ export type Conta = Prisma.ContaModel
  */
 export type Turma = Prisma.TurmaModel
 /**
+ * Model Atividade
+ *
+ */
+export type Atividade = Prisma.AtividadeModel
+/**
  * Model TurmaCuidador
  *
  */

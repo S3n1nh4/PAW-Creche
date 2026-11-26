@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiEdit2, FiEye, FiFilter, FiPlus, FiSearch, FiTrash2 } from 'react-icons/fi';
-import type { CuidadorInput } from '@creche/shared/cuidador';
+import { cadastroCuidadorSchema, type CuidadorInput } from '@creche/shared/cuidador';
 import type { Turma } from '@creche/shared/turma';
 import type { TurmaCuidador } from '@creche/shared/turmaCuidador';
 import ModalCriarCuidador, {
-  type DadoCriacaoCuidador,
+  type DadosFormularioCuidador,
 } from '../components/modais/ModalCriarCuidador';
 import ModalVerCuidador from '../components/modais/ModalVerCuidador';
 import ModalDesativarCuidador from '../components/modais/ModalDesativarCuidador';
 import {
   criarCuidador,
+  atualizarCuidador,
+  desvincularCuidador,
   listarCuidadores,
   listarTurmas,
   listarVinculos,
@@ -108,45 +110,29 @@ export default function MainCuidadores() {
     };
   }, [versao]);
 
-  async function criarCuidadorComTurmas({ //parte de associação de turmaCuidador
-  cuidador,
-  turmaIds,
-  senha,
-}: DadoCriacaoCuidador & { senha: string }) {
-  try {
-    const criado = await criarCuidador({ ...cuidador, senha });
-    if (turmaIds.length > 0) {
-      await Promise.all(
-        turmaIds.map((turmaId) => vincularCuidador(turmaId, criado.id))
-      );
+  // Reutiliza o cadastro se alguma associação falhar, evitando duplicá-lo na tentativa seguinte.
+  const criadoNestaAbertura = useRef<CuidadorResumo | null>(null);
+  async function salvarCuidadorComTurmas({ cuidador, turmaIds }: DadosFormularioCuidador) {
+    let cadastro = emEdicao ?? criadoNestaAbertura.current;
+    if (cadastro) {
+      await atualizarCuidador(cadastro.id, cuidador);
+    } else {
+      cadastro = await criarCuidador(cadastroCuidadorSchema.parse(cuidador));
+      criadoNestaAbertura.current = cadastro;
     }
+    // Lê o estado atual para que uma nova tentativa não repita vínculos já salvos.
+    const atuais = (await listarVinculos()).filter(v => v.cuidadorId === cadastro.id).map(v => v.turmaId);
+    for (const turmaId of turmaIds.filter(id => !atuais.includes(id))) await vincularCuidador(turmaId, cadastro.id);
+    for (const turmaId of atuais.filter(id => !turmaIds.includes(id))) await desvincularCuidador(turmaId, cadastro.id);
     setErro('');
     recarregar();
-  } catch (e) {
-    setErro(mensagemDeErro(e, 'Não foi possível criar o cuidador ou vincular turmas.'));
   }
-}
 
-  // ===================== ★ REMOVER (lógica) =====================
-  // Chamada pelo modal de confirmação ("Deseja remover esse cuidador?" -> Sim).
-  // Se o cuidador já tem turma ou ponto, o banco recusa; mostramos uma mensagem clara.
   async function remover(cuidador: CuidadorResumo) {
-    try {
-      await removerCuidador(cuidador.id);
-      setErro('');
-      recarregar();
-    } catch (e) {
-      const mensagem = mensagemDeErro(e, 'Não foi possível remover o cuidador.');
-      if (/foreign key|constraint|violat|referenc/i.test(mensagem)) {
-        setErro(
-          `Não é possível remover ${cuidador.nome}: ele(a) já está em uma turma ou tem ponto registrado. Tire o vínculo antes.`,
-        );
-      } else {
-        setErro(mensagem);
-      }
-    }
+    await removerCuidador(cuidador.id);
+    setErro('');
+    recarregar();
   }
-  // ===================== fim ★ REMOVER (lógica) =================
 
   // O ModalVerCuidador espera o formato do schema (telefone texto, salário número)
   function paraModal(c: CuidadorResumo): CuidadorInput {
@@ -243,7 +229,7 @@ export default function MainCuidadores() {
               <td colSpan={6} className="p-0">
                 <button
                   type="button"
-                  onClick={() => setCriando(true)}
+                  onClick={() => { criadoNestaAbertura.current = null; setCriando(true); }}
                   aria-label="Adicionar cuidador"
                   title="Adicionar cuidador"
                   className="w-full h-11 flex items-center justify-center bg-pp-300 hover:bg-pp-400 text-pp-700 cursor-pointer"
@@ -321,14 +307,11 @@ export default function MainCuidadores() {
           key={emEdicao?.id ?? 'novo'} 
           isOpen={criando || emEdicao !== null}
           turmasDisponiveis={turmas} //MODIFICAÇÕES: associação turmaCuidador em forma de id de turma adicionado
-          onCriar={({cuidador, turmaIds}) =>
-            criarCuidadorComTurmas({
-              cuidador,
-              turmaIds,
-              senha: 'SenhaTemporaria123', //senha pois cuidador tem cadastro com senha na api
-            })
-          }
+          cuidadorInicial={emEdicao}
+          turmaIdsIniciais={emEdicao ? vinculos.filter(v => v.cuidadorId === emEdicao.id).map(v => v.turmaId) : []}
+          onSalvar={salvarCuidadorComTurmas}
           onClose={() => {
+            criadoNestaAbertura.current = null;
             setCriando(false);
             setEmEdicao(null);
             recarregar();
@@ -355,10 +338,11 @@ export default function MainCuidadores() {
           Modal "Deseja remover esse cuidador?" (Não / Sim).
           "Sim" chama remover(); o próprio modal se fecha depois de confirmar. */}
       <ModalDesativarCuidador
+        key={removendo?.id ?? 'nenhum'}
         isOpen={removendo !== null}
         onClose={() => setRemovendo(null)}
-        onConfirmar={() => {
-          if (removendo) remover(removendo);
+        onConfirmar={async () => {
+          if (removendo) await remover(removendo);
         }}
       />
       {/* =================== fim ★ REMOVER (confirmação) =================== */}

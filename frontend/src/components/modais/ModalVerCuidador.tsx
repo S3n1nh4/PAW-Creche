@@ -30,7 +30,7 @@ export default function ModalVerCuidador({
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
-      style={{ fontFamily: "'Coco Gothic', sans-serif" }}
+      style={{ fontFamily: "'Comfortaa', sans-serif" }}
     >
       <div className="w-full max-w-[460px] bg-[#E1F2FE] rounded-[16px] overflow-hidden shadow-xl">
         {/* Cabeçalho */}

@@ -14,9 +14,15 @@
 
   --font-titulo: 'Utendo', sans-serif;
   --font-texto: 'Comfortaa', sans-serif;
-  --font-desc: 'Coco Gothic', sans-serif;
+  --font-desc: 'Comfortaa', sans-serif;
 }
 
 body {
   margin: 0;
+}
+/* Campos usam a fonte completa, sem os glifos limitados da versão trial. */
+@layer base {
+  input, textarea, select {
+    font-family: var(--font-texto);
+  }
 }

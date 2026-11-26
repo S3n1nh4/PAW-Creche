@@ -27,37 +27,48 @@ export type AggregateTurma = {
 }
 
 export type TurmaAvgAggregateOutputType = {
+  criadoPorId: number | null
   id: number | null
   anoLetivo: number | null
 }
 
 export type TurmaSumAggregateOutputType = {
+  criadoPorId: number | null
   id: number | null
   anoLetivo: number | null
 }
 
 export type TurmaMinAggregateOutputType = {
+  sala: string | null
+  criadoPorId: number | null
   id: number | null
   nome: string | null
   anoLetivo: number | null
+  faixaEtaria: string | null
   turno: string | null
   ativo: boolean | null
   criadoEm: Date | null
 }
 
 export type TurmaMaxAggregateOutputType = {
+  sala: string | null
+  criadoPorId: number | null
   id: number | null
   nome: string | null
   anoLetivo: number | null
+  faixaEtaria: string | null
   turno: string | null
   ativo: boolean | null
   criadoEm: Date | null
 }
 
 export type TurmaCountAggregateOutputType = {
+  sala: number
+  criadoPorId: number
   id: number
   nome: number
   anoLetivo: number
+  faixaEtaria: number
   turno: number
   ativo: number
   criadoEm: number
@@ -66,37 +77,48 @@ export type TurmaCountAggregateOutputType = {
 
 
 export type TurmaAvgAggregateInputType = {
+  criadoPorId?: true
   id?: true
   anoLetivo?: true
 }
 
 export type TurmaSumAggregateInputType = {
+  criadoPorId?: true
   id?: true
   anoLetivo?: true
 }
 
 export type TurmaMinAggregateInputType = {
+  sala?: true
+  criadoPorId?: true
   id?: true
   nome?: true
   anoLetivo?: true
+  faixaEtaria?: true
   turno?: true
   ativo?: true
   criadoEm?: true
 }
 
 export type TurmaMaxAggregateInputType = {
+  sala?: true
+  criadoPorId?: true
   id?: true
   nome?: true
   anoLetivo?: true
+  faixaEtaria?: true
   turno?: true
   ativo?: true
   criadoEm?: true
 }
 
 export type TurmaCountAggregateInputType = {
+  sala?: true
+  criadoPorId?: true
   id?: true
   nome?: true
   anoLetivo?: true
+  faixaEtaria?: true
   turno?: true
   ativo?: true
   criadoEm?: true
@@ -190,9 +212,12 @@ export type TurmaGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 export type TurmaGroupByOutputType = {
+  sala: string | null
+  criadoPorId: number | null
   id: number
   nome: string
   anoLetivo: number
+  faixaEtaria: string | null
   turno: string
   ativo: boolean
   criadoEm: Date
@@ -222,24 +247,34 @@ export type TurmaWhereInput = {
   AND?: Prisma.TurmaWhereInput | Prisma.TurmaWhereInput[]
   OR?: Prisma.TurmaWhereInput[]
   NOT?: Prisma.TurmaWhereInput | Prisma.TurmaWhereInput[]
+  sala?: Prisma.StringNullableFilter<"Turma"> | string | null
+  criadoPorId?: Prisma.IntNullableFilter<"Turma"> | number | null
   id?: Prisma.IntFilter<"Turma"> | number
   nome?: Prisma.StringFilter<"Turma"> | string
   anoLetivo?: Prisma.IntFilter<"Turma"> | number
+  faixaEtaria?: Prisma.StringNullableFilter<"Turma"> | string | null
   turno?: Prisma.StringFilter<"Turma"> | string
   ativo?: Prisma.BoolFilter<"Turma"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Turma"> | Date | string
+  atividades?: Prisma.AtividadeListRelationFilter
+  criadoPor?: Prisma.XOR<Prisma.AdminNullableScalarRelationFilter, Prisma.AdminWhereInput> | null
   cuidadores?: Prisma.TurmaCuidadorListRelationFilter
   alunos?: Prisma.AlunoListRelationFilter
   presencas?: Prisma.PresencaListRelationFilter
 }
 
 export type TurmaOrderByWithRelationInput = {
+  sala?: Prisma.SortOrderInput | Prisma.SortOrder
+  criadoPorId?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   anoLetivo?: Prisma.SortOrder
+  faixaEtaria?: Prisma.SortOrderInput | Prisma.SortOrder
   turno?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
+  atividades?: Prisma.AtividadeOrderByRelationAggregateInput
+  criadoPor?: Prisma.AdminOrderByWithRelationInput
   cuidadores?: Prisma.TurmaCuidadorOrderByRelationAggregateInput
   alunos?: Prisma.AlunoOrderByRelationAggregateInput
   presencas?: Prisma.PresencaOrderByRelationAggregateInput
@@ -251,20 +286,28 @@ export type TurmaWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TurmaWhereInput | Prisma.TurmaWhereInput[]
   OR?: Prisma.TurmaWhereInput[]
   NOT?: Prisma.TurmaWhereInput | Prisma.TurmaWhereInput[]
+  sala?: Prisma.StringNullableFilter<"Turma"> | string | null
+  criadoPorId?: Prisma.IntNullableFilter<"Turma"> | number | null
   nome?: Prisma.StringFilter<"Turma"> | string
   anoLetivo?: Prisma.IntFilter<"Turma"> | number
+  faixaEtaria?: Prisma.StringNullableFilter<"Turma"> | string | null
   turno?: Prisma.StringFilter<"Turma"> | string
   ativo?: Prisma.BoolFilter<"Turma"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Turma"> | Date | string
+  atividades?: Prisma.AtividadeListRelationFilter
+  criadoPor?: Prisma.XOR<Prisma.AdminNullableScalarRelationFilter, Prisma.AdminWhereInput> | null
   cuidadores?: Prisma.TurmaCuidadorListRelationFilter
   alunos?: Prisma.AlunoListRelationFilter
   presencas?: Prisma.PresencaListRelationFilter
 }, "id" | "nome_anoLetivo_turno">
 
 export type TurmaOrderByWithAggregationInput = {
+  sala?: Prisma.SortOrderInput | Prisma.SortOrder
+  criadoPorId?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   anoLetivo?: Prisma.SortOrder
+  faixaEtaria?: Prisma.SortOrderInput | Prisma.SortOrder
   turno?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
@@ -279,84 +322,121 @@ export type TurmaScalarWhereWithAggregatesInput = {
   AND?: Prisma.TurmaScalarWhereWithAggregatesInput | Prisma.TurmaScalarWhereWithAggregatesInput[]
   OR?: Prisma.TurmaScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TurmaScalarWhereWithAggregatesInput | Prisma.TurmaScalarWhereWithAggregatesInput[]
+  sala?: Prisma.StringNullableWithAggregatesFilter<"Turma"> | string | null
+  criadoPorId?: Prisma.IntNullableWithAggregatesFilter<"Turma"> | number | null
   id?: Prisma.IntWithAggregatesFilter<"Turma"> | number
   nome?: Prisma.StringWithAggregatesFilter<"Turma"> | string
   anoLetivo?: Prisma.IntWithAggregatesFilter<"Turma"> | number
+  faixaEtaria?: Prisma.StringNullableWithAggregatesFilter<"Turma"> | string | null
   turno?: Prisma.StringWithAggregatesFilter<"Turma"> | string
   ativo?: Prisma.BoolWithAggregatesFilter<"Turma"> | boolean
   criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Turma"> | Date | string
 }
 
 export type TurmaCreateInput = {
+  sala?: string | null
   nome: string
   anoLetivo: number
+  faixaEtaria?: string | null
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutTurmaInput
+  criadoPor?: Prisma.AdminCreateNestedOneWithoutTurmasCriadasInput
   cuidadores?: Prisma.TurmaCuidadorCreateNestedManyWithoutTurmaInput
   alunos?: Prisma.AlunoCreateNestedManyWithoutTurmaInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutTurmaInput
 }
 
 export type TurmaUncheckedCreateInput = {
+  sala?: string | null
+  criadoPorId?: number | null
   id?: number
   nome: string
   anoLetivo: number
+  faixaEtaria?: string | null
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutTurmaInput
   cuidadores?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutTurmaInput
   alunos?: Prisma.AlunoUncheckedCreateNestedManyWithoutTurmaInput
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutTurmaInput
 }
 
 export type TurmaUpdateInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUpdateManyWithoutTurmaNestedInput
+  criadoPor?: Prisma.AdminUpdateOneWithoutTurmasCriadasNestedInput
   cuidadores?: Prisma.TurmaCuidadorUpdateManyWithoutTurmaNestedInput
   alunos?: Prisma.AlunoUpdateManyWithoutTurmaNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutTurmaNestedInput
 }
 
 export type TurmaUncheckedUpdateInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  criadoPorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutTurmaNestedInput
   cuidadores?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutTurmaNestedInput
   alunos?: Prisma.AlunoUncheckedUpdateManyWithoutTurmaNestedInput
   presencas?: Prisma.PresencaUncheckedUpdateManyWithoutTurmaNestedInput
 }
 
 export type TurmaCreateManyInput = {
+  sala?: string | null
+  criadoPorId?: number | null
   id?: number
   nome: string
   anoLetivo: number
+  faixaEtaria?: string | null
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
 }
 
 export type TurmaUpdateManyMutationInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type TurmaUncheckedUpdateManyInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  criadoPorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TurmaListRelationFilter = {
+  every?: Prisma.TurmaWhereInput
+  some?: Prisma.TurmaWhereInput
+  none?: Prisma.TurmaWhereInput
+}
+
+export type TurmaOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type TurmaNomeAnoLetivoTurnoCompoundUniqueInput = {
@@ -366,38 +446,49 @@ export type TurmaNomeAnoLetivoTurnoCompoundUniqueInput = {
 }
 
 export type TurmaCountOrderByAggregateInput = {
+  sala?: Prisma.SortOrder
+  criadoPorId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   anoLetivo?: Prisma.SortOrder
+  faixaEtaria?: Prisma.SortOrder
   turno?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
 }
 
 export type TurmaAvgOrderByAggregateInput = {
+  criadoPorId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   anoLetivo?: Prisma.SortOrder
 }
 
 export type TurmaMaxOrderByAggregateInput = {
+  sala?: Prisma.SortOrder
+  criadoPorId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   anoLetivo?: Prisma.SortOrder
+  faixaEtaria?: Prisma.SortOrder
   turno?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
 }
 
 export type TurmaMinOrderByAggregateInput = {
+  sala?: Prisma.SortOrder
+  criadoPorId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   anoLetivo?: Prisma.SortOrder
+  faixaEtaria?: Prisma.SortOrder
   turno?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
 }
 
 export type TurmaSumOrderByAggregateInput = {
+  criadoPorId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   anoLetivo?: Prisma.SortOrder
 }
@@ -410,6 +501,62 @@ export type TurmaScalarRelationFilter = {
 export type TurmaNullableScalarRelationFilter = {
   is?: Prisma.TurmaWhereInput | null
   isNot?: Prisma.TurmaWhereInput | null
+}
+
+export type TurmaCreateNestedManyWithoutCriadoPorInput = {
+  create?: Prisma.XOR<Prisma.TurmaCreateWithoutCriadoPorInput, Prisma.TurmaUncheckedCreateWithoutCriadoPorInput> | Prisma.TurmaCreateWithoutCriadoPorInput[] | Prisma.TurmaUncheckedCreateWithoutCriadoPorInput[]
+  connectOrCreate?: Prisma.TurmaCreateOrConnectWithoutCriadoPorInput | Prisma.TurmaCreateOrConnectWithoutCriadoPorInput[]
+  createMany?: Prisma.TurmaCreateManyCriadoPorInputEnvelope
+  connect?: Prisma.TurmaWhereUniqueInput | Prisma.TurmaWhereUniqueInput[]
+}
+
+export type TurmaUncheckedCreateNestedManyWithoutCriadoPorInput = {
+  create?: Prisma.XOR<Prisma.TurmaCreateWithoutCriadoPorInput, Prisma.TurmaUncheckedCreateWithoutCriadoPorInput> | Prisma.TurmaCreateWithoutCriadoPorInput[] | Prisma.TurmaUncheckedCreateWithoutCriadoPorInput[]
+  connectOrCreate?: Prisma.TurmaCreateOrConnectWithoutCriadoPorInput | Prisma.TurmaCreateOrConnectWithoutCriadoPorInput[]
+  createMany?: Prisma.TurmaCreateManyCriadoPorInputEnvelope
+  connect?: Prisma.TurmaWhereUniqueInput | Prisma.TurmaWhereUniqueInput[]
+}
+
+export type TurmaUpdateManyWithoutCriadoPorNestedInput = {
+  create?: Prisma.XOR<Prisma.TurmaCreateWithoutCriadoPorInput, Prisma.TurmaUncheckedCreateWithoutCriadoPorInput> | Prisma.TurmaCreateWithoutCriadoPorInput[] | Prisma.TurmaUncheckedCreateWithoutCriadoPorInput[]
+  connectOrCreate?: Prisma.TurmaCreateOrConnectWithoutCriadoPorInput | Prisma.TurmaCreateOrConnectWithoutCriadoPorInput[]
+  upsert?: Prisma.TurmaUpsertWithWhereUniqueWithoutCriadoPorInput | Prisma.TurmaUpsertWithWhereUniqueWithoutCriadoPorInput[]
+  createMany?: Prisma.TurmaCreateManyCriadoPorInputEnvelope
+  set?: Prisma.TurmaWhereUniqueInput | Prisma.TurmaWhereUniqueInput[]
+  disconnect?: Prisma.TurmaWhereUniqueInput | Prisma.TurmaWhereUniqueInput[]
+  delete?: Prisma.TurmaWhereUniqueInput | Prisma.TurmaWhereUniqueInput[]
+  connect?: Prisma.TurmaWhereUniqueInput | Prisma.TurmaWhereUniqueInput[]
+  update?: Prisma.TurmaUpdateWithWhereUniqueWithoutCriadoPorInput | Prisma.TurmaUpdateWithWhereUniqueWithoutCriadoPorInput[]
+  updateMany?: Prisma.TurmaUpdateManyWithWhereWithoutCriadoPorInput | Prisma.TurmaUpdateManyWithWhereWithoutCriadoPorInput[]
+  deleteMany?: Prisma.TurmaScalarWhereInput | Prisma.TurmaScalarWhereInput[]
+}
+
+export type TurmaUncheckedUpdateManyWithoutCriadoPorNestedInput = {
+  create?: Prisma.XOR<Prisma.TurmaCreateWithoutCriadoPorInput, Prisma.TurmaUncheckedCreateWithoutCriadoPorInput> | Prisma.TurmaCreateWithoutCriadoPorInput[] | Prisma.TurmaUncheckedCreateWithoutCriadoPorInput[]
+  connectOrCreate?: Prisma.TurmaCreateOrConnectWithoutCriadoPorInput | Prisma.TurmaCreateOrConnectWithoutCriadoPorInput[]
+  upsert?: Prisma.TurmaUpsertWithWhereUniqueWithoutCriadoPorInput | Prisma.TurmaUpsertWithWhereUniqueWithoutCriadoPorInput[]
+  createMany?: Prisma.TurmaCreateManyCriadoPorInputEnvelope
+  set?: Prisma.TurmaWhereUniqueInput | Prisma.TurmaWhereUniqueInput[]
+  disconnect?: Prisma.TurmaWhereUniqueInput | Prisma.TurmaWhereUniqueInput[]
+  delete?: Prisma.TurmaWhereUniqueInput | Prisma.TurmaWhereUniqueInput[]
+  connect?: Prisma.TurmaWhereUniqueInput | Prisma.TurmaWhereUniqueInput[]
+  update?: Prisma.TurmaUpdateWithWhereUniqueWithoutCriadoPorInput | Prisma.TurmaUpdateWithWhereUniqueWithoutCriadoPorInput[]
+  updateMany?: Prisma.TurmaUpdateManyWithWhereWithoutCriadoPorInput | Prisma.TurmaUpdateManyWithWhereWithoutCriadoPorInput[]
+  deleteMany?: Prisma.TurmaScalarWhereInput | Prisma.TurmaScalarWhereInput[]
+}
+
+export type TurmaCreateNestedOneWithoutAtividadesInput = {
+  create?: Prisma.XOR<Prisma.TurmaCreateWithoutAtividadesInput, Prisma.TurmaUncheckedCreateWithoutAtividadesInput>
+  connectOrCreate?: Prisma.TurmaCreateOrConnectWithoutAtividadesInput
+  connect?: Prisma.TurmaWhereUniqueInput
+}
+
+export type TurmaUpdateOneRequiredWithoutAtividadesNestedInput = {
+  create?: Prisma.XOR<Prisma.TurmaCreateWithoutAtividadesInput, Prisma.TurmaUncheckedCreateWithoutAtividadesInput>
+  connectOrCreate?: Prisma.TurmaCreateOrConnectWithoutAtividadesInput
+  upsert?: Prisma.TurmaUpsertWithoutAtividadesInput
+  connect?: Prisma.TurmaWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TurmaUpdateToOneWithWhereWithoutAtividadesInput, Prisma.TurmaUpdateWithoutAtividadesInput>, Prisma.TurmaUncheckedUpdateWithoutAtividadesInput>
 }
 
 export type TurmaCreateNestedOneWithoutCuidadoresInput = {
@@ -456,23 +603,175 @@ export type TurmaUpdateOneRequiredWithoutPresencasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TurmaUpdateToOneWithWhereWithoutPresencasInput, Prisma.TurmaUpdateWithoutPresencasInput>, Prisma.TurmaUncheckedUpdateWithoutPresencasInput>
 }
 
-export type TurmaCreateWithoutCuidadoresInput = {
+export type TurmaCreateWithoutCriadoPorInput = {
+  sala?: string | null
   nome: string
   anoLetivo: number
+  faixaEtaria?: string | null
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutTurmaInput
+  cuidadores?: Prisma.TurmaCuidadorCreateNestedManyWithoutTurmaInput
+  alunos?: Prisma.AlunoCreateNestedManyWithoutTurmaInput
+  presencas?: Prisma.PresencaCreateNestedManyWithoutTurmaInput
+}
+
+export type TurmaUncheckedCreateWithoutCriadoPorInput = {
+  sala?: string | null
+  id?: number
+  nome: string
+  anoLetivo: number
+  faixaEtaria?: string | null
+  turno: string
+  ativo?: boolean
+  criadoEm?: Date | string
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutTurmaInput
+  cuidadores?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutTurmaInput
+  alunos?: Prisma.AlunoUncheckedCreateNestedManyWithoutTurmaInput
+  presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutTurmaInput
+}
+
+export type TurmaCreateOrConnectWithoutCriadoPorInput = {
+  where: Prisma.TurmaWhereUniqueInput
+  create: Prisma.XOR<Prisma.TurmaCreateWithoutCriadoPorInput, Prisma.TurmaUncheckedCreateWithoutCriadoPorInput>
+}
+
+export type TurmaCreateManyCriadoPorInputEnvelope = {
+  data: Prisma.TurmaCreateManyCriadoPorInput | Prisma.TurmaCreateManyCriadoPorInput[]
+  skipDuplicates?: boolean
+}
+
+export type TurmaUpsertWithWhereUniqueWithoutCriadoPorInput = {
+  where: Prisma.TurmaWhereUniqueInput
+  update: Prisma.XOR<Prisma.TurmaUpdateWithoutCriadoPorInput, Prisma.TurmaUncheckedUpdateWithoutCriadoPorInput>
+  create: Prisma.XOR<Prisma.TurmaCreateWithoutCriadoPorInput, Prisma.TurmaUncheckedCreateWithoutCriadoPorInput>
+}
+
+export type TurmaUpdateWithWhereUniqueWithoutCriadoPorInput = {
+  where: Prisma.TurmaWhereUniqueInput
+  data: Prisma.XOR<Prisma.TurmaUpdateWithoutCriadoPorInput, Prisma.TurmaUncheckedUpdateWithoutCriadoPorInput>
+}
+
+export type TurmaUpdateManyWithWhereWithoutCriadoPorInput = {
+  where: Prisma.TurmaScalarWhereInput
+  data: Prisma.XOR<Prisma.TurmaUpdateManyMutationInput, Prisma.TurmaUncheckedUpdateManyWithoutCriadoPorInput>
+}
+
+export type TurmaScalarWhereInput = {
+  AND?: Prisma.TurmaScalarWhereInput | Prisma.TurmaScalarWhereInput[]
+  OR?: Prisma.TurmaScalarWhereInput[]
+  NOT?: Prisma.TurmaScalarWhereInput | Prisma.TurmaScalarWhereInput[]
+  sala?: Prisma.StringNullableFilter<"Turma"> | string | null
+  criadoPorId?: Prisma.IntNullableFilter<"Turma"> | number | null
+  id?: Prisma.IntFilter<"Turma"> | number
+  nome?: Prisma.StringFilter<"Turma"> | string
+  anoLetivo?: Prisma.IntFilter<"Turma"> | number
+  faixaEtaria?: Prisma.StringNullableFilter<"Turma"> | string | null
+  turno?: Prisma.StringFilter<"Turma"> | string
+  ativo?: Prisma.BoolFilter<"Turma"> | boolean
+  criadoEm?: Prisma.DateTimeFilter<"Turma"> | Date | string
+}
+
+export type TurmaCreateWithoutAtividadesInput = {
+  sala?: string | null
+  nome: string
+  anoLetivo: number
+  faixaEtaria?: string | null
+  turno: string
+  ativo?: boolean
+  criadoEm?: Date | string
+  criadoPor?: Prisma.AdminCreateNestedOneWithoutTurmasCriadasInput
+  cuidadores?: Prisma.TurmaCuidadorCreateNestedManyWithoutTurmaInput
+  alunos?: Prisma.AlunoCreateNestedManyWithoutTurmaInput
+  presencas?: Prisma.PresencaCreateNestedManyWithoutTurmaInput
+}
+
+export type TurmaUncheckedCreateWithoutAtividadesInput = {
+  sala?: string | null
+  criadoPorId?: number | null
+  id?: number
+  nome: string
+  anoLetivo: number
+  faixaEtaria?: string | null
+  turno: string
+  ativo?: boolean
+  criadoEm?: Date | string
+  cuidadores?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutTurmaInput
+  alunos?: Prisma.AlunoUncheckedCreateNestedManyWithoutTurmaInput
+  presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutTurmaInput
+}
+
+export type TurmaCreateOrConnectWithoutAtividadesInput = {
+  where: Prisma.TurmaWhereUniqueInput
+  create: Prisma.XOR<Prisma.TurmaCreateWithoutAtividadesInput, Prisma.TurmaUncheckedCreateWithoutAtividadesInput>
+}
+
+export type TurmaUpsertWithoutAtividadesInput = {
+  update: Prisma.XOR<Prisma.TurmaUpdateWithoutAtividadesInput, Prisma.TurmaUncheckedUpdateWithoutAtividadesInput>
+  create: Prisma.XOR<Prisma.TurmaCreateWithoutAtividadesInput, Prisma.TurmaUncheckedCreateWithoutAtividadesInput>
+  where?: Prisma.TurmaWhereInput
+}
+
+export type TurmaUpdateToOneWithWhereWithoutAtividadesInput = {
+  where?: Prisma.TurmaWhereInput
+  data: Prisma.XOR<Prisma.TurmaUpdateWithoutAtividadesInput, Prisma.TurmaUncheckedUpdateWithoutAtividadesInput>
+}
+
+export type TurmaUpdateWithoutAtividadesInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  turno?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  criadoPor?: Prisma.AdminUpdateOneWithoutTurmasCriadasNestedInput
+  cuidadores?: Prisma.TurmaCuidadorUpdateManyWithoutTurmaNestedInput
+  alunos?: Prisma.AlunoUpdateManyWithoutTurmaNestedInput
+  presencas?: Prisma.PresencaUpdateManyWithoutTurmaNestedInput
+}
+
+export type TurmaUncheckedUpdateWithoutAtividadesInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  criadoPorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  turno?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cuidadores?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutTurmaNestedInput
+  alunos?: Prisma.AlunoUncheckedUpdateManyWithoutTurmaNestedInput
+  presencas?: Prisma.PresencaUncheckedUpdateManyWithoutTurmaNestedInput
+}
+
+export type TurmaCreateWithoutCuidadoresInput = {
+  sala?: string | null
+  nome: string
+  anoLetivo: number
+  faixaEtaria?: string | null
+  turno: string
+  ativo?: boolean
+  criadoEm?: Date | string
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutTurmaInput
+  criadoPor?: Prisma.AdminCreateNestedOneWithoutTurmasCriadasInput
   alunos?: Prisma.AlunoCreateNestedManyWithoutTurmaInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutTurmaInput
 }
 
 export type TurmaUncheckedCreateWithoutCuidadoresInput = {
+  sala?: string | null
+  criadoPorId?: number | null
   id?: number
   nome: string
   anoLetivo: number
+  faixaEtaria?: string | null
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutTurmaInput
   alunos?: Prisma.AlunoUncheckedCreateNestedManyWithoutTurmaInput
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutTurmaInput
 }
@@ -494,43 +793,59 @@ export type TurmaUpdateToOneWithWhereWithoutCuidadoresInput = {
 }
 
 export type TurmaUpdateWithoutCuidadoresInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUpdateManyWithoutTurmaNestedInput
+  criadoPor?: Prisma.AdminUpdateOneWithoutTurmasCriadasNestedInput
   alunos?: Prisma.AlunoUpdateManyWithoutTurmaNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutTurmaNestedInput
 }
 
 export type TurmaUncheckedUpdateWithoutCuidadoresInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  criadoPorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutTurmaNestedInput
   alunos?: Prisma.AlunoUncheckedUpdateManyWithoutTurmaNestedInput
   presencas?: Prisma.PresencaUncheckedUpdateManyWithoutTurmaNestedInput
 }
 
 export type TurmaCreateWithoutAlunosInput = {
+  sala?: string | null
   nome: string
   anoLetivo: number
+  faixaEtaria?: string | null
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutTurmaInput
+  criadoPor?: Prisma.AdminCreateNestedOneWithoutTurmasCriadasInput
   cuidadores?: Prisma.TurmaCuidadorCreateNestedManyWithoutTurmaInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutTurmaInput
 }
 
 export type TurmaUncheckedCreateWithoutAlunosInput = {
+  sala?: string | null
+  criadoPorId?: number | null
   id?: number
   nome: string
   anoLetivo: number
+  faixaEtaria?: string | null
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutTurmaInput
   cuidadores?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutTurmaInput
   presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutTurmaInput
 }
@@ -552,43 +867,59 @@ export type TurmaUpdateToOneWithWhereWithoutAlunosInput = {
 }
 
 export type TurmaUpdateWithoutAlunosInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUpdateManyWithoutTurmaNestedInput
+  criadoPor?: Prisma.AdminUpdateOneWithoutTurmasCriadasNestedInput
   cuidadores?: Prisma.TurmaCuidadorUpdateManyWithoutTurmaNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutTurmaNestedInput
 }
 
 export type TurmaUncheckedUpdateWithoutAlunosInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  criadoPorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutTurmaNestedInput
   cuidadores?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutTurmaNestedInput
   presencas?: Prisma.PresencaUncheckedUpdateManyWithoutTurmaNestedInput
 }
 
 export type TurmaCreateWithoutPresencasInput = {
+  sala?: string | null
   nome: string
   anoLetivo: number
+  faixaEtaria?: string | null
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
+  atividades?: Prisma.AtividadeCreateNestedManyWithoutTurmaInput
+  criadoPor?: Prisma.AdminCreateNestedOneWithoutTurmasCriadasInput
   cuidadores?: Prisma.TurmaCuidadorCreateNestedManyWithoutTurmaInput
   alunos?: Prisma.AlunoCreateNestedManyWithoutTurmaInput
 }
 
 export type TurmaUncheckedCreateWithoutPresencasInput = {
+  sala?: string | null
+  criadoPorId?: number | null
   id?: number
   nome: string
   anoLetivo: number
+  faixaEtaria?: string | null
   turno: string
   ativo?: boolean
   criadoEm?: Date | string
+  atividades?: Prisma.AtividadeUncheckedCreateNestedManyWithoutTurmaInput
   cuidadores?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutTurmaInput
   alunos?: Prisma.AlunoUncheckedCreateNestedManyWithoutTurmaInput
 }
@@ -610,24 +941,83 @@ export type TurmaUpdateToOneWithWhereWithoutPresencasInput = {
 }
 
 export type TurmaUpdateWithoutPresencasInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUpdateManyWithoutTurmaNestedInput
+  criadoPor?: Prisma.AdminUpdateOneWithoutTurmasCriadasNestedInput
   cuidadores?: Prisma.TurmaCuidadorUpdateManyWithoutTurmaNestedInput
   alunos?: Prisma.AlunoUpdateManyWithoutTurmaNestedInput
 }
 
 export type TurmaUncheckedUpdateWithoutPresencasInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  criadoPorId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turno?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutTurmaNestedInput
   cuidadores?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutTurmaNestedInput
   alunos?: Prisma.AlunoUncheckedUpdateManyWithoutTurmaNestedInput
+}
+
+export type TurmaCreateManyCriadoPorInput = {
+  sala?: string | null
+  id?: number
+  nome: string
+  anoLetivo: number
+  faixaEtaria?: string | null
+  turno: string
+  ativo?: boolean
+  criadoEm?: Date | string
+}
+
+export type TurmaUpdateWithoutCriadoPorInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  turno?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUpdateManyWithoutTurmaNestedInput
+  cuidadores?: Prisma.TurmaCuidadorUpdateManyWithoutTurmaNestedInput
+  alunos?: Prisma.AlunoUpdateManyWithoutTurmaNestedInput
+  presencas?: Prisma.PresencaUpdateManyWithoutTurmaNestedInput
+}
+
+export type TurmaUncheckedUpdateWithoutCriadoPorInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  turno?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atividades?: Prisma.AtividadeUncheckedUpdateManyWithoutTurmaNestedInput
+  cuidadores?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutTurmaNestedInput
+  alunos?: Prisma.AlunoUncheckedUpdateManyWithoutTurmaNestedInput
+  presencas?: Prisma.PresencaUncheckedUpdateManyWithoutTurmaNestedInput
+}
+
+export type TurmaUncheckedUpdateManyWithoutCriadoPorInput = {
+  sala?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  anoLetivo?: Prisma.IntFieldUpdateOperationsInput | number
+  faixaEtaria?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  turno?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -636,12 +1026,14 @@ export type TurmaUncheckedUpdateWithoutPresencasInput = {
  */
 
 export type TurmaCountOutputType = {
+  atividades: number
   cuidadores: number
   alunos: number
   presencas: number
 }
 
 export type TurmaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  atividades?: boolean | TurmaCountOutputTypeCountAtividadesArgs
   cuidadores?: boolean | TurmaCountOutputTypeCountCuidadoresArgs
   alunos?: boolean | TurmaCountOutputTypeCountAlunosArgs
   presencas?: boolean | TurmaCountOutputTypeCountPresencasArgs
@@ -655,6 +1047,13 @@ export type TurmaCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
    * Select specific fields to fetch from the TurmaCountOutputType
    */
   select?: Prisma.TurmaCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * TurmaCountOutputType without action
+ */
+export type TurmaCountOutputTypeCountAtividadesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AtividadeWhereInput
 }
 
 /**
@@ -680,12 +1079,17 @@ export type TurmaCountOutputTypeCountPresencasArgs<ExtArgs extends runtime.Types
 
 
 export type TurmaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  sala?: boolean
+  criadoPorId?: boolean
   id?: boolean
   nome?: boolean
   anoLetivo?: boolean
+  faixaEtaria?: boolean
   turno?: boolean
   ativo?: boolean
   criadoEm?: boolean
+  atividades?: boolean | Prisma.Turma$atividadesArgs<ExtArgs>
+  criadoPor?: boolean | Prisma.Turma$criadoPorArgs<ExtArgs>
   cuidadores?: boolean | Prisma.Turma$cuidadoresArgs<ExtArgs>
   alunos?: boolean | Prisma.Turma$alunosArgs<ExtArgs>
   presencas?: boolean | Prisma.Turma$presencasArgs<ExtArgs>
@@ -693,53 +1097,75 @@ export type TurmaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 }, ExtArgs["result"]["turma"]>
 
 export type TurmaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  sala?: boolean
+  criadoPorId?: boolean
   id?: boolean
   nome?: boolean
   anoLetivo?: boolean
+  faixaEtaria?: boolean
   turno?: boolean
   ativo?: boolean
   criadoEm?: boolean
+  criadoPor?: boolean | Prisma.Turma$criadoPorArgs<ExtArgs>
 }, ExtArgs["result"]["turma"]>
 
 export type TurmaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  sala?: boolean
+  criadoPorId?: boolean
   id?: boolean
   nome?: boolean
   anoLetivo?: boolean
+  faixaEtaria?: boolean
   turno?: boolean
   ativo?: boolean
   criadoEm?: boolean
+  criadoPor?: boolean | Prisma.Turma$criadoPorArgs<ExtArgs>
 }, ExtArgs["result"]["turma"]>
 
 export type TurmaSelectScalar = {
+  sala?: boolean
+  criadoPorId?: boolean
   id?: boolean
   nome?: boolean
   anoLetivo?: boolean
+  faixaEtaria?: boolean
   turno?: boolean
   ativo?: boolean
   criadoEm?: boolean
 }
 
-export type TurmaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "anoLetivo" | "turno" | "ativo" | "criadoEm", ExtArgs["result"]["turma"]>
+export type TurmaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"sala" | "criadoPorId" | "id" | "nome" | "anoLetivo" | "faixaEtaria" | "turno" | "ativo" | "criadoEm", ExtArgs["result"]["turma"]>
 export type TurmaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  atividades?: boolean | Prisma.Turma$atividadesArgs<ExtArgs>
+  criadoPor?: boolean | Prisma.Turma$criadoPorArgs<ExtArgs>
   cuidadores?: boolean | Prisma.Turma$cuidadoresArgs<ExtArgs>
   alunos?: boolean | Prisma.Turma$alunosArgs<ExtArgs>
   presencas?: boolean | Prisma.Turma$presencasArgs<ExtArgs>
   _count?: boolean | Prisma.TurmaCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type TurmaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type TurmaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type TurmaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  criadoPor?: boolean | Prisma.Turma$criadoPorArgs<ExtArgs>
+}
+export type TurmaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  criadoPor?: boolean | Prisma.Turma$criadoPorArgs<ExtArgs>
+}
 
 export type $TurmaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Turma"
   objects: {
+    atividades: Prisma.$AtividadePayload<ExtArgs>[]
+    criadoPor: Prisma.$AdminPayload<ExtArgs> | null
     cuidadores: Prisma.$TurmaCuidadorPayload<ExtArgs>[]
     alunos: Prisma.$AlunoPayload<ExtArgs>[]
     presencas: Prisma.$PresencaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    sala: string | null
+    criadoPorId: number | null
     id: number
     nome: string
     anoLetivo: number
+    faixaEtaria: string | null
     turno: string
     ativo: boolean
     criadoEm: Date
@@ -826,8 +1252,8 @@ export interface TurmaDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * // Get first 10 Turmas
    * const turmas = await prisma.turma.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const turmaWithIdOnly = await prisma.turma.findMany({ select: { id: true } })
+   * // Only select the `sala`
+   * const turmaWithSalaOnly = await prisma.turma.findMany({ select: { sala: true } })
    * 
    */
   findMany<T extends TurmaFindManyArgs>(args?: Prisma.SelectSubset<T, TurmaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TurmaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -871,9 +1297,9 @@ export interface TurmaDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    *   ]
    * })
    * 
-   * // Create many Turmas and only return the `id`
-   * const turmaWithIdOnly = await prisma.turma.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Turmas and only return the `sala`
+   * const turmaWithSalaOnly = await prisma.turma.createManyAndReturn({
+   *   select: { sala: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -962,9 +1388,9 @@ export interface TurmaDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    *   ]
    * })
    * 
-   * // Update zero or more Turmas and only return the `id`
-   * const turmaWithIdOnly = await prisma.turma.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Turmas and only return the `sala`
+   * const turmaWithSalaOnly = await prisma.turma.updateManyAndReturn({
+   *   select: { sala: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1137,6 +1563,8 @@ readonly fields: TurmaFieldRefs;
  */
 export interface Prisma__TurmaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  atividades<T extends Prisma.Turma$atividadesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Turma$atividadesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  criadoPor<T extends Prisma.Turma$criadoPorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Turma$criadoPorArgs<ExtArgs>>): Prisma.Prisma__AdminClient<runtime.Types.Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   cuidadores<T extends Prisma.Turma$cuidadoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Turma$cuidadoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TurmaCuidadorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   alunos<T extends Prisma.Turma$alunosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Turma$alunosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AlunoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   presencas<T extends Prisma.Turma$presencasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Turma$presencasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PresencaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1169,9 +1597,12 @@ export interface Prisma__TurmaClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the Turma model
  */
 export interface TurmaFieldRefs {
+  readonly sala: Prisma.FieldRef<"Turma", 'String'>
+  readonly criadoPorId: Prisma.FieldRef<"Turma", 'Int'>
   readonly id: Prisma.FieldRef<"Turma", 'Int'>
   readonly nome: Prisma.FieldRef<"Turma", 'String'>
   readonly anoLetivo: Prisma.FieldRef<"Turma", 'Int'>
+  readonly faixaEtaria: Prisma.FieldRef<"Turma", 'String'>
   readonly turno: Prisma.FieldRef<"Turma", 'String'>
   readonly ativo: Prisma.FieldRef<"Turma", 'Boolean'>
   readonly criadoEm: Prisma.FieldRef<"Turma", 'DateTime'>
@@ -1429,6 +1860,10 @@ export type TurmaCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    */
   data: Prisma.TurmaCreateManyInput | Prisma.TurmaCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TurmaIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1499,6 +1934,10 @@ export type TurmaUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many Turmas to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TurmaIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1565,6 +2004,49 @@ export type TurmaDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Turmas to delete.
    */
   limit?: number
+}
+
+/**
+ * Turma.atividades
+ */
+export type Turma$atividadesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Atividade
+   */
+  select?: Prisma.AtividadeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Atividade
+   */
+  omit?: Prisma.AtividadeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AtividadeInclude<ExtArgs> | null
+  where?: Prisma.AtividadeWhereInput
+  orderBy?: Prisma.AtividadeOrderByWithRelationInput | Prisma.AtividadeOrderByWithRelationInput[]
+  cursor?: Prisma.AtividadeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AtividadeScalarFieldEnum | Prisma.AtividadeScalarFieldEnum[]
+}
+
+/**
+ * Turma.criadoPor
+ */
+export type Turma$criadoPorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Admin
+   */
+  select?: Prisma.AdminSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Admin
+   */
+  omit?: Prisma.AdminOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdminInclude<ExtArgs> | null
+  where?: Prisma.AdminWhereInput
 }
 
 /**

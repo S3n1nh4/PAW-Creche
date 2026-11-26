@@ -32,25 +32,18 @@ export async function buscarTurmasDosCuidadores(cuidadorId:number) {
 }
 
 export async function Vincular(dados: TurmaCuidadorInput): Promise<TurmaCuidador | null > {
-     const turma = await turmaRepo.buscarPorId(dados.turmaId);
-    if (!turma) {
-        throw new PresencaError(404, `Turma com ID ${dados.turmaId} não encontrada.`);
-    }
-    const Cuidador = await cuidadorRepo.buscarPorId(dados.cuidadorId);
-    if (!Cuidador) {
-        throw new PresencaError(404, `Cuidador com ID ${dados.cuidadorId} não encontrada.`);
-    }
-    const vinculos = await repo.buscarCuidadorPorTurma(dados.turmaId);
-    const vinculoExistente = vinculos.some(
-        vinculos => vinculos.cuidadorId === dados.cuidadorId
-    );
-
-    if (vinculoExistente) {
-        throw new PresencaError(409, "Cuidador já vinculado à turma.");
-    }
-
-    if (!turma.ativo || !Cuidador.ativo) throw new PresencaError(409, "Turma ou cuidador desativado.");
-    return persistir(() => repo.vincular(dados));
+    return persistir(() => prisma.$transaction(async tx => {
+        await tx.$queryRaw`SELECT id FROM turma WHERE id = ${dados.turmaId} FOR UPDATE`;
+        const turma = await tx.turma.findUnique({ where: { id: dados.turmaId } });
+        if (!turma) throw new PresencaError(404, "Turma não encontrada.");
+        const cuidador = await tx.cuidador.findUnique({ where: { id: dados.cuidadorId } });
+        if (!cuidador) throw new PresencaError(404, "Cuidador não encontrado.");
+        const vinculos = await tx.turmaCuidador.findMany({ where: { turmaId: dados.turmaId } });
+        if (vinculos.some(v => v.cuidadorId === dados.cuidadorId)) throw new PresencaError(409, "Cuidador já vinculado à turma.");
+        if (vinculos.length >= 3) throw new PresencaError(409, "Cada turma permite no máximo 3 cuidadores.");
+        if (!turma.ativo || !cuidador.ativo) throw new PresencaError(409, "Turma ou cuidador desativado.");
+        return tx.turmaCuidador.create({ data: dados });
+    }));
 }
 
 

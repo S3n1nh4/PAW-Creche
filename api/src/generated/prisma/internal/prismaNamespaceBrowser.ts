@@ -55,6 +55,7 @@ export const ModelName = {
   Cuidador: 'Cuidador',
   Conta: 'Conta',
   Turma: 'Turma',
+  Atividade: 'Atividade',
   TurmaCuidador: 'TurmaCuidador',
   Aluno: 'Aluno',
   Presenca: 'Presenca',
@@ -121,15 +122,32 @@ export type ContaScalarFieldEnum = (typeof ContaScalarFieldEnum)[keyof typeof Co
 
 
 export const TurmaScalarFieldEnum = {
+  sala: 'sala',
+  criadoPorId: 'criadoPorId',
   id: 'id',
   nome: 'nome',
   anoLetivo: 'anoLetivo',
+  faixaEtaria: 'faixaEtaria',
   turno: 'turno',
   ativo: 'ativo',
   criadoEm: 'criadoEm'
 } as const
 
 export type TurmaScalarFieldEnum = (typeof TurmaScalarFieldEnum)[keyof typeof TurmaScalarFieldEnum]
+
+
+export const AtividadeScalarFieldEnum = {
+  id: 'id',
+  turmaId: 'turmaId',
+  cuidadorId: 'cuidadorId',
+  diaSemana: 'diaSemana',
+  inicio: 'inicio',
+  fim: 'fim',
+  descricao: 'descricao',
+  criadoEm: 'criadoEm'
+} as const
+
+export type AtividadeScalarFieldEnum = (typeof AtividadeScalarFieldEnum)[keyof typeof AtividadeScalarFieldEnum]
 
 
 export const TurmaCuidadorScalarFieldEnum = {
@@ -148,6 +166,10 @@ export const AlunoScalarFieldEnum = {
   responsavelNome: 'responsavelNome',
   responsavelTelefone: 'responsavelTelefone',
   responsavelEmail: 'responsavelEmail',
+  responsavelParentesco: 'responsavelParentesco',
+  responsavelSecundarioNome: 'responsavelSecundarioNome',
+  responsavelSecundarioParentesco: 'responsavelSecundarioParentesco',
+  responsavelSecundarioTelefone: 'responsavelSecundarioTelefone',
   observacoes: 'observacoes',
   ativo: 'ativo',
   criadoEm: 'criadoEm'
