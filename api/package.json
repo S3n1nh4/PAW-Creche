@@ -11,6 +11,7 @@
     "db:status": "prisma migrate status",
     "db:baseline": "prisma migrate resolve --applied 20261124204007_init",
     "db:migrate": "prisma migrate deploy",
+    "db:seed": "prisma db seed",
     "test:presencas": "tsx --test tests/presencas.test.ts",
     "test:presencas:integration": "tsx --test tests/presencas.integration.test.ts",
     "start": "node dist/server.js",
