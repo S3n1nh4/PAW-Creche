@@ -1,71 +1,26 @@
-import express, { type Request, type Response } from "express";
-import * as Service  from "../services/comportamentoService.js";
-import type { ComportamentoInput } from "@creche/shared/comportamento";
-
+import type { Request, Response } from "express";
+import * as service from "../services/comportamentoService.js";
+import { idPresencaSchema } from "@creche/shared/presenca";
 
 export async function listar(req: Request, res: Response) {
-    const Comportamentos = await Service.buscarComportamentos();
-    return res.json(Comportamentos);
-};
+  return res.json(await service.buscarComportamentos(req.usuario!));
+}
 export async function buscarPorId(req: Request, res: Response) {
-    try {
-        const id: number = Number(req.params.id);
-        const comportamento = await Service.buscarComportamentoPorId(Number(id));
-        return res.json(comportamento);
-    } catch (erro: any) {
-        return res.status(404).json({ mensagem: erro.message });
-    }
-};
-
+  return res.json(await service.buscarComportamentoPorId(idPresencaSchema.parse(req.params.id), req.usuario!));
+}
 export async function buscarPorCuidador(req: Request, res: Response) {
-    try {
-        const id: number = Number(req.params.id);
-        const comportamento = await Service.buscarComportamentoPorCuidador(id);
-        return res.json(comportamento);
-    } catch (erro: any) {
-        return res.status(404).json({ mensagem: erro.message });
-    }
-}; 
-
+  return res.json(await service.buscarComportamentoPorCuidador(idPresencaSchema.parse(req.params.cuidadorId), req.usuario!));
+}
 export async function buscarPorAluno(req: Request, res: Response) {
-    try {
-        const id: number = Number(req.params.id);
-        const comportamento = await Service.buscarComportamentoPorAluno(Number(id));
-        return res.json(comportamento);
-    } catch (erro: any) {
-        return res.status(404).json({ mensagem: erro.message });
-    }
-};
-
-
+  return res.json(await service.buscarComportamentoPorAluno(idPresencaSchema.parse(req.params.alunoId), req.usuario!));
+}
 export async function criar(req: Request, res: Response) {
-    try {
-        const dados: ComportamentoInput = req.body;
-        const comportamento = await Service.criarComportamento(dados);
-        return res.status(201).json(comportamento);
-    } catch (erro:any) {
-        return res.status(400).json({ mensagem: erro.message });
-    }
-    
-};
-
+  return res.status(201).json(await service.criarComportamento({ ...req.body, cuidadorId: req.usuario!.id }, req.usuario!));
+}
 export async function atualizar(req: Request, res: Response) {
-    try {
-        const id: number = Number(req.params.id);
-        const dados: ComportamentoInput = req.body;
-        const comportamento = await Service.atualizar(id, dados);
-        return res.json(comportamento);
-    } catch (erro: any) {
-        return res.status(500).json({mensagem: erro.message});
-    }
-};
-
-export async function deletar(req: Request, res: Response){
-    try {
-        const id: number = Number(req.params.id);
-        await Service.deletar(id);
-        return res.status(204).send();
-    } catch (erro:any) {
-        return res.status(500).json({mensagem: erro.message});
-    }
+  return res.json(await service.atualizar(idPresencaSchema.parse(req.params.id), { ...req.body, cuidadorId: req.usuario!.id }, req.usuario!));
+}
+export async function deletar(req: Request, res: Response) {
+  await service.deletar(idPresencaSchema.parse(req.params.id), req.usuario!);
+  return res.status(204).send();
 }

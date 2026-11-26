@@ -27,16 +27,19 @@ export type AggregateCuidador = {
 }
 
 export type CuidadorAvgAggregateOutputType = {
+  contaId: number | null
   id: number | null
   salarioBase: runtime.Decimal | null
 }
 
 export type CuidadorSumAggregateOutputType = {
+  contaId: number | null
   id: number | null
   salarioBase: runtime.Decimal | null
 }
 
 export type CuidadorMinAggregateOutputType = {
+  contaId: number | null
   id: number | null
   nome: string | null
   email: string | null
@@ -49,6 +52,7 @@ export type CuidadorMinAggregateOutputType = {
 }
 
 export type CuidadorMaxAggregateOutputType = {
+  contaId: number | null
   id: number | null
   nome: string | null
   email: string | null
@@ -61,6 +65,7 @@ export type CuidadorMaxAggregateOutputType = {
 }
 
 export type CuidadorCountAggregateOutputType = {
+  contaId: number
   id: number
   nome: number
   email: number
@@ -75,16 +80,19 @@ export type CuidadorCountAggregateOutputType = {
 
 
 export type CuidadorAvgAggregateInputType = {
+  contaId?: true
   id?: true
   salarioBase?: true
 }
 
 export type CuidadorSumAggregateInputType = {
+  contaId?: true
   id?: true
   salarioBase?: true
 }
 
 export type CuidadorMinAggregateInputType = {
+  contaId?: true
   id?: true
   nome?: true
   email?: true
@@ -97,6 +105,7 @@ export type CuidadorMinAggregateInputType = {
 }
 
 export type CuidadorMaxAggregateInputType = {
+  contaId?: true
   id?: true
   nome?: true
   email?: true
@@ -109,6 +118,7 @@ export type CuidadorMaxAggregateInputType = {
 }
 
 export type CuidadorCountAggregateInputType = {
+  contaId?: true
   id?: true
   nome?: true
   email?: true
@@ -208,6 +218,7 @@ export type CuidadorGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 export type CuidadorGroupByOutputType = {
+  contaId: number | null
   id: number
   nome: string
   email: string
@@ -243,6 +254,7 @@ export type CuidadorWhereInput = {
   AND?: Prisma.CuidadorWhereInput | Prisma.CuidadorWhereInput[]
   OR?: Prisma.CuidadorWhereInput[]
   NOT?: Prisma.CuidadorWhereInput | Prisma.CuidadorWhereInput[]
+  contaId?: Prisma.IntNullableFilter<"Cuidador"> | number | null
   id?: Prisma.IntFilter<"Cuidador"> | number
   nome?: Prisma.StringFilter<"Cuidador"> | string
   email?: Prisma.StringFilter<"Cuidador"> | string
@@ -252,6 +264,7 @@ export type CuidadorWhereInput = {
   salarioBase?: Prisma.DecimalFilter<"Cuidador"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: Prisma.BoolFilter<"Cuidador"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Cuidador"> | Date | string
+  conta?: Prisma.XOR<Prisma.ContaNullableScalarRelationFilter, Prisma.ContaWhereInput> | null
   turmas?: Prisma.TurmaCuidadorListRelationFilter
   presencas?: Prisma.PresencaListRelationFilter
   presencasCuidador?: Prisma.PresencaCuidadorListRelationFilter
@@ -259,6 +272,7 @@ export type CuidadorWhereInput = {
 }
 
 export type CuidadorOrderByWithRelationInput = {
+  contaId?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -268,6 +282,7 @@ export type CuidadorOrderByWithRelationInput = {
   salarioBase?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
+  conta?: Prisma.ContaOrderByWithRelationInput
   turmas?: Prisma.TurmaCuidadorOrderByRelationAggregateInput
   presencas?: Prisma.PresencaOrderByRelationAggregateInput
   presencasCuidador?: Prisma.PresencaCuidadorOrderByRelationAggregateInput
@@ -275,6 +290,7 @@ export type CuidadorOrderByWithRelationInput = {
 }
 
 export type CuidadorWhereUniqueInput = Prisma.AtLeast<{
+  contaId?: number
   id?: number
   AND?: Prisma.CuidadorWhereInput | Prisma.CuidadorWhereInput[]
   OR?: Prisma.CuidadorWhereInput[]
@@ -287,13 +303,15 @@ export type CuidadorWhereUniqueInput = Prisma.AtLeast<{
   salarioBase?: Prisma.DecimalFilter<"Cuidador"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: Prisma.BoolFilter<"Cuidador"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Cuidador"> | Date | string
+  conta?: Prisma.XOR<Prisma.ContaNullableScalarRelationFilter, Prisma.ContaWhereInput> | null
   turmas?: Prisma.TurmaCuidadorListRelationFilter
   presencas?: Prisma.PresencaListRelationFilter
   presencasCuidador?: Prisma.PresencaCuidadorListRelationFilter
   comportamentos?: Prisma.ComportamentoListRelationFilter
-}, "id">
+}, "id" | "contaId">
 
 export type CuidadorOrderByWithAggregationInput = {
+  contaId?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -314,6 +332,7 @@ export type CuidadorScalarWhereWithAggregatesInput = {
   AND?: Prisma.CuidadorScalarWhereWithAggregatesInput | Prisma.CuidadorScalarWhereWithAggregatesInput[]
   OR?: Prisma.CuidadorScalarWhereWithAggregatesInput[]
   NOT?: Prisma.CuidadorScalarWhereWithAggregatesInput | Prisma.CuidadorScalarWhereWithAggregatesInput[]
+  contaId?: Prisma.IntNullableWithAggregatesFilter<"Cuidador"> | number | null
   id?: Prisma.IntWithAggregatesFilter<"Cuidador"> | number
   nome?: Prisma.StringWithAggregatesFilter<"Cuidador"> | string
   email?: Prisma.StringWithAggregatesFilter<"Cuidador"> | string
@@ -334,6 +353,7 @@ export type CuidadorCreateInput = {
   salarioBase?: runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: boolean
   criadoEm?: Date | string
+  conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
   turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
@@ -341,6 +361,7 @@ export type CuidadorCreateInput = {
 }
 
 export type CuidadorUncheckedCreateInput = {
+  contaId?: number | null
   id?: number
   nome: string
   email: string
@@ -365,6 +386,7 @@ export type CuidadorUpdateInput = {
   salarioBase?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
   turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
@@ -372,6 +394,7 @@ export type CuidadorUpdateInput = {
 }
 
 export type CuidadorUncheckedUpdateInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -388,6 +411,7 @@ export type CuidadorUncheckedUpdateInput = {
 }
 
 export type CuidadorCreateManyInput = {
+  contaId?: number | null
   id?: number
   nome: string
   email: string
@@ -411,6 +435,7 @@ export type CuidadorUpdateManyMutationInput = {
 }
 
 export type CuidadorUncheckedUpdateManyInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -423,6 +448,7 @@ export type CuidadorUncheckedUpdateManyInput = {
 }
 
 export type CuidadorCountOrderByAggregateInput = {
+  contaId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -435,11 +461,13 @@ export type CuidadorCountOrderByAggregateInput = {
 }
 
 export type CuidadorAvgOrderByAggregateInput = {
+  contaId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   salarioBase?: Prisma.SortOrder
 }
 
 export type CuidadorMaxOrderByAggregateInput = {
+  contaId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -452,6 +480,7 @@ export type CuidadorMaxOrderByAggregateInput = {
 }
 
 export type CuidadorMinOrderByAggregateInput = {
+  contaId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -464,8 +493,14 @@ export type CuidadorMinOrderByAggregateInput = {
 }
 
 export type CuidadorSumOrderByAggregateInput = {
+  contaId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   salarioBase?: Prisma.SortOrder
+}
+
+export type CuidadorNullableScalarRelationFilter = {
+  is?: Prisma.CuidadorWhereInput | null
+  isNot?: Prisma.CuidadorWhereInput | null
 }
 
 export type CuidadorScalarRelationFilter = {
@@ -483,6 +518,38 @@ export type DecimalFieldUpdateOperationsInput = {
   decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
   multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type CuidadorCreateNestedOneWithoutContaInput = {
+  create?: Prisma.XOR<Prisma.CuidadorCreateWithoutContaInput, Prisma.CuidadorUncheckedCreateWithoutContaInput>
+  connectOrCreate?: Prisma.CuidadorCreateOrConnectWithoutContaInput
+  connect?: Prisma.CuidadorWhereUniqueInput
+}
+
+export type CuidadorUncheckedCreateNestedOneWithoutContaInput = {
+  create?: Prisma.XOR<Prisma.CuidadorCreateWithoutContaInput, Prisma.CuidadorUncheckedCreateWithoutContaInput>
+  connectOrCreate?: Prisma.CuidadorCreateOrConnectWithoutContaInput
+  connect?: Prisma.CuidadorWhereUniqueInput
+}
+
+export type CuidadorUpdateOneWithoutContaNestedInput = {
+  create?: Prisma.XOR<Prisma.CuidadorCreateWithoutContaInput, Prisma.CuidadorUncheckedCreateWithoutContaInput>
+  connectOrCreate?: Prisma.CuidadorCreateOrConnectWithoutContaInput
+  upsert?: Prisma.CuidadorUpsertWithoutContaInput
+  disconnect?: Prisma.CuidadorWhereInput | boolean
+  delete?: Prisma.CuidadorWhereInput | boolean
+  connect?: Prisma.CuidadorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CuidadorUpdateToOneWithWhereWithoutContaInput, Prisma.CuidadorUpdateWithoutContaInput>, Prisma.CuidadorUncheckedUpdateWithoutContaInput>
+}
+
+export type CuidadorUncheckedUpdateOneWithoutContaNestedInput = {
+  create?: Prisma.XOR<Prisma.CuidadorCreateWithoutContaInput, Prisma.CuidadorUncheckedCreateWithoutContaInput>
+  connectOrCreate?: Prisma.CuidadorCreateOrConnectWithoutContaInput
+  upsert?: Prisma.CuidadorUpsertWithoutContaInput
+  disconnect?: Prisma.CuidadorWhereInput | boolean
+  delete?: Prisma.CuidadorWhereInput | boolean
+  connect?: Prisma.CuidadorWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CuidadorUpdateToOneWithWhereWithoutContaInput, Prisma.CuidadorUpdateWithoutContaInput>, Prisma.CuidadorUncheckedUpdateWithoutContaInput>
 }
 
 export type CuidadorCreateNestedOneWithoutTurmasInput = {
@@ -541,6 +608,84 @@ export type CuidadorUpdateOneRequiredWithoutComportamentosNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CuidadorUpdateToOneWithWhereWithoutComportamentosInput, Prisma.CuidadorUpdateWithoutComportamentosInput>, Prisma.CuidadorUncheckedUpdateWithoutComportamentosInput>
 }
 
+export type CuidadorCreateWithoutContaInput = {
+  nome: string
+  email: string
+  senhaHash: string
+  telefone?: string | null
+  dataAdmissao?: Date | string
+  salarioBase?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ativo?: boolean
+  criadoEm?: Date | string
+  turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
+  presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
+  presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
+  comportamentos?: Prisma.ComportamentoCreateNestedManyWithoutCuidadorInput
+}
+
+export type CuidadorUncheckedCreateWithoutContaInput = {
+  id?: number
+  nome: string
+  email: string
+  senhaHash: string
+  telefone?: string | null
+  dataAdmissao?: Date | string
+  salarioBase?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  ativo?: boolean
+  criadoEm?: Date | string
+  turmas?: Prisma.TurmaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
+  presencas?: Prisma.PresencaUncheckedCreateNestedManyWithoutCuidadorInput
+  presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutCuidadorInput
+  comportamentos?: Prisma.ComportamentoUncheckedCreateNestedManyWithoutCuidadorInput
+}
+
+export type CuidadorCreateOrConnectWithoutContaInput = {
+  where: Prisma.CuidadorWhereUniqueInput
+  create: Prisma.XOR<Prisma.CuidadorCreateWithoutContaInput, Prisma.CuidadorUncheckedCreateWithoutContaInput>
+}
+
+export type CuidadorUpsertWithoutContaInput = {
+  update: Prisma.XOR<Prisma.CuidadorUpdateWithoutContaInput, Prisma.CuidadorUncheckedUpdateWithoutContaInput>
+  create: Prisma.XOR<Prisma.CuidadorCreateWithoutContaInput, Prisma.CuidadorUncheckedCreateWithoutContaInput>
+  where?: Prisma.CuidadorWhereInput
+}
+
+export type CuidadorUpdateToOneWithWhereWithoutContaInput = {
+  where?: Prisma.CuidadorWhereInput
+  data: Prisma.XOR<Prisma.CuidadorUpdateWithoutContaInput, Prisma.CuidadorUncheckedUpdateWithoutContaInput>
+}
+
+export type CuidadorUpdateWithoutContaInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dataAdmissao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salarioBase?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
+  presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
+  presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
+  comportamentos?: Prisma.ComportamentoUpdateManyWithoutCuidadorNestedInput
+}
+
+export type CuidadorUncheckedUpdateWithoutContaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dataAdmissao?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  salarioBase?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  turmas?: Prisma.TurmaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
+  presencas?: Prisma.PresencaUncheckedUpdateManyWithoutCuidadorNestedInput
+  presencasCuidador?: Prisma.PresencaCuidadorUncheckedUpdateManyWithoutCuidadorNestedInput
+  comportamentos?: Prisma.ComportamentoUncheckedUpdateManyWithoutCuidadorNestedInput
+}
+
 export type CuidadorCreateWithoutTurmasInput = {
   nome: string
   email: string
@@ -550,12 +695,14 @@ export type CuidadorCreateWithoutTurmasInput = {
   salarioBase?: runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: boolean
   criadoEm?: Date | string
+  conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoCreateNestedManyWithoutCuidadorInput
 }
 
 export type CuidadorUncheckedCreateWithoutTurmasInput = {
+  contaId?: number | null
   id?: number
   nome: string
   email: string
@@ -595,12 +742,14 @@ export type CuidadorUpdateWithoutTurmasInput = {
   salarioBase?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUpdateManyWithoutCuidadorNestedInput
 }
 
 export type CuidadorUncheckedUpdateWithoutTurmasInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -624,12 +773,14 @@ export type CuidadorCreateWithoutPresencasInput = {
   salarioBase?: runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: boolean
   criadoEm?: Date | string
+  conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
   turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoCreateNestedManyWithoutCuidadorInput
 }
 
 export type CuidadorUncheckedCreateWithoutPresencasInput = {
+  contaId?: number | null
   id?: number
   nome: string
   email: string
@@ -669,12 +820,14 @@ export type CuidadorUpdateWithoutPresencasInput = {
   salarioBase?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
   turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUpdateManyWithoutCuidadorNestedInput
 }
 
 export type CuidadorUncheckedUpdateWithoutPresencasInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -698,12 +851,14 @@ export type CuidadorCreateWithoutPresencasCuidadorInput = {
   salarioBase?: runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: boolean
   criadoEm?: Date | string
+  conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
   turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
   comportamentos?: Prisma.ComportamentoCreateNestedManyWithoutCuidadorInput
 }
 
 export type CuidadorUncheckedCreateWithoutPresencasCuidadorInput = {
+  contaId?: number | null
   id?: number
   nome: string
   email: string
@@ -743,12 +898,14 @@ export type CuidadorUpdateWithoutPresencasCuidadorInput = {
   salarioBase?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
   turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
   comportamentos?: Prisma.ComportamentoUpdateManyWithoutCuidadorNestedInput
 }
 
 export type CuidadorUncheckedUpdateWithoutPresencasCuidadorInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -772,12 +929,14 @@ export type CuidadorCreateWithoutComportamentosInput = {
   salarioBase?: runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: boolean
   criadoEm?: Date | string
+  conta?: Prisma.ContaCreateNestedOneWithoutCuidadorInput
   turmas?: Prisma.TurmaCuidadorCreateNestedManyWithoutCuidadorInput
   presencas?: Prisma.PresencaCreateNestedManyWithoutCuidadorInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutCuidadorInput
 }
 
 export type CuidadorUncheckedCreateWithoutComportamentosInput = {
+  contaId?: number | null
   id?: number
   nome: string
   email: string
@@ -817,12 +976,14 @@ export type CuidadorUpdateWithoutComportamentosInput = {
   salarioBase?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conta?: Prisma.ContaUpdateOneWithoutCuidadorNestedInput
   turmas?: Prisma.TurmaCuidadorUpdateManyWithoutCuidadorNestedInput
   presencas?: Prisma.PresencaUpdateManyWithoutCuidadorNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutCuidadorNestedInput
 }
 
 export type CuidadorUncheckedUpdateWithoutComportamentosInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -896,6 +1057,7 @@ export type CuidadorCountOutputTypeCountComportamentosArgs<ExtArgs extends runti
 
 
 export type CuidadorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  contaId?: boolean
   id?: boolean
   nome?: boolean
   email?: boolean
@@ -905,6 +1067,7 @@ export type CuidadorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   salarioBase?: boolean
   ativo?: boolean
   criadoEm?: boolean
+  conta?: boolean | Prisma.Cuidador$contaArgs<ExtArgs>
   turmas?: boolean | Prisma.Cuidador$turmasArgs<ExtArgs>
   presencas?: boolean | Prisma.Cuidador$presencasArgs<ExtArgs>
   presencasCuidador?: boolean | Prisma.Cuidador$presencasCuidadorArgs<ExtArgs>
@@ -913,6 +1076,7 @@ export type CuidadorSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }, ExtArgs["result"]["cuidador"]>
 
 export type CuidadorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  contaId?: boolean
   id?: boolean
   nome?: boolean
   email?: boolean
@@ -922,9 +1086,11 @@ export type CuidadorSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   salarioBase?: boolean
   ativo?: boolean
   criadoEm?: boolean
+  conta?: boolean | Prisma.Cuidador$contaArgs<ExtArgs>
 }, ExtArgs["result"]["cuidador"]>
 
 export type CuidadorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  contaId?: boolean
   id?: boolean
   nome?: boolean
   email?: boolean
@@ -934,9 +1100,11 @@ export type CuidadorSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   salarioBase?: boolean
   ativo?: boolean
   criadoEm?: boolean
+  conta?: boolean | Prisma.Cuidador$contaArgs<ExtArgs>
 }, ExtArgs["result"]["cuidador"]>
 
 export type CuidadorSelectScalar = {
+  contaId?: boolean
   id?: boolean
   nome?: boolean
   email?: boolean
@@ -948,28 +1116,38 @@ export type CuidadorSelectScalar = {
   criadoEm?: boolean
 }
 
-export type CuidadorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senhaHash" | "telefone" | "dataAdmissao" | "salarioBase" | "ativo" | "criadoEm", ExtArgs["result"]["cuidador"]>
+export type CuidadorOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"contaId" | "id" | "nome" | "email" | "senhaHash" | "telefone" | "dataAdmissao" | "salarioBase" | "ativo" | "criadoEm", ExtArgs["result"]["cuidador"]>
 export type CuidadorInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  conta?: boolean | Prisma.Cuidador$contaArgs<ExtArgs>
   turmas?: boolean | Prisma.Cuidador$turmasArgs<ExtArgs>
   presencas?: boolean | Prisma.Cuidador$presencasArgs<ExtArgs>
   presencasCuidador?: boolean | Prisma.Cuidador$presencasCuidadorArgs<ExtArgs>
   comportamentos?: boolean | Prisma.Cuidador$comportamentosArgs<ExtArgs>
   _count?: boolean | Prisma.CuidadorCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type CuidadorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type CuidadorIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type CuidadorIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  conta?: boolean | Prisma.Cuidador$contaArgs<ExtArgs>
+}
+export type CuidadorIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  conta?: boolean | Prisma.Cuidador$contaArgs<ExtArgs>
+}
 
 export type $CuidadorPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Cuidador"
   objects: {
+    conta: Prisma.$ContaPayload<ExtArgs> | null
     turmas: Prisma.$TurmaCuidadorPayload<ExtArgs>[]
     presencas: Prisma.$PresencaPayload<ExtArgs>[]
     presencasCuidador: Prisma.$PresencaCuidadorPayload<ExtArgs>[]
     comportamentos: Prisma.$ComportamentoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    contaId: number | null
     id: number
     nome: string
+    /**
+     * Espelho de compatibilidade; a identidade e o email único estão em Conta.
+     */
     email: string
     senhaHash: string
     telefone: string | null
@@ -1060,8 +1238,8 @@ export interface CuidadorDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * // Get first 10 Cuidadors
    * const cuidadors = await prisma.cuidador.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const cuidadorWithIdOnly = await prisma.cuidador.findMany({ select: { id: true } })
+   * // Only select the `contaId`
+   * const cuidadorWithContaIdOnly = await prisma.cuidador.findMany({ select: { contaId: true } })
    * 
    */
   findMany<T extends CuidadorFindManyArgs>(args?: Prisma.SelectSubset<T, CuidadorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CuidadorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1105,9 +1283,9 @@ export interface CuidadorDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    *   ]
    * })
    * 
-   * // Create many Cuidadors and only return the `id`
-   * const cuidadorWithIdOnly = await prisma.cuidador.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Cuidadors and only return the `contaId`
+   * const cuidadorWithContaIdOnly = await prisma.cuidador.createManyAndReturn({
+   *   select: { contaId: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -1196,9 +1374,9 @@ export interface CuidadorDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    *   ]
    * })
    * 
-   * // Update zero or more Cuidadors and only return the `id`
-   * const cuidadorWithIdOnly = await prisma.cuidador.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Cuidadors and only return the `contaId`
+   * const cuidadorWithContaIdOnly = await prisma.cuidador.updateManyAndReturn({
+   *   select: { contaId: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -1371,6 +1549,7 @@ readonly fields: CuidadorFieldRefs;
  */
 export interface Prisma__CuidadorClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  conta<T extends Prisma.Cuidador$contaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cuidador$contaArgs<ExtArgs>>): Prisma.Prisma__ContaClient<runtime.Types.Result.GetResult<Prisma.$ContaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   turmas<T extends Prisma.Cuidador$turmasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cuidador$turmasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TurmaCuidadorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   presencas<T extends Prisma.Cuidador$presencasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cuidador$presencasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PresencaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   presencasCuidador<T extends Prisma.Cuidador$presencasCuidadorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cuidador$presencasCuidadorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PresencaCuidadorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1404,6 +1583,7 @@ export interface Prisma__CuidadorClient<T, Null = never, ExtArgs extends runtime
  * Fields of the Cuidador model
  */
 export interface CuidadorFieldRefs {
+  readonly contaId: Prisma.FieldRef<"Cuidador", 'Int'>
   readonly id: Prisma.FieldRef<"Cuidador", 'Int'>
   readonly nome: Prisma.FieldRef<"Cuidador", 'String'>
   readonly email: Prisma.FieldRef<"Cuidador", 'String'>
@@ -1667,6 +1847,10 @@ export type CuidadorCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    */
   data: Prisma.CuidadorCreateManyInput | Prisma.CuidadorCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CuidadorIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1737,6 +1921,10 @@ export type CuidadorUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extens
    * Limit how many Cuidadors to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CuidadorIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1803,6 +1991,25 @@ export type CuidadorDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Cuidadors to delete.
    */
   limit?: number
+}
+
+/**
+ * Cuidador.conta
+ */
+export type Cuidador$contaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Conta
+   */
+  select?: Prisma.ContaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Conta
+   */
+  omit?: Prisma.ContaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContaInclude<ExtArgs> | null
+  where?: Prisma.ContaWhereInput
 }
 
 /**

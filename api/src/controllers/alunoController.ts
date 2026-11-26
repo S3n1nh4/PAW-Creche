@@ -1,70 +1,28 @@
-import express, { type Request, type Response } from "express";
-import * as Service  from "../services/alunoService.js";
-import type { AlunoInput } from "@creche/shared/aluno";
+import type { Request, Response } from "express";
+import * as service from "../services/alunoService.js";
+import { idPresencaSchema } from "@creche/shared/presenca";
+import { z } from "zod";
 
 export async function listar(req: Request, res: Response) {
-    const alunos = await Service.buscarAlunos();
-    return res.json(alunos);
-};
-export async function buscarPorId(req: Request, res: Response) {
-    try {
-        const id: number = Number(req.params.id);
-        const aluno = await Service.buscarAlunoPorId(Number(id));
-        return res.json(aluno);
-    } catch (erro: any) {
-        return res.status(404).json({ mensagem: erro.message });
-    }
-} 
-export async function buscarPorNome(req: Request, res: Response) {
-    try {
-        const nome = (req.params.id);
-        if (typeof nome !== "string" || !nome.trim()){
-            return res.status(404).json({mensagem: "nome invalido"})
-        }
-        const aluno = await Service.buscarPorNome(nome);
-        return res.json(aluno);
-    } catch (erro: any) {
-        return res.status(404).json({ mensagem: erro.message });
-    }
-} 
-
-export async function buscarPorTurma(req: Request, res: Response) {
-    try {
-        const id: number = Number(req.params.id);
-        const alunos = await Service.buscarPorTurma(Number(id));
-        return res.json(alunos);
-    } catch (erro: any) {
-        return res.status(404).json({ mensagem: erro.message });
-    }
+  return res.json(await service.buscarAlunos(req.usuario!));
 }
-
+export async function buscarPorId(req: Request, res: Response) {
+  return res.json(await service.buscarAlunoPorId(idPresencaSchema.parse(req.params.id), req.usuario!));
+}
+export async function buscarPorNome(req: Request, res: Response) {
+  const nome = z.string().trim().min(1).parse(req.params.nome);
+  return res.json(await service.buscarPorNome(nome, req.usuario!));
+}
+export async function buscarPorTurma(req: Request, res: Response) {
+  return res.json(await service.buscarPorTurma(idPresencaSchema.parse(req.params.turmaId), req.usuario!));
+}
 export async function criar(req: Request, res: Response) {
-    try {
-        const dados: AlunoInput = req.body;
-        const aluno = await Service.criarAluno(dados);
-        return res.status(201).json(aluno);
-    } catch (erro:any) {
-        return res.status(400).json({ mensagem: erro.message });
-    }
-    
+  return res.status(201).json(await service.criarAluno(req.body, req.usuario!));
 }
 export async function atualizar(req: Request, res: Response) {
-    try {
-        const id: number = Number(req.params.id);
-        const dados: AlunoInput = req.body;
-        const aluno = await Service.atualizarAluno(id, dados);
-        return res.json(aluno);
-    } catch (erro: any) {
-        return res.status(500).json({mensagem: erro.message});
-    }
+  return res.json(await service.atualizarAluno(idPresencaSchema.parse(req.params.id), req.body, req.usuario!));
 }
-
-export async function deletar(req: Request, res: Response){
-    try {
-        const id: number = Number(req.params.id);
-        await Service.deletarAluno(id);
-        return res.status(204).send();
-    } catch (erro:any) {
-        return res.status(500).json({mensagem: erro.message});
-    }
+export async function deletar(req: Request, res: Response) {
+  await service.deletarAluno(idPresencaSchema.parse(req.params.id), req.usuario!);
+  return res.status(204).send();
 }

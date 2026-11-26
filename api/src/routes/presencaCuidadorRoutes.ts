@@ -10,4 +10,5 @@ router.get("/presencas-cuidadores", controller.listar);
 router.get("/presencas-cuidadores/:id", controller.buscarPorId);
 router.post("/presencas-cuidadores", validarBody(presencaCuidadorSchema), controller.criar);
 router.put("/presencas-cuidadores/:id", validarBody(atualizarPresencaCuidadorSchema), controller.atualizar);
+router.delete("/presencas-cuidadores/:id", controller.deletar);
 export default router;

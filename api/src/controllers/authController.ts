@@ -10,7 +10,7 @@ export async function login(req: Request, res: Response){
         return res.status(401).json({ mensagem: "email ou senha inválidos" });
     }
     res.setHeader("Cache-Control", "no-store");
-    return res.json({ ...usuario, ...criarSessao({ id: usuario.id, tipoUsuario: usuario.tipoUsuario }) });
+    return res.json({ ...usuario, ...criarSessao({ id: usuario.id, tipoUsuario: usuario.tipoUsuario, contaId: usuario.contaId, versaoSessao: usuario.versaoSessao }) });
 }
 
 export function logout(req: Request, res: Response) {

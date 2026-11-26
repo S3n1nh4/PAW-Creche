@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { emailSchema } from "./email.js";
 
 export const adminSchema = z.object({
     nome: z
@@ -7,9 +8,7 @@ export const adminSchema = z.object({
     .max(100, "o nome deve  ter no máximo 100 caracteres")
     .meta({example: "Ana Luiza"}),
 
-    email: z
-    .preprocess((valor) => (valor === "" || valor === undefined ? null : valor),
-      z.email("E-mail com formato inválido"),)
+    email: emailSchema
     .meta({example: "analu@gmail.com"}),
 
 });

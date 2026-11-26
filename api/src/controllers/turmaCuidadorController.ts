@@ -1,52 +1,26 @@
-import express, { type Request, type Response } from "express";
-import * as Service  from "../services/turmaCuidadorService.js";
-import type { TurmaCuidadorInput } from "@creche/shared/turmaCuidador";
+import type { Request, Response } from "express";
+import * as service from "../services/turmaCuidadorService.js";
+import { idPresencaSchema } from "@creche/shared/presenca";
+import { PresencaError } from "../services/presencaErrors.js";
 
-
-export async function listar(req: Request, res: Response) {
-    const turmas_Cuidadores = await Service.buscarTodosOsVinculos();
-    return res.json(turmas_Cuidadores);
+export async function listar(_req: Request, res: Response) {
+  return res.json(await service.buscarTodosOsVinculos());
 }
-
 export async function buscarCuidadorPorTurma(req: Request, res: Response) {
-    try{
-        const turmaId: number = Number(req.params.id);
-        const cuidadores = await Service.buscarCuidadorPorTurma(Number(turmaId));
-        return res.json(cuidadores);
-    }catch(erro: any){
-        return res.status(404).json({mensagem: erro.message});
-    }
+  return res.json(await service.buscarCuidadorPorTurma(idPresencaSchema.parse(req.params.turmaId)));
 }
-
 export async function buscarTurmasDosCuidadores(req: Request, res: Response) {
-    try{
-        const cuidadorId: number = Number(req.params.id);
-        const turmas = await Service.buscarCuidadorPorTurma(Number(cuidadorId));
-        return res.json(turmas);
-    }catch(erro: any){
-        return res.status(404).json({mensagem: erro.message});
-    }
+  return res.json(await service.buscarTurmasDosCuidadores(idPresencaSchema.parse(req.params.cuidadorId)));
 }
-
 export async function vincular(req: Request, res: Response) {
-    try{
-        const dados: TurmaCuidadorInput = req.body
-        const turmaCuidador = await Service.Vincular(dados);
-        return res.status(201).json(turmaCuidador);
-    }catch(erro:any){
-        return res.status(400).json({mensagem: erro.message});
-    }
+  const turmaId = idPresencaSchema.parse(req.params.turmaId);
+  const cuidadorId = idPresencaSchema.parse(req.params.cuidadorId);
+  if (req.body.turmaId !== turmaId || req.body.cuidadorId !== cuidadorId) {
+    throw new PresencaError(400, "IDs da URL e do corpo precisam ser iguais.");
+  }
+  return res.status(201).json(await service.Vincular({ turmaId, cuidadorId }));
 }
-
-
-
 export async function desvincular(req: Request, res: Response) {
-    try {
-        const turmaId = Number(req.params.turmaId);
-        const cuidadorId = Number(req.params.cuidadorId);
-        await Service.desvincular(cuidadorId,turmaId);
-        return res.status(204).send();
-    }catch(erro:any){
-        return res.status(500).json({mensagem: erro.message});
-    }
+  await service.desvincular(idPresencaSchema.parse(req.params.turmaId), idPresencaSchema.parse(req.params.cuidadorId));
+  return res.status(204).send();
 }

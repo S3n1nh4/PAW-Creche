@@ -10,6 +10,7 @@
  */
 export type * from './models/Admin.js'
 export type * from './models/Cuidador.js'
+export type * from './models/Conta.js'
 export type * from './models/Turma.js'
 export type * from './models/TurmaCuidador.js'
 export type * from './models/Aluno.js'

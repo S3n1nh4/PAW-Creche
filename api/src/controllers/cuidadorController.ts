@@ -1,74 +1,29 @@
-import express, { type Request, type Response } from "express";
-import * as Service  from "../services/cuidadorService.js";
-import type { CuidadorInput, CadastroCuidadorInput, AtualizarCuidadorInput } from "@creche/shared/cuidador";
-
+import type { Request, Response } from "express";
+import * as service from "../services/cuidadorService.js";
+import { idPresencaSchema } from "@creche/shared/presenca";
+import { emailSchema } from "@creche/shared/email";
 
 export async function listar(req: Request, res: Response) {
-    const cuidadores = await Service.buscarCuidadores();
-    return res.json(cuidadores);
-};
+  return res.json(await service.buscarCuidadores());
+}
 
 export async function buscarPorId(req: Request, res: Response) {
-    try {
-        const id: number = Number(req.params.id);
-        const cuidador = await Service.buscarCuidadorPorId(Number(id));
-        return res.json(cuidador);
-    } catch (erro: any) {
-        return res.status(404).json({ mensagem: erro.message });
-    }
+  return res.json(await service.buscarCuidadorPorId(idPresencaSchema.parse(req.params.id)));
 }
 
 export async function buscarPorEmail(req: Request, res: Response) {
-    try {
-        const email = (req.params.email);
-        if (typeof email !== "string" || !email.trim()){
-            return res.status(404).json({mensagem: "email invalido"})
-        }
-        const cuidador = await Service.buscarCuidadorPorEmail(email);
-        return res.json(cuidador);
-    } catch (erro: any) {
-        return res.status(404).json({ mensagem: erro.message })
-    }    
+  return res.json(await service.buscarCuidadorPorEmail(emailSchema.parse(req.params.email)));
 }
 
 export async function criar(req: Request, res: Response) {
-    try {
-        const dados: CadastroCuidadorInput = req.body;
-        const cuidador = await Service.criarCuidador(dados);
-        return res.status(201).json(cuidador);
-    } catch (erro:any) {
-        return res.status(400).json({ mensagem: erro.message });
-    }
-    
+  return res.status(201).json(await service.criarCuidador(req.body));
 }
 
 export async function atualizar(req: Request, res: Response) {
-    try {
-        const id: number = Number(req.params.id);
-        const dados: AtualizarCuidadorInput = req.body;
-        const cuidador = await Service.atualizarCuidador(id, dados);
-        return res.json(cuidador);
-    } catch (erro: any) {
-        return res.status(500).json({mensagem: erro.message});
-    }
+  return res.json(await service.atualizarCuidador(idPresencaSchema.parse(req.params.id), req.body));
 }
 
-// export async function desativar(req: Request, res: Response){
-//     try {
-//         const id: number = Number(req.params.id);
-//         const Cuidador = await Service.desativarCuidador(id)
-//         return res.json(Cuidador);
-//     } catch (erro:any) {
-//         return res.status(500).json({mensagem: erro.message});
-//     }
-// }
-
-export async function deletar(req: Request, res: Response){
-    try {
-        const id: number = Number(req.params.id);
-        await Service.deletarCuidador(id);
-        return res.status(204).send();
-    } catch (erro:any) {
-        return res.status(500).json({mensagem: erro.message});
-    }
+export async function deletar(req: Request, res: Response) {
+  await service.deletarCuidador(idPresencaSchema.parse(req.params.id));
+  return res.status(204).send();
 }

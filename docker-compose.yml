@@ -12,7 +12,8 @@ services:
       - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql
-      - ../database/init:/docker-entrypoint-initdb.d:ro
+      # Em banco criado por estes SQLs: db:baseline uma vez, depois db:migrate (workspace api).
+      - ./database/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
       interval: 5s

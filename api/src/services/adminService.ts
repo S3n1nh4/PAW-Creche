@@ -1,3 +1,5 @@
+import { emailSchema } from "@creche/shared/email";
+import { persistir, PresencaError } from "./presencaErrors.js";
 import * as repo from "../repositories/adminRepostirio.js";
 import type { Admin as AdminPrisma } from "../generated/prisma/client.js";
 import bcrypt from "bcryptjs";
@@ -20,51 +22,53 @@ export async function buscarAdmins(): Promise<Admin[]> {
 export async function buscarAdminPorId(id: number): Promise<Admin | null> {
     const admin = await repo.buscarPorId(id);
     if (!admin) {
-        throw new Error(`admin com ID ${id} não encontrada.`);
+        throw new PresencaError(404, `admin com ID ${id} não encontrada.`);
     }
     return semSenha(admin);
 }
 
 export async function buscarPorEmail(email: string): Promise<Admin | null > {
-    const admin = await repo.buscarPorEmail(email);
-    return admin ? semSenha(admin) : null;
+    const admin = await repo.buscarPorEmail(emailSchema.parse(email));
+    if (!admin) throw new PresencaError(404, "Administrador não encontrado.");
+    return semSenha(admin);
 }
 
 export async function criarAdmin(dados: CadastroAdminInput ): Promise<Admin> {
-    if (!dados.nome || !dados.email ) {
-    throw new Error("Campos obrigatórios ausentes: nome e email.");
-    }
-    const existente = await repo.buscarPorEmail(dados.email);
+    const email = emailSchema.parse(dados.email);
+    const existente = await repo.buscarPorEmail(email);
     if (existente) {
-        throw new Error("Já existe um secretário cadastrado com este email.");
+        throw new PresencaError(409, "Já existe um administrador com este email.");
     }
     const senhaHash = await bcrypt.hash(dados.senha, SALT_ROUNDS); 
-    return semSenha(await repo.criar({nome: dados.nome, email: dados.email, senhaHash}));
+    return semSenha(await persistir(() => repo.criar({ nome: dados.nome, email, senhaHash }), "Já existe um administrador com este email."));
 }
 
 export async function atualizarAdmin(id: number, dados: AtualizarAdminInput ): Promise<Admin> {
     const admin = await repo.buscarPorId(id);
     if (!admin) {
-        throw new Error(`admin com ID ${id} não encontrada.`);
+        throw new PresencaError(404, `admin com ID ${id} não encontrada.`);
     }
+    const email = emailSchema.parse(dados.email);
+    const existente = await repo.buscarPorEmail(email);
+    if (existente && existente.id !== id) throw new PresencaError(409, "Já existe um administrador com este email.");
     const { senha, ...dadosAtualizacao } = dados;
     
-    const dadosFinal = {...dadosAtualizacao,...(senha && {senhaHash: await bcrypt.hash(senha, SALT_ROUNDS) })};
-    return semSenha(await repo.atualizar(id, dadosFinal));
+    const dadosFinal = {...dadosAtualizacao, email,...(senha && {senhaHash: await bcrypt.hash(senha, SALT_ROUNDS) })};
+    return semSenha(await persistir(() => repo.atualizar(id, dadosFinal), "Já existe um administrador com este email."));
 }
 
 export async function desativarAdmin(id: number): Promise<Admin> {
     const admin = await repo.buscarPorId(id);
     if (!admin) {
-        throw new Error(`Admin com ID ${id} não encontrada.`);
+        throw new PresencaError(404, `Admin com ID ${id} não encontrada.`);
     }
-    return semSenha(await repo.desativarAdmin(id));
+    return semSenha(await persistir(() => repo.desativarAdmin(id)));
  }
 
 export async function deletarAdmin(id: number): Promise<Admin> {
     const admin = await repo.buscarPorId(id);
     if (!admin) {
-        throw new Error(`admin com ID ${id} não encontrada.`);
+        throw new PresencaError(404, `admin com ID ${id} não encontrada.`);
     }
-    return semSenha(await repo.deletar(id));
+    return semSenha(await persistir(() => repo.desativarAdmin(id)));
 }

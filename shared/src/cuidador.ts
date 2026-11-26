@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { emailSchema } from "./email.js";
 
 export const cuidadorSchema =  z.object({
     nome: z
@@ -13,9 +14,7 @@ export const cuidadorSchema =  z.object({
     .max(15, "O telefone deve ter no máximo 15 dígitos")
     .meta({ example: "79999998888" }),
 
-    email: z
-    .preprocess((valor) => (valor === "" || valor === undefined ? null : valor),
-      z.email("E-mail com formato inválido"),)
+    email: emailSchema
     .meta({example: "betatriz@gmail.com"}),
 
 

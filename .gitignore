@@ -3,3 +3,5 @@
 !.env.example
 backups/
 node_modules/
+
+api/dist/

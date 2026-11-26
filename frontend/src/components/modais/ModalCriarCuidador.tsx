@@ -53,7 +53,7 @@ export default function ModalCriarCuidador({
     await onCriar({
       cuidador: {
         nome: nome.trim(),
-        email: email.trim(),
+        email,
         telefone: telefone.trim(),
         salarioBase: salarioNumero,
         ativo: true,
@@ -123,7 +123,7 @@ export default function ModalCriarCuidador({
                 Email
               </label>
               <input
-                type="email"
+                type="text" inputMode="email"
                 placeholder="Digite o email..."
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

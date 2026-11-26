@@ -21,6 +21,10 @@ export function criarPresencaCuidadorService(repo = presencaCuidadorRepository) 
   }
   return {
     buscarPorId,
+    async deletar(id: number) {
+      await buscarPorId(id);
+      return persistir(() => repo.deletar(id));
+    },
     async listar(filtro: FiltroPresencaCuidador) {
       const registros = await repo.listar({
         ...(filtro.cuidadorId ? { cuidadorId: filtro.cuidadorId } : {}),

@@ -60,8 +60,14 @@ test("cadastros ocultam hashes, atualizam senhas e exigem administrador; buscas 
   stub(prisma.turma, "findUnique", async () => null);
   stub(prisma.turma, "findFirst", async ({ where }: { where: { nome: string } }) =>
     where.nome === "Maternal" ? { id: 1, nome: "Maternal", anoLetivo: 2026, turno: "integral", ativo: true, criadoEm: new Date() } : null);
-  const sessaoAdmin = criarSessao({ id: 1, tipoUsuario: "ADMIN" });
-  const sessaoCuidador = criarSessao({ id: 2, tipoUsuario: "CUIDADOR" });
+  admin.ativo = true;
+  cuidador.ativo = true;
+  stub(prisma.conta, "findUnique", async ({ where }: { where: { id: number } }) => ({
+    id: where.id, perfil: where.id === 1 ? "ADMIN" : "CUIDADOR", ativo: true, versaoSessao: 1,
+    admin: where.id === 1 ? admin : null, cuidador: where.id === 2 ? cuidador : null,
+  }));
+  const sessaoAdmin = criarSessao({ id: 1, tipoUsuario: "ADMIN", contaId: 1, versaoSessao: 1 });
+  const sessaoCuidador = criarSessao({ id: 2, tipoUsuario: "CUIDADOR", contaId: 2, versaoSessao: 1 });
   const server = app.listen(0, "127.0.0.1");
   t.after(async () => {
     encerrarSessao(sessaoAdmin.token);
@@ -89,10 +95,10 @@ test("cadastros ocultam hashes, atualizam senhas e exigem administrador; buscas 
     assert.equal(resposta.status, 200);
     (await resposta.json()).forEach(semHash);
   }
-  const turma = await request("/turmas/nome/Maternal");
+  const turma = await request("/turmas/nome/Maternal", sessaoAdmin.token);
   assert.equal(turma.status, 200);
   assert.equal((await turma.json()).nome, "Maternal");
-  assert.equal((await request("/turmas/nome/Inexistente")).status, 404);
-  assert.equal((await request("/turmas/999")).status, 404);
+  assert.equal((await request("/turmas/nome/Inexistente", sessaoAdmin.token)).status, 404);
+  assert.equal((await request("/turmas/999", sessaoAdmin.token)).status, 404);
 });
 

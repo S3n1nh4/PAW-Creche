@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "build": "tsc --noEmit && esbuild src/server.ts --bundle --platform=node --format=esm --packages=external --alias:@creche/shared=../shared/src --outfile=dist/server.js --sourcemap",
     "typecheck": "tsc --noEmit",
+    "test": "tsx --test --test-concurrency=1 tests/*.test.ts",
+    "db:status": "prisma migrate status",
+    "db:baseline": "prisma migrate resolve --applied 20261124204007_init",
+    "db:migrate": "prisma migrate deploy",
     "test:presencas": "tsx --test tests/presencas.test.ts",
     "test:presencas:integration": "tsx --test tests/presencas.integration.test.ts",
     "start": "node dist/server.js",
@@ -34,6 +38,7 @@
     "@types/express": "^5.0.6",
     "@types/pg": "^8.23.1",
     "@types/swagger-ui-express": "^4.1.8",
-    "tsx": "^4.23.15"
+    "tsx": "^4.23.15",
+    "esbuild": "^0.27.0"
   }
 }

@@ -2,15 +2,18 @@ import {prisma} from "../config/prisma.js";
 import type { AdminCreateInput, AdminUpdateInput } from "../generated/prisma/models/Admin.js";
 
 export async function buscarTodos() {
-  return await prisma.admin.findMany();
+  return await prisma.admin.findMany({ where: { conta: { perfil: "ADMIN" } } });
 }
 
 export async function buscarPorId(id: number) {
-  return await prisma.admin.findUnique({ where: { id } });
+  const cadastro = await prisma.admin.findUnique({ where: { id }, include: { conta: { select: { perfil: true } } } });
+  if (!cadastro || (cadastro.conta && cadastro.conta.perfil !== "ADMIN")) return null;
+  const { conta, ...dados } = cadastro;
+  return dados;
 }
 
 export async function buscarPorEmail(email: string) {
-  return await prisma.admin.findFirst({ where: { email } });
+  return await prisma.admin.findFirst({ where: { email, conta: { perfil: "ADMIN" } } });
 }
 
 export async function criar(dados: AdminCreateInput) {

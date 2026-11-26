@@ -3,6 +3,11 @@ import { idPresencaSchema } from "@creche/shared/presenca";
 import { filtroPresencaCuidadorSchema } from "@creche/shared/presencaCuidador";
 import { presencaCuidadorService } from "../services/presencaCuidadorService.js";
 
+export async function deletar(req: Request, res: Response) {
+  await presencaCuidadorService.deletar(idPresencaSchema.parse(req.params.id));
+  return res.status(204).send();
+}
+
 export async function listar(req: Request, res: Response) {
   return res.json(await presencaCuidadorService.listar(filtroPresencaCuidadorSchema.parse(req.query)));
 }

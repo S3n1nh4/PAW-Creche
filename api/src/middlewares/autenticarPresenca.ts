@@ -9,17 +9,20 @@ declare global {
   }
 }
 
-export function autenticarPresenca(perfil: UsuarioSessao["tipoUsuario"]) {
+export function autenticarPresenca(...perfis: UsuarioSessao["tipoUsuario"][]) {
   return async (req: Request, _res: Response, next: NextFunction) => {
     try {
       const token = /^Bearer ([a-f0-9]{64})$/i.exec(req.headers.authorization ?? "")?.[1];
       const usuario = token ? buscarSessao(token) : null;
       if (!usuario) throw new PresencaError(401, "Faça login e envie um token Bearer válido.");
-      const cadastro = usuario.tipoUsuario === "ADMIN"
-        ? await prisma.admin.findUnique({ where: { id: usuario.id }, select: { ativo: true } })
-        : await prisma.cuidador.findUnique({ where: { id: usuario.id }, select: { ativo: true } });
-      if (!cadastro?.ativo) throw new PresencaError(401, "Conta desativada ou removida.");
-      if (usuario.tipoUsuario !== perfil) throw new PresencaError(403, "Seu perfil não pode acessar esta operação.");
+      if (!usuario.contaId || !usuario.versaoSessao) throw new PresencaError(401, "Faça login novamente.");
+      const conta = await prisma.conta.findUnique({ where: { id: usuario.contaId }, include: { admin: true, cuidador: true } });
+      if (!conta?.ativo || conta.versaoSessao !== usuario.versaoSessao || conta.perfil !== usuario.tipoUsuario) {
+        throw new PresencaError(401, "Sessão encerrada. Faça login novamente.");
+      }
+      const cadastro = usuario.tipoUsuario === "ADMIN" ? conta.admin : conta.cuidador;
+      if (!cadastro?.ativo || cadastro.id !== usuario.id) throw new PresencaError(401, "Conta desativada ou removida.");
+      if (!perfis.includes(usuario.tipoUsuario)) throw new PresencaError(403, "Seu perfil não pode acessar esta operação.");
       req.usuario = usuario;
       next();
     } catch (erro) { next(erro); }

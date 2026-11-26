@@ -25,7 +25,7 @@ export default function Login({ onEntrar, onCadastrar }: LoginProps) {
     setErrosCampos({});
 
     // Valida com o schema do shared antes de enviar; cada mensagem aparece junto do seu campo
-    const validacao = loginSchema.safeParse({ email: email.trim(), senha });
+    const validacao = loginSchema.safeParse({ email, senha });
     if (!validacao.success) {
       const porCampo: Record<string, string> = {};
       for (const issue of validacao.error.issues) {
@@ -83,7 +83,7 @@ export default function Login({ onEntrar, onCadastrar }: LoginProps) {
           <label htmlFor="login-email" className="sr-only">Email</label>
           <input
             id="login-email"
-            type="email"
+            type="text" inputMode="email"
             autoComplete="email"
             placeholder="Email"
             value={email}

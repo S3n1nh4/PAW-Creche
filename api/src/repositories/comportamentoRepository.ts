@@ -1,9 +1,10 @@
+import type { Prisma } from "../generated/prisma/client.js";
 import {prisma} from "../config/prisma.js";
 import type { ComportamentoUncheckedCreateInput, ComportamentoUncheckedUpdateInput } from "../generated/prisma/models/Comportamento.js";
 
 
-export async function buscarTodos() {
-  return await prisma.comportamento.findMany();
+export async function buscarTodos(where: Prisma.ComportamentoWhereInput = {}) {
+  return await prisma.comportamento.findMany({ where, orderBy: { data: "desc" } });
 }
 
 export async function buscarPorId(id: number) {

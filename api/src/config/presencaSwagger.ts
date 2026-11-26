@@ -37,6 +37,12 @@ export function registrarPresencas(registry: OpenAPIRegistry) {
       request: { params: z.object({ id: idPresencaSchema }), body: json(config.update) },
       responses: { ...erros, 200: { description: "Registro corrigido", ...json(config.response) } } });
   }
+  registry.registerPath({ method: "delete", path: "/presencas-cuidadores/{id}",
+    tags: ["Ponto dos cuidadores (ADMIN)"], security: [{ bearerAuth: [] }],
+    summary: "Exclui definitivamente um ponto incorreto (somente ADMIN)",
+    request: { params: z.object({ id: idPresencaSchema }) },
+    responses: { 204: { description: "Ponto excluído" }, 401: { description: "Não autenticado" },
+      403: { description: "Perfil indevido" }, 404: { description: "Ponto inexistente" } } });
   registry.registerPath({ method: "post", path: "/logout", tags: ["Autenticação"],
     summary: "Encerra a sessão Bearer atual", security: [{ bearerAuth: [] }],
     responses: { 204: { description: "Sessão encerrada (operação idempotente)" } } });

@@ -27,14 +27,17 @@ export type AggregateAdmin = {
 }
 
 export type AdminAvgAggregateOutputType = {
+  contaId: number | null
   id: number | null
 }
 
 export type AdminSumAggregateOutputType = {
+  contaId: number | null
   id: number | null
 }
 
 export type AdminMinAggregateOutputType = {
+  contaId: number | null
   id: number | null
   nome: string | null
   email: string | null
@@ -44,6 +47,7 @@ export type AdminMinAggregateOutputType = {
 }
 
 export type AdminMaxAggregateOutputType = {
+  contaId: number | null
   id: number | null
   nome: string | null
   email: string | null
@@ -53,6 +57,7 @@ export type AdminMaxAggregateOutputType = {
 }
 
 export type AdminCountAggregateOutputType = {
+  contaId: number
   id: number
   nome: number
   email: number
@@ -64,14 +69,17 @@ export type AdminCountAggregateOutputType = {
 
 
 export type AdminAvgAggregateInputType = {
+  contaId?: true
   id?: true
 }
 
 export type AdminSumAggregateInputType = {
+  contaId?: true
   id?: true
 }
 
 export type AdminMinAggregateInputType = {
+  contaId?: true
   id?: true
   nome?: true
   email?: true
@@ -81,6 +89,7 @@ export type AdminMinAggregateInputType = {
 }
 
 export type AdminMaxAggregateInputType = {
+  contaId?: true
   id?: true
   nome?: true
   email?: true
@@ -90,6 +99,7 @@ export type AdminMaxAggregateInputType = {
 }
 
 export type AdminCountAggregateInputType = {
+  contaId?: true
   id?: true
   nome?: true
   email?: true
@@ -186,6 +196,7 @@ export type AdminGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 }
 
 export type AdminGroupByOutputType = {
+  contaId: number | null
   id: number
   nome: string
   email: string
@@ -218,26 +229,31 @@ export type AdminWhereInput = {
   AND?: Prisma.AdminWhereInput | Prisma.AdminWhereInput[]
   OR?: Prisma.AdminWhereInput[]
   NOT?: Prisma.AdminWhereInput | Prisma.AdminWhereInput[]
+  contaId?: Prisma.IntNullableFilter<"Admin"> | number | null
   id?: Prisma.IntFilter<"Admin"> | number
   nome?: Prisma.StringFilter<"Admin"> | string
   email?: Prisma.StringFilter<"Admin"> | string
   senhaHash?: Prisma.StringFilter<"Admin"> | string
   ativo?: Prisma.BoolFilter<"Admin"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Admin"> | Date | string
+  conta?: Prisma.XOR<Prisma.ContaNullableScalarRelationFilter, Prisma.ContaWhereInput> | null
   presencasCuidador?: Prisma.PresencaCuidadorListRelationFilter
 }
 
 export type AdminOrderByWithRelationInput = {
+  contaId?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senhaHash?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
+  conta?: Prisma.ContaOrderByWithRelationInput
   presencasCuidador?: Prisma.PresencaCuidadorOrderByRelationAggregateInput
 }
 
 export type AdminWhereUniqueInput = Prisma.AtLeast<{
+  contaId?: number
   id?: number
   AND?: Prisma.AdminWhereInput | Prisma.AdminWhereInput[]
   OR?: Prisma.AdminWhereInput[]
@@ -247,10 +263,12 @@ export type AdminWhereUniqueInput = Prisma.AtLeast<{
   senhaHash?: Prisma.StringFilter<"Admin"> | string
   ativo?: Prisma.BoolFilter<"Admin"> | boolean
   criadoEm?: Prisma.DateTimeFilter<"Admin"> | Date | string
+  conta?: Prisma.XOR<Prisma.ContaNullableScalarRelationFilter, Prisma.ContaWhereInput> | null
   presencasCuidador?: Prisma.PresencaCuidadorListRelationFilter
-}, "id">
+}, "id" | "contaId">
 
 export type AdminOrderByWithAggregationInput = {
+  contaId?: Prisma.SortOrderInput | Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -268,6 +286,7 @@ export type AdminScalarWhereWithAggregatesInput = {
   AND?: Prisma.AdminScalarWhereWithAggregatesInput | Prisma.AdminScalarWhereWithAggregatesInput[]
   OR?: Prisma.AdminScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AdminScalarWhereWithAggregatesInput | Prisma.AdminScalarWhereWithAggregatesInput[]
+  contaId?: Prisma.IntNullableWithAggregatesFilter<"Admin"> | number | null
   id?: Prisma.IntWithAggregatesFilter<"Admin"> | number
   nome?: Prisma.StringWithAggregatesFilter<"Admin"> | string
   email?: Prisma.StringWithAggregatesFilter<"Admin"> | string
@@ -282,10 +301,12 @@ export type AdminCreateInput = {
   senhaHash: string
   ativo?: boolean
   criadoEm?: Date | string
+  conta?: Prisma.ContaCreateNestedOneWithoutAdminInput
   presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutAdminInput
 }
 
 export type AdminUncheckedCreateInput = {
+  contaId?: number | null
   id?: number
   nome: string
   email: string
@@ -301,10 +322,12 @@ export type AdminUpdateInput = {
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conta?: Prisma.ContaUpdateOneWithoutAdminNestedInput
   presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutAdminNestedInput
 }
 
 export type AdminUncheckedUpdateInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -315,6 +338,7 @@ export type AdminUncheckedUpdateInput = {
 }
 
 export type AdminCreateManyInput = {
+  contaId?: number | null
   id?: number
   nome: string
   email: string
@@ -332,6 +356,7 @@ export type AdminUpdateManyMutationInput = {
 }
 
 export type AdminUncheckedUpdateManyInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -341,6 +366,7 @@ export type AdminUncheckedUpdateManyInput = {
 }
 
 export type AdminCountOrderByAggregateInput = {
+  contaId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -350,10 +376,12 @@ export type AdminCountOrderByAggregateInput = {
 }
 
 export type AdminAvgOrderByAggregateInput = {
+  contaId?: Prisma.SortOrder
   id?: Prisma.SortOrder
 }
 
 export type AdminMaxOrderByAggregateInput = {
+  contaId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -363,6 +391,7 @@ export type AdminMaxOrderByAggregateInput = {
 }
 
 export type AdminMinOrderByAggregateInput = {
+  contaId?: Prisma.SortOrder
   id?: Prisma.SortOrder
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -372,7 +401,13 @@ export type AdminMinOrderByAggregateInput = {
 }
 
 export type AdminSumOrderByAggregateInput = {
+  contaId?: Prisma.SortOrder
   id?: Prisma.SortOrder
+}
+
+export type AdminNullableScalarRelationFilter = {
+  is?: Prisma.AdminWhereInput | null
+  isNot?: Prisma.AdminWhereInput | null
 }
 
 export type AdminScalarRelationFilter = {
@@ -392,12 +427,52 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type AdminCreateNestedOneWithoutContaInput = {
+  create?: Prisma.XOR<Prisma.AdminCreateWithoutContaInput, Prisma.AdminUncheckedCreateWithoutContaInput>
+  connectOrCreate?: Prisma.AdminCreateOrConnectWithoutContaInput
+  connect?: Prisma.AdminWhereUniqueInput
+}
+
+export type AdminUncheckedCreateNestedOneWithoutContaInput = {
+  create?: Prisma.XOR<Prisma.AdminCreateWithoutContaInput, Prisma.AdminUncheckedCreateWithoutContaInput>
+  connectOrCreate?: Prisma.AdminCreateOrConnectWithoutContaInput
+  connect?: Prisma.AdminWhereUniqueInput
+}
+
+export type AdminUpdateOneWithoutContaNestedInput = {
+  create?: Prisma.XOR<Prisma.AdminCreateWithoutContaInput, Prisma.AdminUncheckedCreateWithoutContaInput>
+  connectOrCreate?: Prisma.AdminCreateOrConnectWithoutContaInput
+  upsert?: Prisma.AdminUpsertWithoutContaInput
+  disconnect?: Prisma.AdminWhereInput | boolean
+  delete?: Prisma.AdminWhereInput | boolean
+  connect?: Prisma.AdminWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUpdateToOneWithWhereWithoutContaInput, Prisma.AdminUpdateWithoutContaInput>, Prisma.AdminUncheckedUpdateWithoutContaInput>
+}
+
+export type AdminUncheckedUpdateOneWithoutContaNestedInput = {
+  create?: Prisma.XOR<Prisma.AdminCreateWithoutContaInput, Prisma.AdminUncheckedCreateWithoutContaInput>
+  connectOrCreate?: Prisma.AdminCreateOrConnectWithoutContaInput
+  upsert?: Prisma.AdminUpsertWithoutContaInput
+  disconnect?: Prisma.AdminWhereInput | boolean
+  delete?: Prisma.AdminWhereInput | boolean
+  connect?: Prisma.AdminWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUpdateToOneWithWhereWithoutContaInput, Prisma.AdminUpdateWithoutContaInput>, Prisma.AdminUncheckedUpdateWithoutContaInput>
 }
 
 export type AdminCreateNestedOneWithoutPresencasCuidadorInput = {
@@ -414,15 +489,71 @@ export type AdminUpdateOneRequiredWithoutPresencasCuidadorNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AdminUpdateToOneWithWhereWithoutPresencasCuidadorInput, Prisma.AdminUpdateWithoutPresencasCuidadorInput>, Prisma.AdminUncheckedUpdateWithoutPresencasCuidadorInput>
 }
 
+export type AdminCreateWithoutContaInput = {
+  nome: string
+  email: string
+  senhaHash: string
+  ativo?: boolean
+  criadoEm?: Date | string
+  presencasCuidador?: Prisma.PresencaCuidadorCreateNestedManyWithoutAdminInput
+}
+
+export type AdminUncheckedCreateWithoutContaInput = {
+  id?: number
+  nome: string
+  email: string
+  senhaHash: string
+  ativo?: boolean
+  criadoEm?: Date | string
+  presencasCuidador?: Prisma.PresencaCuidadorUncheckedCreateNestedManyWithoutAdminInput
+}
+
+export type AdminCreateOrConnectWithoutContaInput = {
+  where: Prisma.AdminWhereUniqueInput
+  create: Prisma.XOR<Prisma.AdminCreateWithoutContaInput, Prisma.AdminUncheckedCreateWithoutContaInput>
+}
+
+export type AdminUpsertWithoutContaInput = {
+  update: Prisma.XOR<Prisma.AdminUpdateWithoutContaInput, Prisma.AdminUncheckedUpdateWithoutContaInput>
+  create: Prisma.XOR<Prisma.AdminCreateWithoutContaInput, Prisma.AdminUncheckedCreateWithoutContaInput>
+  where?: Prisma.AdminWhereInput
+}
+
+export type AdminUpdateToOneWithWhereWithoutContaInput = {
+  where?: Prisma.AdminWhereInput
+  data: Prisma.XOR<Prisma.AdminUpdateWithoutContaInput, Prisma.AdminUncheckedUpdateWithoutContaInput>
+}
+
+export type AdminUpdateWithoutContaInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  presencasCuidador?: Prisma.PresencaCuidadorUpdateManyWithoutAdminNestedInput
+}
+
+export type AdminUncheckedUpdateWithoutContaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  presencasCuidador?: Prisma.PresencaCuidadorUncheckedUpdateManyWithoutAdminNestedInput
+}
+
 export type AdminCreateWithoutPresencasCuidadorInput = {
   nome: string
   email: string
   senhaHash: string
   ativo?: boolean
   criadoEm?: Date | string
+  conta?: Prisma.ContaCreateNestedOneWithoutAdminInput
 }
 
 export type AdminUncheckedCreateWithoutPresencasCuidadorInput = {
+  contaId?: number | null
   id?: number
   nome: string
   email: string
@@ -453,9 +584,11 @@ export type AdminUpdateWithoutPresencasCuidadorInput = {
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  conta?: Prisma.ContaUpdateOneWithoutAdminNestedInput
 }
 
 export type AdminUncheckedUpdateWithoutPresencasCuidadorInput = {
+  contaId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   id?: Prisma.IntFieldUpdateOperationsInput | number
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -496,35 +629,42 @@ export type AdminCountOutputTypeCountPresencasCuidadorArgs<ExtArgs extends runti
 
 
 export type AdminSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  contaId?: boolean
   id?: boolean
   nome?: boolean
   email?: boolean
   senhaHash?: boolean
   ativo?: boolean
   criadoEm?: boolean
+  conta?: boolean | Prisma.Admin$contaArgs<ExtArgs>
   presencasCuidador?: boolean | Prisma.Admin$presencasCuidadorArgs<ExtArgs>
   _count?: boolean | Prisma.AdminCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["admin"]>
 
 export type AdminSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  contaId?: boolean
   id?: boolean
   nome?: boolean
   email?: boolean
   senhaHash?: boolean
   ativo?: boolean
   criadoEm?: boolean
+  conta?: boolean | Prisma.Admin$contaArgs<ExtArgs>
 }, ExtArgs["result"]["admin"]>
 
 export type AdminSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  contaId?: boolean
   id?: boolean
   nome?: boolean
   email?: boolean
   senhaHash?: boolean
   ativo?: boolean
   criadoEm?: boolean
+  conta?: boolean | Prisma.Admin$contaArgs<ExtArgs>
 }, ExtArgs["result"]["admin"]>
 
 export type AdminSelectScalar = {
+  contaId?: boolean
   id?: boolean
   nome?: boolean
   email?: boolean
@@ -533,22 +673,32 @@ export type AdminSelectScalar = {
   criadoEm?: boolean
 }
 
-export type AdminOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senhaHash" | "ativo" | "criadoEm", ExtArgs["result"]["admin"]>
+export type AdminOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"contaId" | "id" | "nome" | "email" | "senhaHash" | "ativo" | "criadoEm", ExtArgs["result"]["admin"]>
 export type AdminInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  conta?: boolean | Prisma.Admin$contaArgs<ExtArgs>
   presencasCuidador?: boolean | Prisma.Admin$presencasCuidadorArgs<ExtArgs>
   _count?: boolean | Prisma.AdminCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type AdminIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type AdminIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type AdminIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  conta?: boolean | Prisma.Admin$contaArgs<ExtArgs>
+}
+export type AdminIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  conta?: boolean | Prisma.Admin$contaArgs<ExtArgs>
+}
 
 export type $AdminPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Admin"
   objects: {
+    conta: Prisma.$ContaPayload<ExtArgs> | null
     presencasCuidador: Prisma.$PresencaCuidadorPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    contaId: number | null
     id: number
     nome: string
+    /**
+     * Espelho de compatibilidade; a identidade e o email único estão em Conta.
+     */
     email: string
     senhaHash: string
     ativo: boolean
@@ -636,8 +786,8 @@ export interface AdminDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * // Get first 10 Admins
    * const admins = await prisma.admin.findMany({ take: 10 })
    * 
-   * // Only select the `id`
-   * const adminWithIdOnly = await prisma.admin.findMany({ select: { id: true } })
+   * // Only select the `contaId`
+   * const adminWithContaIdOnly = await prisma.admin.findMany({ select: { contaId: true } })
    * 
    */
   findMany<T extends AdminFindManyArgs>(args?: Prisma.SelectSubset<T, AdminFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -681,9 +831,9 @@ export interface AdminDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    *   ]
    * })
    * 
-   * // Create many Admins and only return the `id`
-   * const adminWithIdOnly = await prisma.admin.createManyAndReturn({
-   *   select: { id: true },
+   * // Create many Admins and only return the `contaId`
+   * const adminWithContaIdOnly = await prisma.admin.createManyAndReturn({
+   *   select: { contaId: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -772,9 +922,9 @@ export interface AdminDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    *   ]
    * })
    * 
-   * // Update zero or more Admins and only return the `id`
-   * const adminWithIdOnly = await prisma.admin.updateManyAndReturn({
-   *   select: { id: true },
+   * // Update zero or more Admins and only return the `contaId`
+   * const adminWithContaIdOnly = await prisma.admin.updateManyAndReturn({
+   *   select: { contaId: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -947,6 +1097,7 @@ readonly fields: AdminFieldRefs;
  */
 export interface Prisma__AdminClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  conta<T extends Prisma.Admin$contaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Admin$contaArgs<ExtArgs>>): Prisma.Prisma__ContaClient<runtime.Types.Result.GetResult<Prisma.$ContaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   presencasCuidador<T extends Prisma.Admin$presencasCuidadorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Admin$presencasCuidadorArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PresencaCuidadorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -977,6 +1128,7 @@ export interface Prisma__AdminClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the Admin model
  */
 export interface AdminFieldRefs {
+  readonly contaId: Prisma.FieldRef<"Admin", 'Int'>
   readonly id: Prisma.FieldRef<"Admin", 'Int'>
   readonly nome: Prisma.FieldRef<"Admin", 'String'>
   readonly email: Prisma.FieldRef<"Admin", 'String'>
@@ -1237,6 +1389,10 @@ export type AdminCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    */
   data: Prisma.AdminCreateManyInput | Prisma.AdminCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdminIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1307,6 +1463,10 @@ export type AdminUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many Admins to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdminIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1373,6 +1533,25 @@ export type AdminDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many Admins to delete.
    */
   limit?: number
+}
+
+/**
+ * Admin.conta
+ */
+export type Admin$contaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Conta
+   */
+  select?: Prisma.ContaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Conta
+   */
+  omit?: Prisma.ContaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContaInclude<ExtArgs> | null
+  where?: Prisma.ContaWhereInput
 }
 
 /**

@@ -535,14 +535,6 @@ export type AlunoUncheckedUpdateManyWithoutTurmaNestedInput = {
   deleteMany?: Prisma.AlunoScalarWhereInput | Prisma.AlunoScalarWhereInput[]
 }
 
-export type NullableIntFieldUpdateOperationsInput = {
-  set?: number | null
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type AlunoCreateNestedOneWithoutPresencasInput = {
   create?: Prisma.XOR<Prisma.AlunoCreateWithoutPresencasInput, Prisma.AlunoUncheckedCreateWithoutPresencasInput>
   connectOrCreate?: Prisma.AlunoCreateOrConnectWithoutPresencasInput

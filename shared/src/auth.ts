@@ -1,8 +1,8 @@
 import { z } from "zod";
+import { emailSchema } from "./email.js";
 
 export const loginSchema = z.object({
-  email: z
-    .email("O email informado é inválido")
+  email: emailSchema
     .meta({ example: "usuario@email.com" }),
 
   senha: z

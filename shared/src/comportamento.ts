@@ -1,5 +1,6 @@
 
 import { z } from "zod";
+import { dataCivilSchema } from "./dataCivil.js";
 
 export const comportamentoSchema = z.object({
 
@@ -15,12 +16,7 @@ export const comportamentoSchema = z.object({
     .positive("O ID do cuidador deve ser maior que zero")
     .meta({ example: 2 }),
 
-    data: z
-    .string()
-    .regex(
-      /^\d{2}\/\d{2}\/\d{4}$/,
-      "A data deve estar no formato DD/MM/AAAA (exemplo: 15/10/2026)"
-    )
+    data: dataCivilSchema
     .meta({example: "15/10/2026",description: "Data do comportamento no formato DD/MM/AAAA",}),
 
     descricao: z

@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Admin: 'Admin',
   Cuidador: 'Cuidador',
+  Conta: 'Conta',
   Turma: 'Turma',
   TurmaCuidador: 'TurmaCuidador',
   Aluno: 'Aluno',
@@ -78,6 +79,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 
 export const AdminScalarFieldEnum = {
+  contaId: 'contaId',
   id: 'id',
   nome: 'nome',
   email: 'email',
@@ -90,6 +92,7 @@ export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof Ad
 
 
 export const CuidadorScalarFieldEnum = {
+  contaId: 'contaId',
   id: 'id',
   nome: 'nome',
   email: 'email',
@@ -102,6 +105,19 @@ export const CuidadorScalarFieldEnum = {
 } as const
 
 export type CuidadorScalarFieldEnum = (typeof CuidadorScalarFieldEnum)[keyof typeof CuidadorScalarFieldEnum]
+
+
+export const ContaScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  senhaHash: 'senhaHash',
+  perfil: 'perfil',
+  ativo: 'ativo',
+  versaoSessao: 'versaoSessao',
+  criadoEm: 'criadoEm'
+} as const
+
+export type ContaScalarFieldEnum = (typeof ContaScalarFieldEnum)[keyof typeof ContaScalarFieldEnum]
 
 
 export const TurmaScalarFieldEnum = {

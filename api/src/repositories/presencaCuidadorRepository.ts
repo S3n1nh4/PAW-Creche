@@ -2,6 +2,7 @@ import { prisma } from "../config/prisma.js";
 import type { Prisma } from "../generated/prisma/client.js";
 
 export const presencaCuidadorRepository = {
+  deletar: (id: number) => prisma.presencaCuidador.delete({ where: { id } }),
   buscarPorId: (id: number) => prisma.presencaCuidador.findUnique({ where: { id } }),
   listar: (where: Prisma.PresencaCuidadorWhereInput, skip: number, take: number) =>
     prisma.presencaCuidador.findMany({ where, skip, take, orderBy: [{ data: "desc" }, { id: "desc" }] }),

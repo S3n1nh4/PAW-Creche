@@ -1,4 +1,5 @@
 import {z} from "zod";
+import { dataCivilSchema } from "./dataCivil.js";
 
 export const alunoSchema = z.object({
 
@@ -8,9 +9,7 @@ export const alunoSchema = z.object({
     .max(100, "o nome deve  ter no máximo 100 caracteres")
     .meta({example: "Sena Ayrton"}),
 
-    dataNascimento: z
-    .string({ error: "A data de nascimento é obrigatória" })
-    .regex(/^\d{2}\/\d{2}\/\d{4}$/,"A data deve estar no formato DD/MM/AAAA (exemplo: 15/10/2026)")
+    dataNascimento: dataCivilSchema
     .meta({example: "15/10/2018",description: "Data de nascimento no formato DD/MM/AAAA",}),
 
     turmaId: z

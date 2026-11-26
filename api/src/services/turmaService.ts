@@ -1,6 +1,7 @@
 import * as repo from "../repositories/turmaRepository.js"
 import type {Turma} from "../generated/prisma/client.js";
 import type { TurmaInput } from "@creche/shared/turma";
+import { persistir, PresencaError } from "./presencaErrors.js";
 
 
 export async function buscarTurmas(): Promise<Turma[]> {
@@ -10,7 +11,7 @@ export async function buscarTurmas(): Promise<Turma[]> {
 export async function buscarPorId(id: number): Promise<Turma | null> {
     const turma = await repo.buscarPorId(id);
     if(!turma){
-        throw new Error(`Turma com ID ${id} não encontrado.`);
+        throw new PresencaError(404, `Turma com ID ${id} não encontrada.`);
     }   
     return turma;
 }
@@ -18,33 +19,30 @@ export async function buscarPorId(id: number): Promise<Turma | null> {
 export async function buscarTurmaPorNome(nome : string): Promise<Turma | null> {
     const turma = await repo.buscarPorNome(nome);
     if(!turma){
-        throw new Error(`Turma com nome ${nome} não encontrado.`);
+        throw new PresencaError(404, `Turma com nome ${nome} não encontrada.`);
     }
     return turma;
 }
 
 export async function criarTurma(dados : TurmaInput): Promise< Turma| null> {
-    const turmaExistente = await repo.buscarPorNome(dados.nome);
-        if (turmaExistente) {
-            throw new Error(`Já existe uma Turma com o nome ${dados.nome}.`);
-        }
-        return await repo.criar(dados)
+    // A chave única do banco é nome + ano letivo + turno, inclusive sob concorrência.
+    return persistir(() => repo.criar(dados), "Já existe uma turma com esse nome, ano letivo e turno.");
 }
 
 export async function atualizarTurma(id: number,dados : TurmaInput): Promise<Turma| null>{
     const turma = await repo.buscarPorId(id);
         if (!turma) {
-            throw new Error(`turma com ID ${id} não encontrada.`);
+            throw new PresencaError(404, `Turma com ID ${id} não encontrada.`);
         }
-        return await repo.atualizar(id, dados);
+        return persistir(() => repo.atualizar(id, dados), "Já existe uma turma com esse nome, ano letivo e turno.");
 }
 
 
 export async function deletarTurma(id: number): Promise<Turma> {
     const turma = await repo.buscarPorId(id);
     if (!turma) {
-        throw new Error(`Turma com ID ${id} não encontrada.`);
+        throw new PresencaError(404, `Turma com ID ${id} não encontrada.`);
    }
-    return await repo.deletar(id);
+    return await repo.atualizar(id, { ativo: false });
     
 }

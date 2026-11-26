@@ -1,8 +1,9 @@
+import type { Prisma } from "../generated/prisma/client.js";
 import {prisma} from "../config/prisma.js";
 import type { AlunoCreateInput, AlunoUpdateInput } from "../generated/prisma/models/Aluno.js";
 
-export async function buscarTodos() {
-  return await prisma.aluno.findMany();
+export async function buscarTodos(where: Prisma.AlunoWhereInput = {}) {
+  return await prisma.aluno.findMany({ where });
 }
 
 export async function buscarPorTurma(turmaId: number) {

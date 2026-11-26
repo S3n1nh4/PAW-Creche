@@ -15,6 +15,7 @@ import { comportamentoSchema } from "@creche/shared/comportamento";
 import { turmaCuidadorSchema } from "@creche/shared/turmaCuidador";
 import { loginSchema } from "@creche/shared/auth";
 import { registrarPresencas } from "./presencaSwagger.js";
+import { alterarPerfilSchema } from "@creche/shared/conta";
 
 extendZodWithOpenApi(z);
 
@@ -61,7 +62,6 @@ function registrarCrud({
   schemaCadastro?: ZodType;
   schemaAtualizacao?: ZodType;
 }) {
-  const security = path === "/admins" || path === "/cuidadores" ? [{ bearerAuth: [] }] : [];
   const model = registry.register(
     nomeModelo,
     (schema as any).extend({
@@ -74,8 +74,8 @@ function registrarCrud({
     method: "get",
     path,
     summary: `Lista ${tag.toLowerCase()}`,
-    security,
     tags: [tag],
+    security: [{ bearerAuth: [] }],
     responses: {
       200: jsonResponse("Lista retornada com sucesso", z.array(model)),
     },
@@ -86,8 +86,8 @@ function registrarCrud({
     method: "get",
     path: `${path}/{id}`,
     summary: `Busca ${nomeModelo.toLowerCase()} por ID`,
-    security,
     tags: [tag],
+    security: [{ bearerAuth: [] }],
     request: { params: idParam },
     responses: {
       200: jsonResponse("Registro encontrado", model),
@@ -100,8 +100,8 @@ function registrarCrud({
     method: "post",
     path,
     summary: `Cadastra ${nomeModelo.toLowerCase()}`,
-    security,
     tags: [tag],
+    security: [{ bearerAuth: [] }],
     request: {
       body: jsonBody(schemaCadastro),
     },
@@ -116,8 +116,8 @@ function registrarCrud({
     method: "put",
     path: `${path}/{id}`,
     summary: `Atualiza ${nomeModelo.toLowerCase()}`,
-    security,
     tags: [tag],
+    security: [{ bearerAuth: [] }],
     request: {
       params: idParam,
       body: jsonBody(schemaAtualizacao),
@@ -133,9 +133,9 @@ function registrarCrud({
   registry.registerPath({
     method: "delete",
     path: `${path}/{id}`,
-    summary: `Remove ${nomeModelo.toLowerCase()}`,
-    security,
+    summary: ["/admins", "/alunos", "/turmas", "/cuidadores"].includes(path) ? `Desativa ${nomeModelo.toLowerCase()} e preserva o histórico` : `Remove ${nomeModelo.toLowerCase()}`,
     tags: [tag],
+    security: [{ bearerAuth: [] }],
     request: { params: idParam },
     responses: {
       204: jsonResponse("Registro removido com sucesso"),
@@ -188,6 +188,8 @@ const comportamentoModel = registrarCrud({
   path: "/comportamentos",
   nomeModelo: "Comportamento",
   schema: comportamentoSchema,
+  schemaCadastro: comportamentoSchema.omit({ cuidadorId: true }),
+  schemaAtualizacao: comportamentoSchema.omit({ cuidadorId: true }),
 });
 
 // -------------------------------------------------------------
@@ -198,8 +200,8 @@ registry.registerPath({
   method: "get",
   path: "/admins/email/{email}",
   summary: "Busca administrador por e-mail",
-  security: [{ bearerAuth: [] }],
   tags: ["Administradores"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       email: z.string().email(),
@@ -215,8 +217,8 @@ registry.registerPath({
   method: "put",
   path: "/admins/desativar/{id}",
   summary: "Desativa um administrador",
-  security: [{ bearerAuth: [] }],
   tags: ["Administradores"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: idParam,
   },
@@ -234,8 +236,8 @@ registry.registerPath({
   method: "get",
   path: "/cuidadores/email/{email}",
   summary: "Busca cuidador por e-mail",
-  security: [{ bearerAuth: [] }],
   tags: ["Cuidadores"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       email: z.string().email(),
@@ -256,6 +258,7 @@ registry.registerPath({
   path: "/alunos/turma/{turmaId}",
   summary: "Lista alunos de uma turma",
   tags: ["Alunos"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       turmaId: z.coerce.number().int().positive(),
@@ -271,6 +274,7 @@ registry.registerPath({
   path: "/alunos/nome/{nome}",
   summary: "Busca alunos pelo nome",
   tags: ["Alunos"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       nome: z.string(),
@@ -290,6 +294,7 @@ registry.registerPath({
   path: "/turmas/nome/{nome}",
   summary: "Busca turma pelo nome",
   tags: ["Turmas"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       nome: z.string(),
@@ -310,6 +315,7 @@ registry.registerPath({
   path: "/comportamentos/cuidador/{cuidadorId}",
   summary: "Lista comportamentos registrados por um cuidador",
   tags: ["Comportamentos"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       cuidadorId: z.coerce.number().int().positive(),
@@ -325,6 +331,7 @@ registry.registerPath({
   path: "/comportamentos/aluno/{alunoId}",
   summary: "Lista comportamentos de um aluno",
   tags: ["Comportamentos"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       alunoId: z.coerce.number().int().positive(),
@@ -344,6 +351,7 @@ registry.registerPath({
   path: "/turmaCuidador",
   summary: "Lista todos os vínculos entre turmas e cuidadores",
   tags: ["Turma e Cuidador"],
+    security: [{ bearerAuth: [] }],
   responses: {
     200: jsonResponse(
       "Vínculos encontrados",
@@ -357,6 +365,7 @@ registry.registerPath({
   path: "/turmaCuidador/turma/{turmaId}",
   summary: "Lista cuidadores vinculados a uma turma",
   tags: ["Turma e Cuidador"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       turmaId: z.coerce.number().int().positive(),
@@ -372,6 +381,7 @@ registry.registerPath({
   path: "/turmaCuidador/cuidador/{cuidadorId}",
   summary: "Lista turmas vinculadas a um cuidador",
   tags: ["Turma e Cuidador"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       cuidadorId: z.coerce.number().int().positive(),
@@ -387,6 +397,7 @@ registry.registerPath({
   path: "/turmaCuidador/{turmaId}/{cuidadorId}",
   summary: "Vincula um cuidador a uma turma",
   tags: ["Turma e Cuidador"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       turmaId: z.coerce.number().int().positive(),
@@ -405,6 +416,7 @@ registry.registerPath({
   path: "/turmaCuidador/{turmaId}/{cuidadorId}",
   summary: "Desvincula um cuidador de uma turma",
   tags: ["Turma e Cuidador"],
+    security: [{ bearerAuth: [] }],
   request: {
     params: z.object({
       turmaId: z.coerce.number().int().positive(),
@@ -441,6 +453,13 @@ registry.registerPath({
 // -------------------------------------------------------------
 
 registrarPresencas(registry);
+registry.registerPath({ method: "get", path: "/contas/{id}", tags: ["Contas"], security: [{ bearerAuth: [] }],
+  summary: "Consulta a identidade central (ADMIN)", request: { params: idParam },
+  responses: { 200: jsonResponse("Conta sem credenciais"), 404: jsonResponse("Conta não encontrada") } });
+registry.registerPath({ method: "put", path: "/contas/{id}/perfil", tags: ["Contas"], security: [{ bearerAuth: [] }],
+  summary: "Troca o perfil da conta e encerra suas sessões (ADMIN)", request: { params: idParam, body: jsonBody(alterarPerfilSchema) },
+  responses: { 200: jsonResponse("Perfil atualizado; o titular precisa fazer login novamente"),
+    400: jsonResponse("Perfil inválido"), 403: jsonResponse("Exige administrador"), 404: jsonResponse("Conta não encontrada") } });
 const generator = new OpenApiGeneratorV3(registry.definitions);
 
 export const swaggerSpec = generator.generateDocument({

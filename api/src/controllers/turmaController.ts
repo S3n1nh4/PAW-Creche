@@ -1,64 +1,20 @@
-import express, { type Request, type Response } from "express";
-import * as Service  from "../services/turmaService.js";
-import type { TurmaInput } from "@creche/shared/turma";
+import type { Request, Response } from "express";
+import * as service from "../services/turmaService.js";
+import { idPresencaSchema } from "@creche/shared/presenca";
+import { z } from "zod";
 
-
-
-export async function listar(req: Request, res: Response) {
-    const turmas = await Service.buscarTurmas();
-    return res.json(turmas);
-}
-
+export async function listar(_req: Request, res: Response) { return res.json(await service.buscarTurmas()); }
 export async function buscarPorId(req: Request, res: Response) {
-    try{
-        const id: number = Number(req.params.id);
-        const turma = await Service.buscarPorId(Number(id));
-        return res.json(turma);
-    }catch(erro: any){
-        return res.status(404).json({mensagem: erro.message});
-    }
+  return res.json(await service.buscarPorId(idPresencaSchema.parse(req.params.id)));
 }
 export async function buscarPorNome(req: Request, res: Response) {
-    try{
-        const nome = req.params.nome;
-        if (typeof nome !== "string" || !nome.trim()){
-            return res.status(404).json({mensagem: "nome invalido"})
-        }
-        const turma = await Service.buscarTurmaPorNome(nome);
-        return res.json(turma);
-    }catch(erro: any){
-        return res.status(404).json({mensagem: erro.message});
-    }
+  return res.json(await service.buscarTurmaPorNome(z.string().trim().min(1).parse(req.params.nome)));
 }
-
-export async function criar(req: Request, res: Response) {
-    try{
-        const dados: TurmaInput = req.body;
-        const turma = await Service.criarTurma(dados);
-        return res.status(201).json(turma);
-    }catch(erro:any){
-        return res.status(400).json({mensagem: erro.message});
-    }
-}
-
-
+export async function criar(req: Request, res: Response) { return res.status(201).json(await service.criarTurma(req.body)); }
 export async function atualizar(req: Request, res: Response) {
-    try {
-        const id: number = Number(req.params.id);
-        const dados: TurmaInput = req.body;
-        const turma = await Service.atualizarTurma(id,dados);
-        return res.json(turma);
-    }catch(erro:any){
-        return res.status(500).json({mensagem: erro.message});
-    }   
+  return res.json(await service.atualizarTurma(idPresencaSchema.parse(req.params.id), req.body));
 }
-
 export async function deletar(req: Request, res: Response) {
-    try {
-        const id:number = Number(req.params.id);
-        await Service.deletarTurma(id);
-        return res.status(204).send();
-    }catch(erro:any){
-        return res.status(500).json({mensagem: erro.message});
-    }
+  await service.deletarTurma(idPresencaSchema.parse(req.params.id));
+  return res.status(204).send();
 }

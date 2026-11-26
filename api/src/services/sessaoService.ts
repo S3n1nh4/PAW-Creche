@@ -1,6 +1,6 @@
 import { createHash, randomBytes } from "node:crypto";
 
-export type UsuarioSessao = { id: number; tipoUsuario: "ADMIN" | "CUIDADOR" };
+export type UsuarioSessao = { id: number; tipoUsuario: "ADMIN" | "CUIDADOR"; contaId?: number; versaoSessao?: number };
 type Sessao = { usuario: UsuarioSessao; expiraEm: number };
 const sessoes = new Map<string, Sessao>();
 const duracao = 8 * 60 * 60 * 1000;

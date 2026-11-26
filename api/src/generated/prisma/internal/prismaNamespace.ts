@@ -399,6 +399,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Admin: 'Admin',
   Cuidador: 'Cuidador',
+  Conta: 'Conta',
   Turma: 'Turma',
   TurmaCuidador: 'TurmaCuidador',
   Aluno: 'Aluno',
@@ -420,7 +421,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "admin" | "cuidador" | "turma" | "turmaCuidador" | "aluno" | "presenca" | "presencaCuidador" | "comportamento"
+    modelProps: "admin" | "cuidador" | "conta" | "turma" | "turmaCuidador" | "aluno" | "presenca" | "presencaCuidador" | "comportamento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -569,6 +570,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CuidadorCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CuidadorCountAggregateOutputType> | number
+        }
+      }
+    }
+    Conta: {
+      payload: Prisma.$ContaPayload<ExtArgs>
+      fields: Prisma.ContaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload>
+        }
+        findFirst: {
+          args: Prisma.ContaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload>
+        }
+        findMany: {
+          args: Prisma.ContaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload>[]
+        }
+        create: {
+          args: Prisma.ContaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload>
+        }
+        createMany: {
+          args: Prisma.ContaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ContaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload>[]
+        }
+        delete: {
+          args: Prisma.ContaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload>
+        }
+        update: {
+          args: Prisma.ContaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload>
+        }
+        deleteMany: {
+          args: Prisma.ContaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ContaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload>[]
+        }
+        upsert: {
+          args: Prisma.ContaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContaPayload>
+        }
+        aggregate: {
+          args: Prisma.ContaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateConta>
+        }
+        groupBy: {
+          args: Prisma.ContaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContaCountAggregateOutputType> | number
         }
       }
     }
@@ -1056,6 +1131,7 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 
 export const AdminScalarFieldEnum = {
+  contaId: 'contaId',
   id: 'id',
   nome: 'nome',
   email: 'email',
@@ -1068,6 +1144,7 @@ export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof Ad
 
 
 export const CuidadorScalarFieldEnum = {
+  contaId: 'contaId',
   id: 'id',
   nome: 'nome',
   email: 'email',
@@ -1080,6 +1157,19 @@ export const CuidadorScalarFieldEnum = {
 } as const
 
 export type CuidadorScalarFieldEnum = (typeof CuidadorScalarFieldEnum)[keyof typeof CuidadorScalarFieldEnum]
+
+
+export const ContaScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  senhaHash: 'senhaHash',
+  perfil: 'perfil',
+  ativo: 'ativo',
+  versaoSessao: 'versaoSessao',
+  criadoEm: 'criadoEm'
+} as const
+
+export type ContaScalarFieldEnum = (typeof ContaScalarFieldEnum)[keyof typeof ContaScalarFieldEnum]
 
 
 export const TurmaScalarFieldEnum = {
@@ -1418,6 +1508,7 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   admin?: Prisma.AdminOmit
   cuidador?: Prisma.CuidadorOmit
+  conta?: Prisma.ContaOmit
   turma?: Prisma.TurmaOmit
   turmaCuidador?: Prisma.TurmaCuidadorOmit
   aluno?: Prisma.AlunoOmit
